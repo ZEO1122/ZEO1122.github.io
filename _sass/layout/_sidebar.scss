@@ -149,21 +149,18 @@
 
   @include breakpoint($large) {
     display: block;
-    width: auto;
+    width: 175px;
     height: auto;
   }
 
   img {
-    max-width: 175px;
-    width: 36px;
-    height: 36px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
     border-radius: 50%;
 
     @include breakpoint($large) {
-      width: 175px;
-      height: 175px;
       padding: 5px;
       border: 1px solid var(--global-border-color);
     }
