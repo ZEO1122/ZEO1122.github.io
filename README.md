@@ -100,8 +100,8 @@ Description of the project.
 
 | Item | Location | Current Value |
 |------|----------|---------------|
-| Email address | `_config.yml` → `author.email` | `your.email@example.com` |
-| Profile photo | `images/profile.png` | Missing — no avatar shown |
+| Email address | `_config.yml` → `author.email` | `chris011122@gmail.com` |
+| Profile photo | `_config.yml` → `author.avatar` | GitHub-hosted image URL is set |
 
 ---
 

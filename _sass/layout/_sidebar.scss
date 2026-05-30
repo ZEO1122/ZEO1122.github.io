@@ -149,12 +149,15 @@
 
   @include breakpoint($large) {
     display: block;
-    width: auto;
+    width: 175px;
     height: auto;
   }
 
   img {
-    max-width: 175px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
     border-radius: 50%;
 
     @include breakpoint($large) {
