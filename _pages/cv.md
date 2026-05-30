@@ -9,6 +9,10 @@ redirect_from:
 
 {% include base_path %}
 
+<div style="max-width: 180px; margin: 0 0 1.25rem 0;">
+  <img src="{{ base_path }}/assets/img/profile.png" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
+</div>
+
 ## Education
 
 **Gachon University (가천대학교)** · Seongnam, Korea  
@@ -79,5 +83,5 @@ B.S. in Computer Science
 
 ## Contact
 
-- **Email:** your.email@example.com *(placeholder — update in `_config.yml`)*
+- **Email:** [chris011122@gmail.com](mailto:chris011122@gmail.com)
 - **GitHub:** [github.com/ZEO1122](https://github.com/ZEO1122)
