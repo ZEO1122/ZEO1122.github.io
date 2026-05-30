@@ -13,7 +13,7 @@ repository               : "ZEO1122/ZEO1122.github.io"
 
 # Site Author
 author:
-  avatar           : "profile.png"   # Place your photo at /images/profile.png
+  avatar           : "assets/img/profile.png"
   name             : "전제오 (Jeo Jeon)"
   pronouns         :
   bio              : "Undergraduate Researcher<br/>Gachon Univ. · Computer Science<br/>AI · Affective Computing · Multimodal AI"
