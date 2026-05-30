@@ -9,8 +9,15 @@ redirect_from:
 
 {% include base_path %}
 
+{% assign cv_avatar = site.author.avatar | default: "profile.png" %}
 <div style="max-width: 180px; margin: 0 0 1.25rem 0;">
-  <img src="{{ base_path }}/assets/img/profile.png" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
+  {% if cv_avatar contains "://" %}
+  <img src="{{ cv_avatar }}" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
+  {% elsif cv_avatar contains "/" %}
+  <img src="{{ base_path }}/{{ cv_avatar }}" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
+  {% else %}
+  <img src="{{ base_path }}/images/{{ cv_avatar }}" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
+  {% endif %}
 </div>
 
 ## Education
@@ -83,5 +90,5 @@ B.S. in Computer Science
 
 ## Contact
 
-- **Email:** [chris011122@gmail.com](mailto:chris011122@gmail.com)
-- **GitHub:** [github.com/ZEO1122](https://github.com/ZEO1122)
+{% if site.author.email %}- **Email:** [{{ site.author.email }}](mailto:{{ site.author.email }}){% endif %}
+{% if site.author.github %}- **GitHub:** [github.com/{{ site.author.github }}](https://github.com/{{ site.author.github }}){% endif %}
