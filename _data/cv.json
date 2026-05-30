@@ -1,152 +1,141 @@
 {
   "basics": {
-    "name": "Your Sidebar Name",
-    "email": "none@example.org",
+    "name": "Jeo Jeon (전제오)",
+    "label": "Undergraduate Researcher in AI",
+    "email": "chris011122@gmail.com",
     "phone": "",
-    "website": "https://academicpages.github.io",
-    "summary": "Currently employed at Red Brick University. Short biography for the left-hand sidebar",
+    "website": "https://zeo1122.github.io",
+    "summary": "Third-year undergraduate student in Computer Science at Gachon University, expected to graduate in February 2028. Interested in affective computing, multimodal AI, human-centered AI, and machine learning research.",
     "location": {
       "address": "",
       "postalCode": "",
-      "city": "Earth",
-      "countryCode": "US",
+      "city": "Seongnam",
+      "countryCode": "KR",
       "region": ""
     },
     "profiles": [
       {
-        "network": "Google Scholar",
-        "username": "",
-        "url": "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
-      },
-      {
-        "network": "ORCID",
-        "username": "",
-        "url": "https://orcid.org/yourorcidurl"
-      },
-      {
         "network": "GitHub",
-        "username": "academicpages",
-        "url": "https://github.com/academicpages"
+        "username": "ZEO1122",
+        "url": "https://github.com/ZEO1122"
       }
     ]
   },
-  "work": [],
+  "work": [
+    {
+      "company": "PRML Lab",
+      "position": "Undergraduate Researcher",
+      "startDate": "2025.09",
+      "endDate": "Present",
+      "summary": "Participating in paper reading sessions and deep learning study as an undergraduate researcher.",
+      "highlights": [
+        "Building research foundations in pattern recognition, machine learning, and deep learning",
+        "Research projects and proposal-related work will be added when available"
+      ]
+    },
+    {
+      "company": "Aing, AI Academic Club at Gachon University",
+      "position": "Executive Member",
+      "startDate": "2025.12",
+      "endDate": "2026.06",
+      "summary": "Operating the AI academic club and supporting member learning.",
+      "highlights": [
+        "Planning and facilitating study sessions and activities",
+        "Supporting member engagement and learning"
+      ]
+    },
+    {
+      "company": "Aing, AI Academic Club at Gachon University",
+      "position": "Transformer Study Creator & Participant",
+      "startDate": "2026.03",
+      "endDate": "Present",
+      "summary": "Designed and led a structured study program on Transformer architecture and the Attention mechanism.",
+      "highlights": [
+        "Connected Attention Is All You Need to implementation practice through paper-to-code mapping and PyTorch notebooks",
+        "Repository: https://github.com/aing-gachon/26-Spring-Transformer-Study"
+      ]
+    }
+  ],
   "education": [
     {
-      "institution": "GitHub University",
-      "area": "Ph.D in Version Control Theory",
+      "institution": "Gachon University (가천대학교)",
+      "area": "B.S. in Computer Science",
       "studyType": "",
-      "startDate": "",
-      "endDate": "2018",
+      "startDate": "2022.02",
+      "endDate": "Expected 2028.02",
       "gpa": null,
-      "courses": []
-    },
-    {
-      "institution": "GitHub University",
-      "area": "M.S. in Jekyll",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2014",
-      "gpa": null,
-      "courses": []
-    },
-    {
-      "institution": "GitHub University",
-      "area": "B.S. in GitHub",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2012",
-      "gpa": null,
-      "courses": []
+      "courses": [
+        "Natural Language Processing",
+        "Image Processing",
+        "Advanced Generative AI",
+        "Special Topics in Emerging Technologies"
+      ]
     }
   ],
-  "skills": [],
+  "skills": [
+    {
+      "name": "Programming",
+      "keywords": [
+        "Python",
+        "C++"
+      ]
+    },
+    {
+      "name": "Frameworks",
+      "keywords": [
+        "PyTorch"
+      ]
+    },
+    {
+      "name": "AI / Machine Learning",
+      "keywords": [
+        "Machine Learning",
+        "Deep Learning",
+        "NLP",
+        "Transformer"
+      ]
+    },
+    {
+      "name": "Tools",
+      "keywords": [
+        "Git",
+        "GitHub",
+        "Linux"
+      ]
+    }
+  ],
   "languages": [],
-  "interests": [],
+  "interests": [
+    {
+      "name": "Research Interests",
+      "keywords": [
+        "Affective Computing",
+        "Multimodal AI",
+        "Human-centered AI",
+        "Machine Learning",
+        "Deep Learning",
+        "NLP"
+      ]
+    }
+  ],
   "references": [],
-  "publications": [
-    {
-      "name": "Paper Title Number 1",
-      "publisher": "Journal 1",
-      "releaseDate": "2009-10-01",
-      "website": "https://academicpages.github.io/files/paper1.pdf",
-      "summary": "This paper is about the number 1. The number 2 is left for future work."
-    },
-    {
-      "name": "Paper Title Number 2",
-      "publisher": "Journal 1",
-      "releaseDate": "2010-10-01",
-      "website": "https://academicpages.github.io/files/paper2.pdf",
-      "summary": "This paper is about the number 2. The number 3 is left for future work."
-    },
-    {
-      "name": "Paper Title Number 3",
-      "publisher": "Journal 1",
-      "releaseDate": "2015-10-01",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about the number 3. The number 4 is left for future work."
-    },
-    {
-      "name": "Paper Title Number 4",
-      "publisher": "GitHub Journal of Bugs",
-      "releaseDate": "2024-02-17",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about fixing template issue #693."
-    }
-  ],
-  "presentations": [
-    {
-      "name": "Talk 1 on Relevant Topic in Your Field",
-      "event": "UC San Francisco, Department of Testing",
-      "date": "2012-03-01",
-      "location": "San Francisco, CA, USA",
-      "description": ""
-    },
-    {
-      "name": "Tutorial 1 on Relevant Topic in Your Field",
-      "event": "UC-Berkeley Institute for Testing Science",
-      "date": "2013-03-01",
-      "location": "Berkeley, CA, USA",
-      "description": ""
-    },
-    {
-      "name": "Talk 2 on Relevant Topic in Your Field",
-      "event": "London School of Testing",
-      "date": "2014-02-01",
-      "location": "London, UK",
-      "description": ""
-    },
-    {
-      "name": "Conference Proceeding talk 3 on Relevant Topic in Your Field",
-      "event": "Testing Institute of America 2014 Annual Conference",
-      "date": "2014-03-01",
-      "location": "Los Angeles, CA, USA",
-      "description": ""
-    }
-  ],
-  "teaching": [
-    {
-      "course": "Teaching experience 1",
-      "institution": "University 1, Department",
-      "date": "2014-01-01",
-      "role": "Undergraduate course",
-      "description": ""
-    },
-    {
-      "course": "Teaching experience 2",
-      "institution": "University 1, Department",
-      "date": "2015-01-01",
-      "role": "Workshop",
-      "description": ""
-    }
-  ],
+  "publications": [],
+  "presentations": [],
+  "teaching": [],
   "portfolio": [
     {
-      "name": "Portfolio item number 1",
-      "category": "portfolio",
-      "date": "",
-      "url": "",
-      "description": "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+      "name": "LG Aimers 8th Model Compression",
+      "category": "Competition",
+      "date": "2025-12-01",
+      "url": "https://github.com/ZEO1122/LG_Aimers_8th",
+      "description": "Team-led LLM compression project for EXAONE-4.0-1.2B. Ranked Top 40 out of 600+ teams; public repository reports 40th place, score 0.63166, and 69 submissions. Strategy focused on QLoRA-based SFT, sequence-length trade-off analysis, and optional GPTQ W8A8 quantization."
+    },
+    {
+      "name": "Transformer Architecture Study",
+      "category": "Study Program",
+      "date": "2026-03-01",
+      "url": "https://github.com/aing-gachon/26-Spring-Transformer-Study",
+      "description": "Junior-track Transformer study curriculum connecting Attention Is All You Need to paper-to-code mapping, from-scratch PyTorch implementation, and translation fine-tuning experiments."
     }
   ]
 }

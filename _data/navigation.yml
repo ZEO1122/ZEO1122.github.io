@@ -12,7 +12,7 @@ main:
   - title: "Projects"
     url: /portfolio/
 
-  - title: "Notes"
+  - title: "Paper Notes"
     url: /notes/
 
   # Restore when you have real publications:
