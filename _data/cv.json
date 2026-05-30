@@ -48,7 +48,7 @@
       "company": "Aing, AI Academic Club at Gachon University",
       "position": "Transformer Study Creator & Participant",
       "startDate": "2026.03",
-      "endDate": "Present",
+      "endDate": "2026.05",
       "summary": "Designed and led a structured study program on Transformer architecture and the Attention mechanism.",
       "highlights": [
         "Connected Attention Is All You Need to implementation practice through paper-to-code mapping and PyTorch notebooks",
@@ -90,9 +90,7 @@
       "name": "AI / Machine Learning",
       "keywords": [
         "Machine Learning",
-        "Deep Learning",
-        "NLP",
-        "Transformer"
+        "Deep Learning"
       ]
     },
     {
@@ -113,8 +111,7 @@
         "Multimodal AI",
         "Human-centered AI",
         "Machine Learning",
-        "Deep Learning",
-        "NLP"
+        "Deep Learning"
       ]
     }
   ],
@@ -128,14 +125,14 @@
       "category": "Competition",
       "date": "2025-12-01",
       "url": "https://github.com/ZEO1122/LG_Aimers_8th",
-      "description": "Team-led LLM compression project for EXAONE-4.0-1.2B. Ranked Top 40 out of 600+ teams; public repository reports 40th place, score 0.63166, and 69 submissions. Strategy focused on QLoRA-based SFT, sequence-length trade-off analysis, and optional GPTQ W8A8 quantization."
+      "description": "Team-led LLM compression project for EXAONE-4.0-1.2B. Ranked Top 40 out of 600+ teams; detailed strategy and implementation notes are documented in the project page and repository."
     },
     {
       "name": "Transformer Architecture Study",
       "category": "Study Program",
       "date": "2026-03-01",
       "url": "https://github.com/aing-gachon/26-Spring-Transformer-Study",
-      "description": "Junior-track Transformer study curriculum connecting Attention Is All You Need to paper-to-code mapping, from-scratch PyTorch implementation, and translation fine-tuning experiments."
+      "description": "Junior-track Transformer study curriculum for Aing. Detailed curriculum materials and implementation exercises are documented in the project page and repository."
     }
   ]
 }

@@ -24,7 +24,7 @@ I am currently an undergraduate researcher in the **PRML Lab**, where I particip
 |------|----------|
 | 2026.03 | Launched [Transformer Architecture Study](https://github.com/aing-gachon/26-Spring-Transformer-Study) at Aing |
 | 2025.12 | Joined Aing as Executive Member |
-| 2025.12 | Participated in LG Aimers 8th — **Top 40 / 600+ teams** |
+| 2026.02 | Participated in LG Aimers 8th — **Top 40 / 600+ teams** |
 | 2025.09 | Joined PRML Lab as Undergraduate Researcher |
 | 2024.12 | Completed mandatory military service in the Republic of Korea Army as Sergeant |
 | 2023.06 | Enlisted in the Republic of Korea Army |

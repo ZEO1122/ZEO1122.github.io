@@ -30,7 +30,7 @@ Relevant Coursework: Natural Language Processing, Image Processing, Advanced Gen
 - Affective Computing
 - Multimodal AI
 - Human-centered AI
-- Machine Learning, Deep Learning, NLP
+- Machine Learning, Deep Learning
 
 ---
 
@@ -49,7 +49,7 @@ Relevant Coursework: Natural Language Processing, Image Processing, Advanced Gen
 - Supporting member engagement and learning
 
 **Transformer Study Creator & Participant** · Aing<br>
-*2026.03 – Present*
+*2026.03 – 2026.05*
 - Designed and led a structured study program on Transformer architecture and the Attention mechanism
 - Study repository: [github.com/aing-gachon/26-Spring-Transformer-Study](https://github.com/aing-gachon/26-Spring-Transformer-Study)
 
@@ -69,10 +69,10 @@ Relevant Coursework: Natural Language Processing, Image Processing, Advanced Gen
 ## Selected Projects
 
 **LG Aimers 8th Model Compression** · [Repository](https://github.com/ZEO1122/LG_Aimers_8th)<br>
-Portfolio version of an LLM model compression pipeline for LG AI Research's EXAONE-4.0-1.2B. The project focused on balancing model performance and inference efficiency under DACON submission constraints using QLoRA fine-tuning, conversation-style SFT preprocessing, sequence-length analysis, and optional GPTQ W8A8 quantization.
+Portfolio version of an LLM model compression project for LG AI Research's EXAONE-4.0-1.2B. Detailed strategy and implementation notes are documented in the project page and repository.
 
 **Transformer Architecture Study** · [Repository](https://github.com/aing-gachon/26-Spring-Transformer-Study)<br>
-Designed and led a junior-track Transformer study for Aing. The curriculum connects *Attention Is All You Need* to implementation practice through weekly concept study, paper-to-code mapping, from-scratch Transformer notebooks, and fine-tuning experiments on Multi30k/IWSLT-style translation tasks.
+Designed and led a junior-track Transformer study for Aing. Detailed curriculum materials and implementation exercises are documented in the project page and repository.
 
 ---
 
@@ -92,7 +92,7 @@ Designed and led a junior-track Transformer study for Aing. The curriculum conne
 - PyTorch
 
 **AI / Machine Learning**
-- Machine Learning, Deep Learning, NLP, Transformer
+- Machine Learning, Deep Learning
 
 **Tools**
 - Git, GitHub, Linux
