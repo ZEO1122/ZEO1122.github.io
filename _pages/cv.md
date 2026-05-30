@@ -10,7 +10,7 @@ redirect_from:
 {% include base_path %}
 
 <div style="max-width: 180px; margin: 0 0 1.25rem 0;">
-  <img src="{{ base_path }}/assets/img/profile.png" alt="Profile photo of Jeon Jeo" style="width: 100%; height: auto; border-radius: 10px;">
+  <img src="{{ base_path }}/assets/img/profile.png" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
 </div>
 
 ## Education
