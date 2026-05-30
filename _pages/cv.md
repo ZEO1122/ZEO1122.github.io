@@ -12,11 +12,16 @@ redirect_from:
 {% assign cv_avatar = site.author.avatar | default: "profile.png" %}
 <div style="max-width: 180px; margin: 0 0 1.25rem 0;">
   {% if cv_avatar contains "://" %}
-  <img src="{{ cv_avatar }}" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
+  <img src="{{ cv_avatar }}" class="author__avatar" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
   {% elsif cv_avatar contains "/" %}
-  <img src="{{ base_path }}/{{ cv_avatar }}" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
+  {% assign cv_avatar_path = cv_avatar %}
+  {% assign cv_avatar_first_char = cv_avatar | slice: 0, 1 %}
+  {% unless cv_avatar_first_char == "/" %}
+    {% assign cv_avatar_path = cv_avatar_path | prepend: "/" %}
+  {% endunless %}
+  <img src="{{ cv_avatar_path | prepend: base_path }}" class="author__avatar" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
   {% else %}
-  <img src="{{ base_path }}/images/{{ cv_avatar }}" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
+  <img src="{{ base_path }}/images/{{ cv_avatar }}" class="author__avatar" alt="Profile photo" style="width: 100%; height: auto; border-radius: 10px;">
   {% endif %}
 </div>
 

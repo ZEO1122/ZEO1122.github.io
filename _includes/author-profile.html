@@ -8,9 +8,14 @@
 
   <div class="author__avatar">
     {% if author.avatar contains "://" %}
-    	<img src="{{ author.avatar }}" alt="{{ author.name }}"  fetchpriority="high" />
+    	<img src="{{ author.avatar }}" class="author__avatar" alt="{{ author.name }}"  fetchpriority="high" />
     {% elsif author.avatar contains "/" %}
-    	<img src="{{ author.avatar | prepend: "/" | prepend: base_path }}" class="author__avatar" alt="{{ author.name }}"  fetchpriority="high" />
+      {% assign avatar_path = author.avatar %}
+      {% assign avatar_path_first_char = author.avatar | slice: 0, 1 %}
+      {% unless avatar_path_first_char == "/" %}
+        {% assign avatar_path = avatar_path | prepend: "/" %}
+      {% endunless %}
+    	<img src="{{ avatar_path | prepend: base_path }}" class="author__avatar" alt="{{ author.name }}"  fetchpriority="high" />
     {% else %}
     	<img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" class="author__avatar" alt="{{ author.name }}"  fetchpriority="high" />
     {% endif %}
