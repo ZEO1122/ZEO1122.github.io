@@ -1,0 +1,28 @@
+# Navigation menu for the site header.
+# Publications, Talks, Teaching are hidden until real content exists.
+# To restore them, uncomment the relevant lines.
+
+main:
+  - title: "About"
+    url: /
+
+  - title: "CV"
+    url: /cv/
+
+  - title: "Projects"
+    url: /portfolio/
+
+  - title: "Notes"
+    url: /notes/
+
+  # Restore when you have real publications:
+  # - title: "Publications"
+  #   url: /publications/
+
+  # Restore when you have real talks:
+  # - title: "Talks"
+  #   url: /talks/
+
+  # Restore when you have real teaching material:
+  # - title: "Teaching"
+  #   url: /teaching/
