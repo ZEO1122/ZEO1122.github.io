@@ -4,9 +4,7 @@ title: "Notes"
 author_profile: true
 ---
 
-Study notes, paper summaries, and learning records.
-
-*To be updated.*
+Study notes, paper summaries, and learning records will be organized here by topic.
 
 ---
 
