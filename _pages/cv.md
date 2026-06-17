@@ -25,6 +25,13 @@ Relevant Coursework: Natural Language Processing, Image Processing, Advanced Gen
 
 ---
 
+## Certifications
+
+**NCP-AI**<br>
+Issued: 2026.06.17
+
+---
+
 ## Research Interests
 
 - Affective Computing

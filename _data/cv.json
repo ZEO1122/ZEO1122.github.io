@@ -72,6 +72,14 @@
       ]
     }
   ],
+  "certificates": [
+    {
+      "name": "NCP-AI",
+      "date": "2026-06-17",
+      "issuer": "",
+      "url": ""
+    }
+  ],
   "skills": [
     {
       "name": "Programming",

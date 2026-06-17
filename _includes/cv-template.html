@@ -96,6 +96,33 @@
   </div>
   {% endif %}
   
+  {% if cv.certificates.size > 0 %}
+  <!-- Certifications -->
+  <div class="cv-section">
+    <h2>Certifications</h2>
+    <ul class="cv-list">
+      {% for certificate in cv.certificates %}
+      <li class="cv-item">
+        <div class="cv-item-header">
+          <div class="cv-item-title">{{ certificate.name }}</div>
+          <div class="cv-item-date">{{ certificate.date }}</div>
+        </div>
+        <div class="cv-item-content">
+          {% if certificate.issuer and certificate.issuer != "" %}
+          <div class="cv-item-subtitle">{{ certificate.issuer }}</div>
+          {% endif %}
+          {% if certificate.url and certificate.url != "" %}
+          <div class="cv-item-detail">
+            <a href="{{ certificate.url }}" target="_blank">View Certificate</a>
+          </div>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
   {% if cv.work.size > 0 %}
   <!-- Work Experience -->
   <div class="cv-section">
