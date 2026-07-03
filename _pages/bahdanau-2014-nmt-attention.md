@@ -36,7 +36,7 @@ This is one of the papers that made **attention** a central idea in deep learnin
 
 ## Problem
 
-Earlier encoder-decoder NMT models encode the entire source sentence into one fixed-length vector \\(c\\). The decoder then generates every target word from that same compressed representation.
+Earlier encoder-decoder NMT models encode the entire source sentence into one fixed-length vector <math><mi>c</mi></math>. The decoder then generates every target word from that same compressed representation.
 
 The paper argues that this design is weak because:
 
@@ -48,15 +48,29 @@ The paper argues that this design is weak because:
 
 Instead of forcing the encoder to produce one sentence vector, the encoder produces a sequence of annotations:
 
-$$
-h_1, h_2, \ldots, h_{T_x}
-$$
+<math display="block">
+  <msub><mi>h</mi><mn>1</mn></msub>
+  <mo>,</mo>
+  <msub><mi>h</mi><mn>2</mn></msub>
+  <mo>,</mo>
+  <mo>...</mo>
+  <mo>,</mo>
+  <msub><mi>h</mi><msub><mi>T</mi><mi>x</mi></msub></msub>
+</math>
 
-At each target step \\(i\\), the decoder computes attention weights over all source annotations and builds a step-specific context vector:
+At each target step <math><mi>i</mi></math>, the decoder computes attention weights over all source annotations and builds a step-specific context vector:
 
-$$
-c_i = \sum_{j=1}^{T_x} \alpha_{ij} h_j
-$$
+<math display="block">
+  <msub><mi>c</mi><mi>i</mi></msub>
+  <mo>=</mo>
+  <munderover>
+    <mo>&#x2211;</mo>
+    <mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow>
+    <msub><mi>T</mi><mi>x</mi></msub>
+  </munderover>
+  <msub><mi>&#x03B1;</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub>
+  <msub><mi>h</mi><mi>j</mi></msub>
+</math>
 
 The model therefore decides which source positions are relevant **for the current target word**, not once for the entire sentence.
 
@@ -66,30 +80,54 @@ For the model structure, I refer directly to **Figure 1** in the paper instead o
 
 ### Encoder
 
-The encoder is a bidirectional RNN. For each source position \\(j\\), it concatenates the forward and backward hidden states:
+The encoder is a bidirectional RNN. For each source position <math><mi>j</mi></math>, it concatenates the forward and backward hidden states:
 
-$$
-h_j = [\overrightarrow{h_j}; \overleftarrow{h_j}]
-$$
+<math display="block">
+  <msub><mi>h</mi><mi>j</mi></msub>
+  <mo>=</mo>
+  <mo>[</mo>
+  <msub><mover><mi>h</mi><mo>&#x2192;</mo></mover><mi>j</mi></msub>
+  <mo>;</mo>
+  <msub><mover><mi>h</mi><mo>&#x2190;</mo></mover><mi>j</mi></msub>
+  <mo>]</mo>
+</math>
 
 This gives each source-word annotation information from both left and right context.
 
 ### Alignment Model
 
-For each target step \\(i\\) and source position \\(j\\), the model computes an alignment score:
+For each target step <math><mi>i</mi></math> and source position <math><mi>j</mi></math>, the model computes an alignment score:
 
-$$
-e_{ij} = a(s_{i-1}, h_j)
-$$
+<math display="block">
+  <msub><mi>e</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub>
+  <mo>=</mo>
+  <mi>a</mi>
+  <mo>(</mo>
+  <msub><mi>s</mi><mrow><mi>i</mi><mo>-</mo><mn>1</mn></mrow></msub>
+  <mo>,</mo>
+  <msub><mi>h</mi><mi>j</mi></msub>
+  <mo>)</mo>
+</math>
 
-Here, \\(s_{i-1}\\) is the previous decoder hidden state and \\(a(\cdot)\\) is a learned feed-forward network. The scores are normalized with softmax:
+Here, <math><msub><mi>s</mi><mrow><mi>i</mi><mo>-</mo><mn>1</mn></mrow></msub></math> is the previous decoder hidden state and <math><mi>a</mi><mo>(</mo><mo>&#x22C5;</mo><mo>)</mo></math> is a learned feed-forward network. The scores are normalized with softmax:
 
-$$
-\alpha_{ij} =
-\frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}
-$$
+<math display="block">
+  <msub><mi>&#x03B1;</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub>
+  <mo>=</mo>
+  <mfrac>
+    <mrow><mi>exp</mi><mo>(</mo><msub><mi>e</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>)</mo></mrow>
+    <mrow>
+      <munderover>
+        <mo>&#x2211;</mo>
+        <mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow>
+        <msub><mi>T</mi><mi>x</mi></msub>
+      </munderover>
+      <mi>exp</mi><mo>(</mo><msub><mi>e</mi><mrow><mi>i</mi><mi>k</mi></mrow></msub><mo>)</mo>
+    </mrow>
+  </mfrac>
+</math>
 
-These \\(\alpha_{ij}\\) values are differentiable soft-alignment weights, so the alignment mechanism can be trained jointly with the translation model by backpropagation.
+These <math><msub><mi>&#x03B1;</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math> values are differentiable soft-alignment weights, so the alignment mechanism can be trained jointly with the translation model by backpropagation.
 
 ### Decoder
 
@@ -97,7 +135,7 @@ The decoder predicts the next target word using:
 
 - the previous target word,
 - the previous decoder state,
-- the current context vector \\(c_i\\).
+- the current context vector <math><msub><mi>c</mi><mi>i</mi></msub></math>.
 
 This differs from the basic encoder-decoder because every decoding step receives a different context vector.
 
@@ -105,7 +143,7 @@ This differs from the basic encoder-decoder because every decoding step receives
 
 I cite the original paper's figures and table rather than recreating them:
 
-- **Figure 1**: Proposed model architecture for generating the \\(i\\)-th target word from source annotations and a step-specific context vector.
+- **Figure 1**: Proposed model architecture for generating the <math><mi>i</mi></math>-th target word from source annotations and a step-specific context vector.
 - **Figure 2**: BLEU score by source sentence length; this is the main evidence that RNNsearch handles long sentences better than the fixed-vector encoder-decoder.
 - **Figure 3**: Sample soft alignments from RNNsearch-50; this supports the interpretation that the model learns plausible source-target alignments.
 - **Table 1**: BLEU scores for RNNencdec, RNNsearch, and Moses; the quantitative table below cites these values directly.
@@ -144,8 +182,8 @@ For my Transformer study, this paper is a good bridge:
 If I implement this in PyTorch, I would split the model into four modules:
 
 1. `Encoder`: bidirectional GRU/LSTM that returns all hidden states.
-2. `AdditiveAttention`: feed-forward alignment network for \\(e_{ij}\\).
-3. `Decoder`: recurrent decoder that consumes \\(c_i\\) at each step.
+2. `AdditiveAttention`: feed-forward alignment network for <math><msub><mi>e</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math>.
+3. `Decoder`: recurrent decoder that consumes <math><msub><mi>c</mi><mi>i</mi></msub></math> at each step.
 4. `Seq2Seq`: training wrapper with teacher forcing and beam-search inference.
 
 Important checks:
