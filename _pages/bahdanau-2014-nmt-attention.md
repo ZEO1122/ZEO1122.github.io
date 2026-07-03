@@ -14,6 +14,59 @@ citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Joi
 
 {% include toc %}
 
+<style>
+  .paper-note-figure {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .paper-note-figure img {
+    max-width: 100%;
+    height: auto;
+    padding: 0.75rem;
+    border: 1px solid var(--global-border-color);
+    background: #fff;
+  }
+
+  .paper-note-figure--narrow img {
+    max-width: 280px;
+  }
+
+  .paper-note-figure--medium img {
+    max-width: 680px;
+  }
+
+  .paper-note-figure-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .paper-note-figure-grid img {
+    width: 100%;
+  }
+
+  .paper-note-panel-label {
+    margin-top: 0.25rem;
+    font-size: 0.85em;
+    color: var(--global-text-color);
+  }
+
+  .paper-note-figure figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.85em;
+    color: var(--global-text-color);
+    text-align: left;
+  }
+
+  @media (max-width: 700px) {
+    .paper-note-figure-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 ## One-Line Takeaway
 
 This paper introduces a neural machine translation model that learns **where to look in the source sentence while generating each target word**, removing the fixed-length context bottleneck of early encoder-decoder models.
@@ -72,9 +125,7 @@ At each target step <math><mi>i</mi></math>, the decoder computes attention weig
   <msub><mi>h</mi><mi>j</mi></msub>
 </math>
 
-The model therefore decides which source positions are relevant **for the current target word**, not once for the entire sentence.
-
-For the model structure, I refer directly to **Figure 1** in the paper instead of redrawing the architecture. Figure 1 is the source diagram for the relationship between the source annotations, the alignment model, the context vector, and the decoder.
+The model therefore decides which source positions are relevant **for the current target word**, not once for the entire sentence. See **Figure 1** below for the original model diagram from the paper.
 
 ## Method
 
@@ -141,12 +192,47 @@ This differs from the basic encoder-decoder because every decoding step receives
 
 ## Paper Figures and Tables
 
-I cite the original paper's figures and table rather than recreating them:
+I cite and render the original paper's figures rather than recreating them.
 
-- **Figure 1**: Proposed model architecture for generating the <math><mi>i</mi></math>-th target word from source annotations and a step-specific context vector.
-- **Figure 2**: BLEU score by source sentence length; this is the main evidence that RNNsearch handles long sentences better than the fixed-vector encoder-decoder.
-- **Figure 3**: Sample soft alignments from RNNsearch-50; this supports the interpretation that the model learns plausible source-target alignments.
-- **Table 1**: BLEU scores for RNNencdec, RNNsearch, and Moses; the quantitative table below cites these values directly.
+<figure class="paper-note-figure paper-note-figure--narrow">
+  <img src="/assets/images/paper-notes/bahdanau-2014/figure-1-model.png" alt="Figure 1 from Bahdanau et al. showing the proposed attention-based neural machine translation model">
+  <figcaption>
+    <strong>Figure 1.</strong> Original model diagram from Bahdanau et al. showing the proposed attention-based decoder. Source: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S3.F1">ar5iv rendering of arXiv:1409.0473</a>.
+  </figcaption>
+</figure>
+
+<figure class="paper-note-figure paper-note-figure--medium">
+  <img src="/assets/images/paper-notes/bahdanau-2014/figure-2-bleu-by-length.png" alt="Figure 2 from Bahdanau et al. showing BLEU scores by source sentence length">
+  <figcaption>
+    <strong>Figure 2.</strong> Original BLEU-by-sentence-length plot. This is the main evidence that RNNsearch handles long sentences better than the fixed-vector encoder-decoder. Source: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S4.F2.fig1">ar5iv rendering of arXiv:1409.0473</a>.
+  </figcaption>
+</figure>
+
+<figure class="paper-note-figure">
+  <div class="paper-note-figure-grid">
+    <div>
+      <img src="/assets/images/paper-notes/bahdanau-2014/figure-3a-alignment.png" alt="Figure 3a from Bahdanau et al. showing a sample soft alignment matrix">
+      <div class="paper-note-panel-label">(a)</div>
+    </div>
+    <div>
+      <img src="/assets/images/paper-notes/bahdanau-2014/figure-3b-alignment.png" alt="Figure 3b from Bahdanau et al. showing a sample soft alignment matrix">
+      <div class="paper-note-panel-label">(b)</div>
+    </div>
+    <div>
+      <img src="/assets/images/paper-notes/bahdanau-2014/figure-3c-alignment.png" alt="Figure 3c from Bahdanau et al. showing a sample soft alignment matrix">
+      <div class="paper-note-panel-label">(c)</div>
+    </div>
+    <div>
+      <img src="/assets/images/paper-notes/bahdanau-2014/figure-3d-alignment.png" alt="Figure 3d from Bahdanau et al. showing a sample soft alignment matrix">
+      <div class="paper-note-panel-label">(d)</div>
+    </div>
+  </div>
+  <figcaption>
+    <strong>Figure 3.</strong> Original RNNsearch-50 soft-alignment examples. The axes correspond to source English words and generated French words; brighter cells indicate larger attention weights. Source: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S4.F3">ar5iv rendering of arXiv:1409.0473</a>.
+  </figcaption>
+</figure>
+
+The quantitative table below cites **Table 1** values directly from the paper.
 
 ## Experiments
 
