@@ -68,10 +68,17 @@ citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Joi
     .page__content > .sidebar__right {
       position: absolute !important;
       top: 0;
+      bottom: 0;
       right: -14.5rem;
       float: none !important;
       width: 13rem !important;
+      height: auto;
       margin: 0 !important;
+    }
+
+    .page__content > .sidebar__right .toc {
+      position: sticky;
+      top: 1.5rem;
     }
   }
 
@@ -80,6 +87,10 @@ citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Joi
       float: none !important;
       width: auto !important;
       margin: 0 0 1.5rem !important;
+    }
+
+    .page__content > .sidebar__right .toc {
+      position: static;
     }
   }
 
