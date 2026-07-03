@@ -60,6 +60,29 @@ citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Joi
     text-align: left;
   }
 
+  .page__content {
+    position: relative;
+  }
+
+  @media (min-width: 1280px) {
+    .page__content > .sidebar__right {
+      position: absolute !important;
+      top: 0;
+      right: -14.5rem;
+      float: none !important;
+      width: 13rem !important;
+      margin: 0 !important;
+    }
+  }
+
+  @media (max-width: 1279px) {
+    .page__content > .sidebar__right {
+      float: none !important;
+      width: auto !important;
+      margin: 0 0 1.5rem !important;
+    }
+  }
+
   @media (max-width: 700px) {
     .paper-note-figure-grid {
       grid-template-columns: 1fr;
