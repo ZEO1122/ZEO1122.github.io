@@ -177,6 +177,10 @@
   min-width: 250px;
   background: var(--global-bg-color);
 
+  @media (max-width: 600px) {
+    min-width: 0;
+  }
+
   a {
     display: block;
     margin: 0 1rem;
@@ -205,9 +209,20 @@
   .visible-links {
     display: table;
 
+    @media (max-width: 600px) {
+      display: block;
+      max-width: calc(100vw - 4rem);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
     li {
       display: table-cell;
       vertical-align: middle;
+
+      @media (max-width: 600px) {
+        display: inline-block;
+      }
 
       &:first-child {
         font-weight: bold;
