@@ -36,7 +36,7 @@ This is one of the papers that made **attention** a central idea in deep learnin
 
 ## Problem
 
-Earlier encoder-decoder NMT models encode the entire source sentence into one fixed-length vector \(c\). The decoder then generates every target word from that same compressed representation.
+Earlier encoder-decoder NMT models encode the entire source sentence into one fixed-length vector \\(c\\). The decoder then generates every target word from that same compressed representation.
 
 The paper argues that this design is weak because:
 
@@ -48,59 +48,48 @@ The paper argues that this design is weak because:
 
 Instead of forcing the encoder to produce one sentence vector, the encoder produces a sequence of annotations:
 
-\[
+$$
 h_1, h_2, \ldots, h_{T_x}
-\]
+$$
 
-At each target step \(i\), the decoder computes attention weights over all source annotations and builds a step-specific context vector:
+At each target step \\(i\\), the decoder computes attention weights over all source annotations and builds a step-specific context vector:
 
-\[
+$$
 c_i = \sum_{j=1}^{T_x} \alpha_{ij} h_j
-\]
+$$
 
 The model therefore decides which source positions are relevant **for the current target word**, not once for the entire sentence.
 
-```mermaid
-flowchart LR
-    A["Source sentence"] --> B["Bidirectional RNN encoder"]
-    B --> C["Source annotations h_j"]
-    C --> D["Alignment scores e_ij"]
-    D --> E["Softmax attention weights alpha_ij"]
-    E --> F["Context vector c_i"]
-    G["Previous decoder state s_i-1"] --> D
-    F --> H["RNN decoder"]
-    G --> H
-    H --> I["Next target word y_i"]
-```
+For the model structure, I refer directly to **Figure 1** in the paper instead of redrawing the architecture. Figure 1 is the source diagram for the relationship between the source annotations, the alignment model, the context vector, and the decoder.
 
 ## Method
 
 ### Encoder
 
-The encoder is a bidirectional RNN. For each source position \(j\), it concatenates the forward and backward hidden states:
+The encoder is a bidirectional RNN. For each source position \\(j\\), it concatenates the forward and backward hidden states:
 
-\[
+$$
 h_j = [\overrightarrow{h_j}; \overleftarrow{h_j}]
-\]
+$$
 
 This gives each source-word annotation information from both left and right context.
 
 ### Alignment Model
 
-For each target step \(i\) and source position \(j\), the model computes an alignment score:
+For each target step \\(i\\) and source position \\(j\\), the model computes an alignment score:
 
-\[
+$$
 e_{ij} = a(s_{i-1}, h_j)
-\]
+$$
 
-Here, \(s_{i-1}\) is the previous decoder hidden state and \(a(\cdot)\) is a learned feed-forward network. The scores are normalized with softmax:
+Here, \\(s_{i-1}\\) is the previous decoder hidden state and \\(a(\cdot)\\) is a learned feed-forward network. The scores are normalized with softmax:
 
-\[
+$$
 \alpha_{ij} =
 \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}
-\]
+$$
 
-These \(\alpha_{ij}\) values are differentiable soft-alignment weights, so the alignment mechanism can be trained jointly with the translation model by backpropagation.
+These \\(\alpha_{ij}\\) values are differentiable soft-alignment weights, so the alignment mechanism can be trained jointly with the translation model by backpropagation.
 
 ### Decoder
 
@@ -108,13 +97,24 @@ The decoder predicts the next target word using:
 
 - the previous target word,
 - the previous decoder state,
-- the current context vector \(c_i\).
+- the current context vector \\(c_i\\).
 
 This differs from the basic encoder-decoder because every decoding step receives a different context vector.
+
+## Paper Figures and Tables
+
+I cite the original paper's figures and table rather than recreating them:
+
+- **Figure 1**: Proposed model architecture for generating the \\(i\\)-th target word from source annotations and a step-specific context vector.
+- **Figure 2**: BLEU score by source sentence length; this is the main evidence that RNNsearch handles long sentences better than the fixed-vector encoder-decoder.
+- **Figure 3**: Sample soft alignments from RNNsearch-50; this supports the interpretation that the model learns plausible source-target alignments.
+- **Table 1**: BLEU scores for RNNencdec, RNNsearch, and Moses; the quantitative table below cites these values directly.
 
 ## Experiments
 
 The authors evaluate on WMT 2014 English-to-French translation. They compare a basic RNN encoder-decoder with the proposed attention-based model, called **RNNsearch**.
+
+Values cited from **Table 1** of the paper:
 
 | Model | BLEU, all sentences | BLEU, no UNK |
 |------|---------------------:|-------------:|
@@ -125,13 +125,13 @@ The authors evaluate on WMT 2014 English-to-French translation. They compare a b
 | RNNsearch-50* | 28.45 | 36.15 |
 | Moses phrase-based SMT | 33.30 | 35.63 |
 
-The important result is not only the overall BLEU improvement. The attention model is much more robust for longer sentences, while the fixed-vector encoder-decoder degrades as sentence length increases.
+The important result is not only the overall BLEU improvement. As shown in **Figure 2** of the paper, the attention model is much more robust for longer sentences, while the fixed-vector encoder-decoder degrades as sentence length increases.
 
 ## What I Learned
 
 The main contribution is the shift from **sentence-level compression** to **step-level retrieval**. The encoder stores a sequence of useful representations, and the decoder retrieves what it needs at each generation step.
 
-This also makes the model more interpretable than a plain encoder-decoder. Visualizing attention weights gives a rough source-target alignment matrix, which helps explain how the translation was produced.
+This also makes the model more interpretable than a plain encoder-decoder. **Figure 3** in the paper visualizes attention weights as source-target alignment matrices, which helps explain how the translation was produced.
 
 For my Transformer study, this paper is a good bridge:
 
@@ -144,14 +144,14 @@ For my Transformer study, this paper is a good bridge:
 If I implement this in PyTorch, I would split the model into four modules:
 
 1. `Encoder`: bidirectional GRU/LSTM that returns all hidden states.
-2. `AdditiveAttention`: feed-forward alignment network for \(e_{ij}\).
-3. `Decoder`: recurrent decoder that consumes \(c_i\) at each step.
+2. `AdditiveAttention`: feed-forward alignment network for \\(e_{ij}\\).
+3. `Decoder`: recurrent decoder that consumes \\(c_i\\) at each step.
 4. `Seq2Seq`: training wrapper with teacher forcing and beam-search inference.
 
 Important checks:
 
 - Verify attention weights sum to 1 over source positions.
-- Plot attention heatmaps for short examples.
+- Compare attention weights against the qualitative alignment examples in Figure 3 of the paper.
 - Compare short-sentence and long-sentence performance separately.
 - Track unknown-token behavior, because rare words remain a key limitation in this paper.
 
