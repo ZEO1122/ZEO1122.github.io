@@ -101,6 +101,13 @@ citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Joi
   }
 </style>
 
+<script>
+  window.MathJax = window.MathJax || {};
+  window.MathJax.tex = window.MathJax.tex || {};
+  window.MathJax.tex.inlineMath = [['$', '$'], ['\\(', '\\)']];
+  window.MathJax.tex.displayMath = [['$$', '$$'], ['\\[', '\\]']];
+</script>
+
 ## One-Line Takeaway
 
 This paper introduces a neural machine translation model that learns **where to look in the source sentence while generating each target word**, removing the fixed-length context bottleneck of early encoder-decoder models.
@@ -299,26 +306,110 @@ For my Transformer study, this paper is a good bridge:
 
 ## Implementation Notes
 
-If I implement this in PyTorch, I would split the model into four modules:
+이 섹션은 단순한 PyTorch 구현 체크리스트가 아니라, 논문을 직접 구현하거나 재현할 때 헷갈릴 수 있는 개념을 정리한 메모이다.
 
-1. `Encoder`: bidirectional GRU/LSTM that returns all hidden states.
-2. `AdditiveAttention`: feed-forward alignment network for <math><msub><mi>e</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math>.
-3. `Decoder`: recurrent decoder that consumes <math><msub><mi>c</mi><mi>i</mi></msub></math> at each step.
-4. `Seq2Seq`: training wrapper with teacher forcing and beam-search inference.
+### 1. Soft-search와 soft-alignment는 어떻게 해석해야 하는가?
 
-Important checks:
+Bahdanau et al.이 말하는 **soft-search**는 decoder가 다음 target word를 생성할 때 source sentence 전체를 하나의 고정 벡터로만 사용하는 대신, source의 각 위치별 annotation을 다시 훑으면서 현재 step에 필요한 정보를 확률적으로 찾는 과정이다. 여기서 “search”는 하나의 source token을 hard하게 선택한다는 뜻이 아니라, 모든 source position에 대해 relevance score를 계산한 뒤 softmax로 weight를 부여한다는 뜻이다.
 
-- Verify attention weights sum to 1 over source positions.
-- Compare attention weights against the qualitative alignment examples in Figure 3 of the paper.
-- Compare short-sentence and long-sentence performance separately.
-- Track unknown-token behavior, because rare words remain a key limitation in this paper.
+각 decoding step $i$에서 alignment score는 대략 다음처럼 계산된다.
+
+$$
+e_{ij} = a(s_{i-1}, h_j)
+$$
+
+여기서 $s_{i-1}$는 이전 decoder hidden state이고, $h_j$는 source position $j$의 annotation이다. 이후 softmax를 통해 attention weight를 만든다.
+
+$$
+\alpha_{ij} = \frac{\exp(e_{ij})}{\sum_k \exp(e_{ik})}
+$$
+
+그리고 context vector는 모든 source annotation의 weighted sum으로 계산된다.
+
+$$
+c_i = \sum_j \alpha_{ij} h_j
+$$
+
+이때 **soft-alignment**는 $\alpha_{ij}$를 source-target alignment처럼 해석한 것이다. 즉 target word $y_i$를 만들 때 source position $j$의 annotation이 얼마나 많이 사용되었는지 보여주는 가중치이다. 논문은 이를 possible alignments에 대한 expected annotation으로 해석할 수 있다고 설명한다.
+
+다만 attention heatmap을 “정답 단어 정렬”이나 “완전한 설명”으로 단정하면 안 된다. 이 값은 모델이 그 step에서 어떤 source representation을 상대적으로 크게 사용했는지 보여주는 진단 신호에 가깝다. 특히 Korean-English처럼 어순, 조사, 어미, 형태소 단위가 크게 다른 언어쌍에서는 word-level alignment보다 tokenization 단위에 따른 soft correspondence로 보는 편이 안전하다.
+
+### 2. BiRNN encoder에서 hidden state를 왜 transpose 또는 reshape하는가?
+
+논문 수준에서 중요한 것은 BiRNN encoder가 각 source position마다 annotation을 만든다는 점이다. forward RNN은 source sentence를 왼쪽에서 오른쪽으로 읽고, backward RNN은 오른쪽에서 왼쪽으로 읽는다. 각 위치의 annotation은 두 방향의 hidden state를 concatenate해서 만든다.
+
+$$
+h_j = [\overrightarrow{h_j}; \overleftarrow{h_j}]
+$$
+
+이렇게 하면 각 source word annotation이 앞쪽 문맥과 뒤쪽 문맥을 모두 담을 수 있다.
+
+구현에서 hidden state를 transpose하거나 reshape하는 이유는 대부분 **수식의 의미 때문이 아니라 tensor layout을 맞추기 위해서**이다. 예를 들어 RNN 라이브러리는 보통 output을 `(seq_len, batch, hidden)` 또는 `(batch, seq_len, hidden)` 형태로 반환한다. 반면 attention 계산에서는 batch matrix multiplication을 편하게 하기 위해 `(batch, seq_len, hidden)` 형태가 필요할 수 있다. 이때 time axis와 batch axis를 바꾸기 위해 transpose가 들어간다.
+
+또한 bidirectional RNN의 final hidden state는 흔히 `(num_layers * num_directions, batch, hidden)` 형태로 나온다. 이를 layer와 direction으로 분리하려면 reshape가 필요하고, forward/backward state를 같은 source position 기준으로 concatenate하려면 다시 transpose 또는 view/reshape가 필요할 수 있다. 따라서 “transpose를 두 번 한다”는 것은 보통 다음 두 가지 목적 중 하나다.
+
+1. RNN output의 time-major/batch-major layout을 attention module이 기대하는 layout으로 바꾸기
+2. `num_layers * num_directions`로 합쳐진 축을 `(num_layers, num_directions, batch, hidden)`처럼 분리한 뒤, forward/backward representation을 올바른 순서로 합치기
+
+중요한 점은 transpose/reshape 자체가 학습되는 연산은 아니라는 것이다. 학습되는 것은 embedding, RNN parameter, attention scoring network, decoder parameter이고, transpose/reshape는 이 값들이 올바른 축 의미를 유지하도록 배치하는 구현상의 조작이다.
+
+공식 GroundHog 구현에서도 source batch는 각 column이 하나의 sentence가 되도록 `(max_seq_len, batch_size)` 형식으로 구성되고, encoder hidden layer는 `(max_seq_len, batch_size, dim)` 형태를 기준으로 처리된다. 따라서 현대 PyTorch 구현에서 `batch_first=True`를 쓰거나 attention 계산을 `torch.bmm`으로 구현한다면, 논문 수식과 달리 transpose가 더 자주 보일 수 있다.
+
+### 3. Annotation은 어떻게 학습되는가?
+
+Annotation $h_j$는 사람이 부여한 정답 label이 아니다. Encoder가 source sentence를 읽으면서 만든 hidden state이며, translation loss를 통해 end-to-end로 학습된다.
+
+학습 흐름은 다음과 같다.
+
+1. Encoder가 각 source position의 annotation $h_j$를 만든다.
+2. Decoder가 이전 state $s_{i-1}$와 annotation $h_j$를 이용해 score $e_{ij}$를 계산한다.
+3. Softmax를 통해 attention weight $\alpha_{ij}$를 만든다.
+4. Context vector $c_i = \sum_j \alpha_{ij} h_j$를 만든다.
+5. Decoder가 $c_i$, 이전 target word, 이전 hidden state를 이용해 다음 target word probability를 예측한다.
+6. 정답 target word에 대한 negative log-likelihood loss가 encoder, attention, decoder 전체로 역전파된다.
+
+논문에서 중요한 점은 alignment가 hard latent variable이 아니라 differentiable soft alignment라는 것이다. 따라서 gradient가 attention scoring network뿐 아니라 encoder annotation을 만든 BiRNN parameter까지 전달될 수 있다.
+
+공식 GroundHog 구현의 `RecurrentLayerWithSearch`도 이 구조를 따른다. Source annotation `c`와 이전 decoder state에서 energy를 계산하고, normalize해서 `probs`를 만든 뒤, `ctx = (c * probs).sum(axis=0)` 형태로 weighted context를 만든다. 이 context가 decoder update에 들어가기 때문에 annotation은 번역 likelihood를 높이는 방향으로 함께 학습된다.
+
+### 4. RNNencdec-30/50, RNNsearch-30/50 실험 설계는 적합한가?
+
+논문에서 `-30`과 `-50`은 단순한 모델 이름이 아니라 training에 포함되는 sentence length cutoff를 의미한다. 논문은 두 모델군을 비교한다.
+
+- `RNNencdec`: attention이 없는 기존 encoder-decoder 모델
+- `RNNsearch`: attention을 사용하는 제안 모델
+
+각 모델은 sentence length를 최대 30 words로 제한한 setting과 최대 50 words로 제한한 setting에서 학습된다. 그래서 `RNNencdec-30`, `RNNsearch-30`, `RNNencdec-50`, `RNNsearch-50`이 나온다.
+
+공식 GroundHog 구현을 보면 이 해석이 코드에서도 드러난다. `prototype_encdec_state()`는 논문의 `RNNencdec-30` 설정으로 문서화되어 있고, `seqlen = 30`, `bs = 80`, `dim = 1000`을 사용한다. `prototype_search_state()`는 `RNNsearch-50` 설정으로 문서화되어 있으며, `search = True`, `forward = True`, `backward = True`, `seqlen = 50`, `sort_k_batches = 20`을 설정한다. README도 기본 prototype이 `RNNsearch-50`에 해당하고, `RNNencdec-50`은 `prototype_encdec_state`에서 `seqlen=50, sort_k_batches=20`을 override해서 학습한다고 설명한다.
+
+따라서 이 실험 설계는 **attention 유무를 비교하는 목적에는 어느 정도 적합하다.** 같은 length cutoff 안에서 `RNNencdec-30`과 `RNNsearch-30`, `RNNencdec-50`과 `RNNsearch-50`을 비교하면 fixed-vector encoder-decoder와 attention-based decoder의 차이를 볼 수 있기 때문이다. 실제 결과에서도 같은 cutoff 기준으로 RNNsearch가 RNNencdec보다 높은 BLEU를 보인다.
+
+하지만 `30`과 `50`을 직접 비교해 “길이를 늘리면 성능이 좋아진다/나빠진다”라고 단순 결론을 내리기에는 한계가 있다. `seqlen=50` setting은 `seqlen=30` setting보다 더 긴 문장들을 training에 포함하므로, 학습 데이터의 길이 분포와 난이도가 달라진다. 또한 GroundHog의 `sort_k_batches`는 여러 minibatch를 모아 길이순으로 정렬한 뒤 padding을 줄이기 위한 batching 전략이지, length bucket별 데이터 분포를 균등하게 맞추는 실험 설계는 아니다.
+
+정리하면 다음과 같다.
+
+- **적합한 비교:** 같은 cutoff 안에서 `RNNencdec` vs `RNNsearch`
+- **주의할 비교:** `-30` vs `-50` 자체의 직접 비교
+- **핵심 해석:** 논문의 주장은 “RNNsearch가 fixed-length vector bottleneck을 완화해 긴 문장에 더 robust하다”는 것이며, 30/50 setting은 이를 보여주는 근거이지만 완전히 균등한 length-controlled 실험은 아니다.
+
+Korean-English 또는 lower-resource setting으로 확장하려면 더 엄밀한 재현 설계가 필요하다. 예를 들어 다음 항목을 함께 보고해야 한다.
+
+- train/dev/test의 sentence length distribution
+- Korean tokenization 방식: eojeol, morpheme, BPE/SentencePiece 등
+- source/target vocabulary size와 `UNK` 또는 rare token 비율
+- length bucket별 BLEU 또는 chrF
+- low-resource size별 성능 변화
+- attention heatmap이 tokenization 단위에 따라 어떻게 달라지는지
+- 여러 random seed의 평균과 분산
+
+이렇게 정리하면 기존 English-to-French 결과를 단순히 Korean-English에 일반화하지 않고, attention의 장점이 언어쌍과 데이터 규모가 바뀌어도 유지되는지 더 명확하게 검증할 수 있다.
 
 ## Limitations and Questions
 
 - The shortlist vocabulary maps rare words to `UNK`, so rare-word translation is still weak.
 - Attention requires computing source-target pair scores, which scales with both input and output length.
 - Attention heatmaps are useful diagnostics, but they should not automatically be treated as a complete explanation of model behavior.
-- The paper focuses on English-to-French; I want to compare whether the same behavior appears in Korean-English or lower-resource settings.
 
 ## Follow-Up Reading
 
@@ -330,3 +421,6 @@ Important checks:
 
 - [arXiv:1409.0473](https://arxiv.org/abs/1409.0473)
 - [HTML version via ar5iv](https://ar5iv.labs.arxiv.org/html/1409.0473)
+- [Official GroundHog NMT implementation README](https://github.com/lisa-groundhog/GroundHog/blob/master/experiments/nmt/README.md)
+- [GroundHog NMT state.py](https://github.com/lisa-groundhog/GroundHog/blob/master/experiments/nmt/state.py)
+- [GroundHog NMT encdec.py](https://github.com/lisa-groundhog/GroundHog/blob/master/experiments/nmt/encdec.py)
