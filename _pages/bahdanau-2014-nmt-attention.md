@@ -344,12 +344,15 @@ $$
 
 이렇게 하면 각 source word annotation이 앞쪽 문맥과 뒤쪽 문맥을 모두 담을 수 있다.
 
-구현에서 hidden state를 transpose하거나 reshape하는 이유는 대부분 **수식의 의미 때문이 아니라 tensor layout을 맞추기 위해서**이다. 예를 들어 RNN 라이브러리는 보통 output을 `(seq_len, batch, hidden)` 또는 `(batch, seq_len, hidden)` 형태로 반환한다. 반면 attention 계산에서는 batch matrix multiplication을 편하게 하기 위해 `(batch, seq_len, hidden)` 형태가 필요할 수 있다. 이때 time axis와 batch axis를 바꾸기 위해 transpose가 들어간다.
+구현에서 hidden state를 transpose하거나 reshape하는 이유는 대부분 **수식의 의미 때문이 아니라 tensor layout을 맞추기 위해서**이다.
 
-또한 bidirectional RNN의 final hidden state는 흔히 `(num_layers * num_directions, batch, hidden)` 형태로 나온다. 이를 layer와 direction으로 분리하려면 reshape가 필요하고, forward/backward state를 같은 source position 기준으로 concatenate하려면 다시 transpose 또는 view/reshape가 필요할 수 있다. 따라서 “transpose를 두 번 한다”는 것은 보통 다음 두 가지 목적 중 하나다.
+주의할 점은 `encoder_outputs`와 `h_n`을 구분하는 것이다. Attention에서 사용하는 annotation sequence는 보통 `encoder_outputs`에서 온다. [PyTorch GRU docs](https://docs.pytorch.org/docs/stable/generated/torch.nn.GRU.html) 기준으로 bidirectional encoder의 `output`은 `batch_first=False`일 때 `(seq_len, batch, 2 * hidden)` 형태이고, 이것이 source position별 annotation에 해당한다. 반면 `h_n`은 `(num_layers * num_directions, batch, hidden)` 형태의 final hidden state로, 주로 decoder initial state를 만들 때 사용한다.
 
-1. RNN output의 time-major/batch-major layout을 attention module이 기대하는 layout으로 바꾸기
-2. `num_layers * num_directions`로 합쳐진 축을 `(num_layers, num_directions, batch, hidden)`처럼 분리한 뒤, forward/backward representation을 올바른 순서로 합치기
+예를 들어 PyTorch에서 `batch_first=False`로 BiGRU를 쓰면 `encoder_outputs`는 `(src_len, batch, 2 * hidden)` 형태로 나온다. Attention module이 `(batch, src_len, 2 * hidden)`을 기대한다면 `encoder_outputs.transpose(0, 1)`이 필요하다.
+
+반면 decoder initial state를 만들 때는 `h_n`의 `(num_layers * 2, batch, hidden)` 축을 `(num_layers, 2, batch, hidden)`처럼 분리한 뒤, 마지막 layer의 forward/backward state를 concatenate할 수 있다. 따라서 하나의 transpose/reshape는 annotation sequence layout을 맞추기 위한 것이고, 다른 하나는 final hidden state에서 layer/direction 축을 분리하기 위한 것이다.
+
+PyTorch에서는 `transpose` 이후 tensor가 non-contiguous일 수 있으므로, `.view()`를 써야 한다면 `.contiguous().view(...)`를 사용하거나 `.reshape(...)`를 쓰는 편이 안전하다.
 
 중요한 점은 transpose/reshape 자체가 학습되는 연산은 아니라는 것이다. 학습되는 것은 embedding, RNN parameter, attention scoring network, decoder parameter이고, transpose/reshape는 이 값들이 올바른 축 의미를 유지하도록 배치하는 구현상의 조작이다.
 
@@ -370,9 +373,11 @@ Annotation $h_j$는 사람이 부여한 정답 label이 아니다. Encoder가 so
 
 논문에서 중요한 점은 alignment가 hard latent variable이 아니라 differentiable soft alignment라는 것이다. 따라서 gradient가 attention scoring network뿐 아니라 encoder annotation을 만든 BiRNN parameter까지 전달될 수 있다.
 
-공식 GroundHog 구현의 `RecurrentLayerWithSearch`도 이 구조를 따른다. Source annotation `c`와 이전 decoder state에서 energy를 계산하고, normalize해서 `probs`를 만든 뒤, `ctx = (c * probs).sum(axis=0)` 형태로 weighted context를 만든다. 이 context가 decoder update에 들어가기 때문에 annotation은 번역 likelihood를 높이는 방향으로 함께 학습된다.
+공식 GroundHog 구현의 [`RecurrentLayerWithSearch`](https://github.com/lisa-groundhog/GroundHog/blob/master/experiments/nmt/encdec.py)도 이 구조를 따른다. 코드에서는 source annotation `c`와 이전 decoder state를 projection해 energy를 만들고, `probs = energy / normalizer`로 normalize한 뒤, `ctx = (c * probs.dimshuffle(0, 1, 'x')).sum(axis=0)`로 weighted context를 계산한다. PyTorch식으로 쓰면 이는 대략 `ctx = weighted_sum(probs, annotations)`에 해당한다. 이 context가 decoder update에 들어가기 때문에 annotation은 번역 likelihood를 높이는 방향으로 함께 학습된다.
 
 ### 4. RNNencdec-30/50, RNNsearch-30/50 실험 설계는 적합한가?
+
+결론부터 말하면, 이 설계는 같은 cutoff 안에서 attention 유무를 비교하기에는 적합하지만, `-30`과 `-50`을 서로 직접 비교해 length cutoff 자체의 효과를 결론내리기에는 부족하다.
 
 논문에서 `-30`과 `-50`은 단순한 모델 이름이 아니라 training에 포함되는 sentence length cutoff를 의미한다. 논문은 두 모델군을 비교한다.
 
@@ -381,9 +386,9 @@ Annotation $h_j$는 사람이 부여한 정답 label이 아니다. Encoder가 so
 
 각 모델은 sentence length를 최대 30 words로 제한한 setting과 최대 50 words로 제한한 setting에서 학습된다. 그래서 `RNNencdec-30`, `RNNsearch-30`, `RNNencdec-50`, `RNNsearch-50`이 나온다.
 
-공식 GroundHog 구현을 보면 이 해석이 코드에서도 드러난다. `prototype_encdec_state()`는 논문의 `RNNencdec-30` 설정으로 문서화되어 있고, `seqlen = 30`, `bs = 80`, `dim = 1000`을 사용한다. `prototype_search_state()`는 `RNNsearch-50` 설정으로 문서화되어 있으며, `search = True`, `forward = True`, `backward = True`, `seqlen = 50`, `sort_k_batches = 20`을 설정한다. README도 기본 prototype이 `RNNsearch-50`에 해당하고, `RNNencdec-50`은 `prototype_encdec_state`에서 `seqlen=50, sort_k_batches=20`을 override해서 학습한다고 설명한다.
+공식 GroundHog 구현의 [`state.py`](https://github.com/lisa-groundhog/GroundHog/blob/master/experiments/nmt/state.py)를 보면 `prototype_encdec_state()`는 docstring상 `RNNenc-30` 설정으로 적혀 있으며, [README](https://github.com/lisa-groundhog/GroundHog/blob/master/experiments/nmt/README.md)에서는 이를 논문의 `RNNencdec-30` 학습 설정으로 안내한다. 이 설정은 `seqlen = 30`, `bs = 80`, `dim = 1000`을 사용한다. `prototype_search_state()`는 `RNNsearch-50` 설정으로 문서화되어 있으며, `search = True`, `forward = True`, `backward = True`, `seqlen = 50`, `sort_k_batches = 20`을 설정한다. README도 기본 prototype이 `RNNsearch-50`에 해당하고, `RNNencdec-50`은 `prototype_encdec_state`에서 `seqlen=50, sort_k_batches=20`을 override해서 학습한다고 설명한다.
 
-따라서 이 실험 설계는 **attention 유무를 비교하는 목적에는 어느 정도 적합하다.** 같은 length cutoff 안에서 `RNNencdec-30`과 `RNNsearch-30`, `RNNencdec-50`과 `RNNsearch-50`을 비교하면 fixed-vector encoder-decoder와 attention-based decoder의 차이를 볼 수 있기 때문이다. 실제 결과에서도 같은 cutoff 기준으로 RNNsearch가 RNNencdec보다 높은 BLEU를 보인다.
+같은 length cutoff 안에서 `RNNencdec-30`과 `RNNsearch-30`, `RNNencdec-50`과 `RNNsearch-50`을 비교하면 fixed-vector encoder-decoder와 attention-based decoder의 차이를 볼 수 있다. 실제 결과에서도 같은 cutoff 기준으로 RNNsearch가 RNNencdec보다 높은 BLEU를 보인다.
 
 하지만 `30`과 `50`을 직접 비교해 “길이를 늘리면 성능이 좋아진다/나빠진다”라고 단순 결론을 내리기에는 한계가 있다. `seqlen=50` setting은 `seqlen=30` setting보다 더 긴 문장들을 training에 포함하므로, 학습 데이터의 길이 분포와 난이도가 달라진다. 또한 GroundHog의 `sort_k_batches`는 여러 minibatch를 모아 길이순으로 정렬한 뒤 padding을 줄이기 위한 batching 전략이지, length bucket별 데이터 분포를 균등하게 맞추는 실험 설계는 아니다.
 
@@ -393,23 +398,11 @@ Annotation $h_j$는 사람이 부여한 정답 label이 아니다. Encoder가 so
 - **주의할 비교:** `-30` vs `-50` 자체의 직접 비교
 - **핵심 해석:** 논문의 주장은 “RNNsearch가 fixed-length vector bottleneck을 완화해 긴 문장에 더 robust하다”는 것이며, 30/50 setting은 이를 보여주는 근거이지만 완전히 균등한 length-controlled 실험은 아니다.
 
-Korean-English 또는 lower-resource setting으로 확장하려면 더 엄밀한 재현 설계가 필요하다. 예를 들어 다음 항목을 함께 보고해야 한다.
-
-- train/dev/test의 sentence length distribution
-- Korean tokenization 방식: eojeol, morpheme, BPE/SentencePiece 등
-- source/target vocabulary size와 `UNK` 또는 rare token 비율
-- length bucket별 BLEU 또는 chrF
-- low-resource size별 성능 변화
-- attention heatmap이 tokenization 단위에 따라 어떻게 달라지는지
-- 여러 random seed의 평균과 분산
-
-이렇게 정리하면 기존 English-to-French 결과를 단순히 Korean-English에 일반화하지 않고, attention의 장점이 언어쌍과 데이터 규모가 바뀌어도 유지되는지 더 명확하게 검증할 수 있다.
-
 ## Limitations and Questions
 
-- The shortlist vocabulary maps rare words to `UNK`, so rare-word translation is still weak.
-- Attention requires computing source-target pair scores, which scales with both input and output length.
-- Attention heatmaps are useful diagnostics, but they should not automatically be treated as a complete explanation of model behavior.
+* Shortlist vocabulary 때문에 rare word가 `UNK`로 매핑되며, rare-word translation은 여전히 약하다.
+* Attention은 source-target pair score를 계산하므로 입력 길이와 출력 길이가 모두 길어질수록 계산량이 증가한다.
+* Attention heatmap은 유용한 진단 도구이지만, 모델 행동에 대한 완전한 설명으로 자동 해석해서는 안 된다.
 
 ## Follow-Up Reading
 
