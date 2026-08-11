@@ -2,6 +2,13 @@
 permalink: /notes/
 title: "Paper Notes"
 author_profile: true
+lang: en
+locale: en-US
+og_locale: en_US
+author: jeo_en
+translations:
+  en: /notes/
+  ko: /ko/notes/
 ---
 
 This page collects structured paper summaries, study questions, and reading records from PRML Lab sessions and personal AI/ML study.

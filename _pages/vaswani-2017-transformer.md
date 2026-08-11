@@ -3,6 +3,13 @@ permalink: /notes/vaswani-2017-transformer/
 title: "Attention Is All You Need"
 date: 2026-08-11
 author_profile: true
+lang: en
+locale: en-US
+og_locale: en_US
+author: jeo_en
+translations:
+  en: /notes/vaswani-2017-transformer/
+  ko: /ko/notes/vaswani-2017-transformer/
 tags:
   - NLP
   - Transformer

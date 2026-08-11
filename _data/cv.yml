@@ -181,7 +181,9 @@ projects:
     description:
       en: "Portfolio project documenting the compression strategy and experiments for LG AI Research's EXAONE-4.0-1.2B."
       ko: "LG AI연구원의 EXAONE-4.0-1.2B를 대상으로 수행한 모델 경량화 전략과 실험 과정을 정리한 프로젝트"
-    page_url: "/portfolio/lg-aimers/"
+    page_url:
+      en: "/portfolio/lg-aimers/"
+      ko: "/ko/portfolio/lg-aimers/"
     repository_url: "https://github.com/ZEO1122/LG_Aimers_8th"
   - name:
       en: "Transformer Architecture Study"
@@ -193,18 +195,24 @@ projects:
     description:
       en: "Junior-track curriculum connecting Attention Is All You Need with from-scratch implementation and translation experiments."
       ko: "Attention Is All You Need 논문을 직접 구현하고 번역 실험까지 이어지도록 구성한 주니어 대상 학습 과정"
-    page_url: "/portfolio/transformer-study/"
+    page_url:
+      en: "/portfolio/transformer-study/"
+      ko: "/ko/portfolio/transformer-study/"
     repository_url: "https://github.com/aing-gachon/26-Spring-Transformer-Study"
 
 paper_notes:
   - title: "Neural Machine Translation by Jointly Learning to Align and Translate"
     authors: "Bahdanau, Cho, and Bengio"
     year: "2014"
-    url: "/notes/bahdanau-2014-nmt-attention/"
+    url:
+      en: "/notes/bahdanau-2014-nmt-attention/"
+      ko: "/ko/notes/bahdanau-2014-nmt-attention/"
   - title: "Attention Is All You Need"
     authors: "Vaswani et al."
     year: "2017"
-    url: "/notes/vaswani-2017-transformer/"
+    url:
+      en: "/notes/vaswani-2017-transformer/"
+      ko: "/ko/notes/vaswani-2017-transformer/"
 
 military:
   organization:

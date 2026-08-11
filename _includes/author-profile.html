@@ -2,7 +2,13 @@
 {% assign author_ui_locale = page.locale | default: site.locale %}
 
 {% if page.author and site.data.authors[page.author] %}
-  {% assign author = site.data.authors[page.author] %}{% else %}{% assign author = site.author %}
+  {% assign author = site.data.authors[page.author] %}
+{% elsif page.lang == "ko" and site.data.authors.jeo_ko %}
+  {% assign author = site.data.authors.jeo_ko %}
+{% elsif page.lang == "en" and site.data.authors.jeo_en %}
+  {% assign author = site.data.authors.jeo_en %}
+{% else %}
+  {% assign author = site.author %}
 {% endif %}
 
 <div itemscope itemtype="http://schema.org/Person">

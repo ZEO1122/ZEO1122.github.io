@@ -3,6 +3,13 @@ permalink: /notes/bahdanau-2014-nmt-attention/
 title: "Neural Machine Translation by Jointly Learning to Align and Translate"
 date: 2026-07-03
 author_profile: true
+lang: en
+locale: en-US
+og_locale: en_US
+author: jeo_en
+translations:
+  en: /notes/bahdanau-2014-nmt-attention/
+  ko: /ko/notes/bahdanau-2014-nmt-attention/
 tags:
   - NLP
   - Neural Machine Translation

@@ -3,6 +3,13 @@ title: "Transformer Architecture Study"
 excerpt: "Junior-track Transformer study curriculum connecting Attention Is All You Need to from-scratch implementation and translation experiments."
 collection: portfolio
 date: 2026-03-01
+lang: en
+locale: en-US
+og_locale: en_US
+author: jeo_en
+translations:
+  en: /portfolio/transformer-study/
+  ko: /ko/portfolio/transformer-study/
 ---
 
 ## Overview

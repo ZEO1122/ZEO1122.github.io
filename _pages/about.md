@@ -2,6 +2,13 @@
 permalink: /
 title: "Jeo Jeon (전제오)"
 author_profile: true
+lang: en
+locale: en-US
+og_locale: en_US
+author: jeo_en
+translations:
+  en: /
+  ko: /ko/
 redirect_from:
   - /about/
   - /about.html

@@ -1,0 +1,80 @@
+<style>
+  .paper-note-figure {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .paper-note-figure img {
+    max-width: 100%;
+    height: auto;
+    padding: 0.75rem;
+    border: 1px solid var(--global-border-color);
+    background: #fff;
+  }
+
+  .paper-note-figure--narrow img {
+    max-width: 360px;
+  }
+
+  .paper-note-figure--medium img {
+    max-width: 720px;
+  }
+
+  .paper-note-figure-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .paper-note-figure-grid img {
+    width: 100%;
+  }
+
+  .paper-note-panel-label {
+    margin-top: 0.25rem;
+    font-size: 0.85em;
+    color: var(--global-text-color);
+  }
+
+  .paper-note-figure figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.85em;
+    color: var(--global-text-color);
+    text-align: left;
+  }
+
+  .paper-note-table-wrap {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .page__content mjx-container[display="true"] {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.15rem;
+  }
+
+  @media (max-width: 700px) {
+    .paper-note-figure-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .masthead,
+    .masthead__inner-wrap,
+    .masthead__menu,
+    .greedy-nav,
+    .greedy-nav .visible-links {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+  }
+</style>
+
+<script>
+  window.MathJax = window.MathJax || {};
+  window.MathJax.tex = window.MathJax.tex || {};
+  window.MathJax.tex.inlineMath = [['$', '$'], ['\\(', '\\)']];
+  window.MathJax.tex.displayMath = [['$$', '$$'], ['\\[', '\\]']];
+</script>

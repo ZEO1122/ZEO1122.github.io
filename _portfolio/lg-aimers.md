@@ -3,6 +3,13 @@ title: "LG Aimers 8th Model Compression"
 excerpt: "Team-led LLM compression project using QLoRA and optional GPTQ W8A8 quantization for EXAONE-4.0-1.2B."
 collection: portfolio
 date: 2025-12-01
+lang: en
+locale: en-US
+og_locale: en_US
+author: jeo_en
+translations:
+  en: /portfolio/lg-aimers/
+  ko: /ko/portfolio/lg-aimers/
 ---
 
 ## Overview

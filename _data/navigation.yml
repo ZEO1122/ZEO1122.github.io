@@ -2,7 +2,7 @@
 # Publications, Talks, Teaching are hidden until real content exists.
 # To restore them, uncomment the relevant lines.
 
-main:
+en:
   - title: "About"
     url: /
 
@@ -26,3 +26,16 @@ main:
   # Restore when you have real teaching material:
   # - title: "Teaching"
   #   url: /teaching/
+
+ko:
+  - title: "소개"
+    url: /ko/
+
+  - title: "이력서"
+    url: /ko/cv/
+
+  - title: "프로젝트"
+    url: /ko/portfolio/
+
+  - title: "논문 노트"
+    url: /ko/notes/

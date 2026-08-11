@@ -79,3 +79,58 @@
   border-bottom: 2px solid var(--global-text-color);
   /* No need to repeat pointer-events and cursor here */
 }
+
+.site-language-switch {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--global-border-color);
+  border-radius: 6px;
+  background: var(--global-bg-color);
+  transform: translateY(-50%);
+  z-index: 110;
+}
+
+.greedy-nav .site-language-switch a {
+  min-width: 2rem;
+  margin: 0;
+  padding: 0.28rem 0.4rem;
+  border-radius: 4px;
+  color: var(--global-masthead-link-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+
+.greedy-nav .site-language-switch a::before {
+  display: none;
+}
+
+.greedy-nav .site-language-switch a.is-active {
+  background: var(--global-text-color);
+  color: var(--global-bg-color);
+  pointer-events: none;
+}
+
+.masthead .greedy-nav {
+  padding-right: 5.5rem;
+  box-sizing: border-box;
+}
+
+.masthead .greedy-nav > button {
+  right: 5.5rem;
+}
+
+@media (max-width: 600px) {
+  .masthead__menu-item--lg {
+    padding-right: 0.5rem;
+  }
+
+  .greedy-nav .site-language-switch a {
+    min-width: 1.8rem;
+    padding-inline: 0.32rem;
+  }
+}

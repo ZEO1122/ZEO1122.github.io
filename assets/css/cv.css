@@ -38,42 +38,10 @@ html[data-theme="dark"] .cv-page {
 .cv-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
   padding: 0.9rem 0;
   border-bottom: 1px solid var(--global-border-color);
-}
-
-.cv-language-switch {
-  display: inline-grid;
-  grid-template-columns: repeat(2, minmax(5.25rem, 1fr));
-  padding: 2px;
-  border: 1px solid var(--global-border-color);
-  border-radius: 6px;
-  background: var(--global-bg-color);
-}
-
-.cv-language-switch a {
-  min-height: 2rem;
-  padding: 0.35rem 0.7rem;
-  border-radius: 4px;
-  color: var(--global-text-color-light);
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1.3;
-  text-align: center;
-  text-decoration: none;
-}
-
-.cv-language-switch a:hover {
-  color: var(--global-text-color);
-  text-decoration: none;
-}
-
-.cv-language-switch a.is-active {
-  background: var(--global-text-color);
-  color: var(--global-bg-color);
-  pointer-events: none;
 }
 
 .cv-toolbar-meta {
@@ -383,10 +351,6 @@ html[data-theme="dark"] .cv-page {
     gap: 0.65rem;
   }
 
-  .cv-language-switch {
-    width: 100%;
-  }
-
   .cv-updated {
     text-align: left;
   }
@@ -453,7 +417,6 @@ html[data-theme="dark"] .cv-page {
   .masthead,
   .sidebar,
   .page__footer,
-  .cv-language-switch,
   .cv-print-button {
     display: none !important;
   }
