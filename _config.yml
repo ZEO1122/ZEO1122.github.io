@@ -1,7 +1,7 @@
 # Welcome to Jekyll!
 # Basic Site Settings
 
-locale                   : "ko-KR"
+locale                   : "en-US"
 site_theme               : "default"
 title                    : "Jeo Jeon"
 title_separator          : "-"
@@ -16,8 +16,8 @@ author:
   avatar           : "https://github.com/user-attachments/assets/7e6040eb-ed28-4452-92a6-23cf46b8c6a2"
   name             : "전제오 (Jeo Jeon)"
   pronouns         :
-  bio              : "Undergraduate Researcher<br/>Gachon Univ. · Computer Science<br/>AI · Affective Computing · Multimodal AI"
-  location         : "Seongnam, Korea"
+  bio              : "Undergraduate Researcher<br/>Gachon Univ. · Computer Engineering<br/>AI · Affective Computing · Multimodal AI"
+  location         : "Seongnam, South Korea"
   employer         : "Gachon University"
   uri              :
   email            : "chris011122@gmail.com"

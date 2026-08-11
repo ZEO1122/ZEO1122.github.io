@@ -1,0 +1,14 @@
+{% assign cv_period_lang = include.lang | default: page.lang | default: "en" %}
+<span class="cv-period">
+  <time datetime="{{ include.start | date: "%Y-%m" }}">
+    {% if cv_period_lang == "ko" %}{{ include.start | date: "%Y. %m." }}{% else %}{{ include.start | date: "%b %Y" }}{% endif %}
+  </time>
+  <span aria-hidden="true">–</span>
+  {% if include.present %}
+    {{ site.data.cv.labels[cv_period_lang].present }}
+  {% else %}
+    <time datetime="{{ include.end | date: "%Y-%m" }}">
+      {% if cv_period_lang == "ko" %}{{ include.end | date: "%Y. %m." }}{% else %}{{ include.end | date: "%b %Y" }}{% endif %}
+    </time>{% if include.expected %} <span class="cv-period-note">{{ site.data.cv.labels[cv_period_lang].expected }}</span>{% endif %}
+  {% endif %}
+</span>

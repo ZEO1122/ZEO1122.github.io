@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <article class="archive cv-page" lang="{{ page.lang }}" aria-labelledby="cv-page-title">
+    <header class="cv-page-heading">
+      <p>{{ site.data.cv.labels[page.lang].eyebrow }}</p>
+      <h1 id="cv-page-title">{{ page.title }}</h1>
+    </header>
+
+    {{ content }}
+  </article>
+</div>

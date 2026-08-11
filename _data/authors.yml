@@ -16,3 +16,21 @@ Name2 Name2:
   avatar      : "bio-photo.jpg"
   twitter     : "name2"
   google_plus : "Name"
+
+jeo_en:
+  name        : "Jeo Jeon (전제오)"
+  email       : "chris011122@gmail.com"
+  bio         : "Undergraduate Researcher<br/>Gachon Univ. · Computer Engineering<br/>AI · Affective Computing · Multimodal AI"
+  avatar      : "https://github.com/user-attachments/assets/7e6040eb-ed28-4452-92a6-23cf46b8c6a2"
+  location    : "Seongnam, South Korea"
+  employer    : "Gachon University"
+  github      : "ZEO1122"
+
+jeo_ko:
+  name        : "전제오 (Jeo Jeon)"
+  email       : "chris011122@gmail.com"
+  bio         : "학부연구생<br/>가천대학교 · 컴퓨터공학과<br/>AI · 감성 컴퓨팅 · 멀티모달 AI"
+  avatar      : "https://github.com/user-attachments/assets/7e6040eb-ed28-4452-92a6-23cf46b8c6a2"
+  location    : "경기도 성남시"
+  employer    : "가천대학교"
+  github      : "ZEO1122"

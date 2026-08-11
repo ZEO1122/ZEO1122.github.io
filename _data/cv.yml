@@ -1,0 +1,249 @@
+updated: "2026-08-11"
+
+labels:
+  en:
+    eyebrow: "Academic profile"
+    summary: "Profile"
+    education: "Education"
+    research_interests: "Research Interests"
+    experience: "Research & Academic Activities"
+    competitions: "Competitions & Hackathons"
+    projects: "Selected Projects"
+    paper_notes: "Paper Reading Notes"
+    military: "Military Service"
+    certifications: "Certifications"
+    skills: "Skills"
+    relevant_coursework: "Relevant coursework"
+    present: "Present"
+    expected: "Expected"
+    issued: "Issued"
+    repository: "Repository"
+    project_page: "Project page"
+    read_note: "Read note"
+    print: "Print / Save PDF"
+    updated: "Last updated"
+    language_navigation: "CV language"
+    contact: "Contact"
+    website: "Website"
+  ko:
+    eyebrow: "학업 및 연구 이력"
+    summary: "소개"
+    education: "학력"
+    research_interests: "연구 관심 분야"
+    experience: "연구 및 학술 활동"
+    competitions: "경진대회 및 해커톤"
+    projects: "주요 프로젝트"
+    paper_notes: "논문 정리"
+    military: "병역"
+    certifications: "자격 및 인증"
+    skills: "기술 역량"
+    relevant_coursework: "주요 이수 과목"
+    present: "현재"
+    expected: "졸업 예정"
+    issued: "취득"
+    repository: "저장소"
+    project_page: "프로젝트 페이지"
+    read_note: "노트 보기"
+    print: "인쇄 / PDF 저장"
+    updated: "최종 업데이트"
+    language_navigation: "CV 언어"
+    contact: "연락처"
+    website: "웹사이트"
+
+profile:
+  name:
+    en: "Jeo Jeon (전제오)"
+    ko: "전제오 (Jeo Jeon)"
+  label:
+    en: "Undergraduate Researcher in Artificial Intelligence"
+    ko: "인공지능 분야 학부연구생"
+  summary:
+    en: "Third-year undergraduate student in the Department of Computer Engineering at Gachon University, expected to graduate in February 2028. My research interests center on affective computing, multimodal AI, and human-centered AI."
+    ko: "가천대학교 컴퓨터공학과 3학년에 재학 중이며, 2028년 2월 졸업 예정입니다. 감성 컴퓨팅, 멀티모달 AI, 인간 중심 AI를 중심으로 머신러닝 연구 경험을 쌓고 있습니다."
+  location:
+    en: "Seongnam, South Korea"
+    ko: "경기도 성남시"
+  email: "chris011122@gmail.com"
+  website: "https://zeo1122.github.io"
+  github:
+    label: "GitHub"
+    url: "https://github.com/ZEO1122"
+
+research_interests:
+  - en: "Affective Computing"
+    ko: "감성 컴퓨팅 (Affective Computing)"
+  - en: "Multimodal AI"
+    ko: "멀티모달 AI (Multimodal AI)"
+  - en: "Human-Centered AI"
+    ko: "인간 중심 AI (Human-Centered AI)"
+  - en: "Machine Learning & Deep Learning"
+    ko: "머신러닝 및 딥러닝"
+
+education:
+  - institution:
+      en: "Gachon University"
+      ko: "가천대학교"
+    location:
+      en: "Seongnam, South Korea"
+      ko: "경기도 성남시"
+    degree:
+      en: "B.S. in Computer Engineering"
+      ko: "컴퓨터공학 학사과정"
+    status:
+      en: "Third-year undergraduate student"
+      ko: "3학년 재학"
+    start: "2022-02-01"
+    end: "2028-02-01"
+    expected: true
+    courses:
+      - en: "Natural Language Processing"
+        ko: "자연어처리"
+      - en: "Image Processing"
+        ko: "영상처리"
+      - en: "Advanced Generative AI"
+        ko: "고급 생성형 AI"
+      - en: "Special Topics in Emerging Technologies"
+        ko: "신기술 특론"
+
+experience:
+  - organization:
+      en: "PRML Lab, Gachon University"
+      ko: "가천대학교 PRML 연구실"
+    role:
+      en: "Undergraduate Researcher"
+      ko: "학부연구생"
+    start: "2025-09-01"
+    present: true
+    highlights:
+      - en: "Participate in paper reading seminars and deep-learning study sessions."
+        ko: "논문 세미나 및 딥러닝 스터디 참여"
+      - en: "Study the foundations of pattern recognition, machine learning, and deep learning."
+        ko: "패턴 인식·머신러닝·딥러닝의 기초 이론 학습"
+  - organization:
+      en: "Aing, AI Academic Club at Gachon University"
+      ko: "가천대학교 AI 학술 동아리 Aing"
+    role:
+      en: "Executive Member"
+      ko: "운영진"
+    start: "2025-12-01"
+    end: "2026-06-01"
+    highlights:
+      - en: "Planned and facilitated study sessions and academic activities."
+        ko: "스터디와 학술 활동을 기획하고 운영"
+      - en: "Supported club operations and member learning."
+        ko: "동아리 운영 및 구성원의 학습 활동 지원"
+  - organization:
+      en: "Aing, AI Academic Club at Gachon University"
+      ko: "가천대학교 AI 학술 동아리 Aing"
+    role:
+      en: "Transformer Study Organizer & Participant"
+      ko: "Transformer 스터디 기획 및 참여"
+    start: "2026-03-01"
+    end: "2026-05-01"
+    highlights:
+      - en: "Designed and led a structured study program on Transformer architecture and the Attention mechanism."
+        ko: "Transformer 구조와 Attention 메커니즘을 다루는 학습 과정을 설계하고 운영"
+      - en: "Connected paper reading with paper-to-code analysis, PyTorch implementation, and translation experiments."
+        ko: "논문 읽기, paper-to-code 분석, PyTorch 구현, 번역 실험을 하나의 학습 과정으로 구성"
+    links:
+      - type: repository
+        url: "https://github.com/aing-gachon/26-Spring-Transformer-Study"
+
+competitions:
+  - name:
+      en: "LG Aimers 8th Model Compression Online Hackathon"
+      ko: "LG Aimers 8기 모델 경량화 온라인 해커톤"
+    role:
+      en: "Team Lead"
+      ko: "팀장"
+    start: "2025-12-01"
+    end: "2026-02-01"
+    achievement:
+      en: "40th out of 600+ teams · Score 0.63166 · 69 submissions"
+      ko: "600개 이상의 참가 팀 중 40위 · 점수 0.63166 · 69회 제출"
+    highlights:
+      - en: "Coordinated the team, consolidated member input, and defined the experiment strategy."
+        ko: "팀원 의견을 조율하고 모델 경량화 실험 전략을 수립"
+      - en: "Explored QLoRA-based supervised fine-tuning, sequence-length trade-offs, and optional GPTQ W8A8 post-training quantization for EXAONE-4.0-1.2B."
+        ko: "EXAONE-4.0-1.2B를 대상으로 QLoRA 기반 지도 미세 조정, 시퀀스 길이별 성능 비교, GPTQ W8A8 사후 양자화를 실험"
+    links:
+      - type: repository
+        url: "https://github.com/ZEO1122/LG_Aimers_8th"
+
+projects:
+  - name:
+      en: "LG Aimers 8th Model Compression"
+      ko: "LG Aimers 8기 모델 경량화"
+    category:
+      en: "LLM model compression"
+      ko: "LLM 모델 경량화"
+    date: "2025-12-01"
+    description:
+      en: "Portfolio project documenting the compression strategy and experiments for LG AI Research's EXAONE-4.0-1.2B."
+      ko: "LG AI연구원의 EXAONE-4.0-1.2B를 대상으로 수행한 모델 경량화 전략과 실험 과정을 정리한 프로젝트"
+    page_url: "/portfolio/lg-aimers/"
+    repository_url: "https://github.com/ZEO1122/LG_Aimers_8th"
+  - name:
+      en: "Transformer Architecture Study"
+      ko: "Transformer 구조 스터디"
+    category:
+      en: "Study curriculum & implementation"
+      ko: "학습 과정 설계 및 구현"
+    date: "2026-03-01"
+    description:
+      en: "Junior-track curriculum connecting Attention Is All You Need with from-scratch implementation and translation experiments."
+      ko: "Attention Is All You Need 논문을 직접 구현하고 번역 실험까지 이어지도록 구성한 주니어 대상 학습 과정"
+    page_url: "/portfolio/transformer-study/"
+    repository_url: "https://github.com/aing-gachon/26-Spring-Transformer-Study"
+
+paper_notes:
+  - title: "Neural Machine Translation by Jointly Learning to Align and Translate"
+    authors: "Bahdanau, Cho, and Bengio"
+    year: "2014"
+    url: "/notes/bahdanau-2014-nmt-attention/"
+  - title: "Attention Is All You Need"
+    authors: "Vaswani et al."
+    year: "2017"
+    url: "/notes/vaswani-2017-transformer/"
+
+military:
+  organization:
+    en: "Republic of Korea Army"
+    ko: "대한민국 육군"
+  start: "2023-06-01"
+  end: "2024-12-01"
+  description:
+    en: "Completed mandatory military service and was honorably discharged as a Sergeant."
+    ko: "병장 만기 전역"
+
+certifications:
+  - name: "NCP-AI"
+    date: "2026-06-17"
+
+skills:
+  - name:
+      en: "Programming Languages"
+      ko: "프로그래밍 언어"
+    items:
+      - "Python"
+      - "C++"
+  - name:
+      en: "Machine Learning Frameworks"
+      ko: "머신러닝 프레임워크"
+    items:
+      - "PyTorch"
+  - name:
+      en: "AI / Machine Learning"
+      ko: "AI / 머신러닝"
+    items:
+      - "Machine Learning"
+      - "Deep Learning"
+      - "LLM Fine-Tuning"
+      - "Model Compression"
+  - name:
+      en: "Tools"
+      ko: "도구"
+    items:
+      - "Git"
+      - "GitHub"
+      - "Linux"

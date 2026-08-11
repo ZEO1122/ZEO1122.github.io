@@ -1,0 +1,227 @@
+{% assign cv = site.data.cv %}
+{% assign lang = include.lang | default: page.lang | default: "en" %}
+{% assign labels = cv.labels[lang] %}
+
+<div class="cv-toolbar">
+  <nav class="cv-language-switch" aria-label="{{ labels.language_navigation }}">
+    <a href="/cv/" lang="en"{% if lang == "en" %} class="is-active" aria-current="page"{% endif %}>English</a>
+    <a href="/ko/cv/" lang="ko"{% if lang == "ko" %} class="is-active" aria-current="page"{% endif %}>한국어</a>
+  </nav>
+
+  <div class="cv-toolbar-meta">
+    <span class="cv-updated">
+      {{ labels.updated }}
+      <time datetime="{{ cv.updated }}">
+        {% if lang == "ko" %}{{ cv.updated | date: "%Y년 %-m월 %-d일" }}{% else %}{{ cv.updated | date: "%B %-d, %Y" }}{% endif %}
+      </time>
+    </span>
+    <button class="cv-print-button" type="button" onclick="window.print()">
+      <i class="fas fa-print" aria-hidden="true"></i>
+      <span>{{ labels.print }}</span>
+    </button>
+  </div>
+</div>
+
+<header class="cv-intro">
+  <p class="cv-eyebrow">{{ labels.summary }}</p>
+  <h2>{{ cv.profile.name[lang] }}</h2>
+  <p class="cv-role">{{ cv.profile.label[lang] }}</p>
+  <p class="cv-summary">{{ cv.profile.summary[lang] }}</p>
+
+  <ul class="cv-contact-list" aria-label="{{ labels.contact }}">
+    <li>
+      <i class="fas fa-location-dot" aria-hidden="true"></i>
+      <span>{{ cv.profile.location[lang] }}</span>
+    </li>
+    <li>
+      <i class="fas fa-envelope" aria-hidden="true"></i>
+      <a href="mailto:{{ cv.profile.email }}">{{ cv.profile.email }}</a>
+    </li>
+    <li>
+      <i class="fab fa-github" aria-hidden="true"></i>
+      <a href="{{ cv.profile.github.url }}" target="_blank" rel="noopener noreferrer">{{ cv.profile.github.label }}</a>
+    </li>
+    <li>
+      <i class="fas fa-globe" aria-hidden="true"></i>
+      <a href="{{ cv.profile.website }}">{{ labels.website }}</a>
+    </li>
+  </ul>
+</header>
+
+<section class="cv-section" aria-labelledby="cv-education">
+  <h2 id="cv-education">{{ labels.education }}</h2>
+  {% for education in cv.education %}
+    <article class="cv-entry">
+      <div class="cv-entry-heading">
+        <div>
+          <h3>{{ education.institution[lang] }}</h3>
+          <p class="cv-entry-subtitle">{{ education.degree[lang] }}</p>
+        </div>
+        <div class="cv-entry-meta">
+          {% include cv-period.html lang=lang start=education.start end=education.end expected=education.expected %}
+          <span>{{ education.location[lang] }}</span>
+        </div>
+      </div>
+      <p class="cv-entry-detail">{{ education.status[lang] }}</p>
+      <p class="cv-coursework">
+        <strong>{{ labels.relevant_coursework }}:</strong>
+        {% for course in education.courses %}{{ course[lang] }}{% unless forloop.last %}, {% endunless %}{% endfor %}
+      </p>
+    </article>
+  {% endfor %}
+</section>
+
+<section class="cv-section" aria-labelledby="cv-research-interests">
+  <h2 id="cv-research-interests">{{ labels.research_interests }}</h2>
+  <ul class="cv-interest-list">
+    {% for interest in cv.research_interests %}
+      <li>{{ interest[lang] }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="cv-section" aria-labelledby="cv-experience">
+  <h2 id="cv-experience">{{ labels.experience }}</h2>
+  {% for experience in cv.experience %}
+    <article class="cv-entry">
+      <div class="cv-entry-heading">
+        <div>
+          <h3>{{ experience.role[lang] }}</h3>
+          <p class="cv-entry-subtitle">{{ experience.organization[lang] }}</p>
+        </div>
+        <div class="cv-entry-meta">
+          {% include cv-period.html lang=lang start=experience.start end=experience.end present=experience.present %}
+        </div>
+      </div>
+      <ul class="cv-highlight-list">
+        {% for highlight in experience.highlights %}
+          <li>{{ highlight[lang] }}</li>
+        {% endfor %}
+      </ul>
+      {% if experience.links %}
+        <div class="cv-entry-links">
+          {% for link in experience.links %}
+            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github" aria-hidden="true"></i>
+              {{ labels.repository }}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </article>
+  {% endfor %}
+</section>
+
+<section class="cv-section" aria-labelledby="cv-competitions">
+  <h2 id="cv-competitions">{{ labels.competitions }}</h2>
+  {% for competition in cv.competitions %}
+    <article class="cv-entry">
+      <div class="cv-entry-heading">
+        <div>
+          <h3>{{ competition.name[lang] }}</h3>
+          <p class="cv-entry-subtitle">{{ competition.role[lang] }}</p>
+        </div>
+        <div class="cv-entry-meta">
+          {% include cv-period.html lang=lang start=competition.start end=competition.end %}
+        </div>
+      </div>
+      <p class="cv-achievement">{{ competition.achievement[lang] }}</p>
+      <ul class="cv-highlight-list">
+        {% for highlight in competition.highlights %}
+          <li>{{ highlight[lang] }}</li>
+        {% endfor %}
+      </ul>
+      <div class="cv-entry-links">
+        {% for link in competition.links %}
+          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            {{ labels.repository }}
+          </a>
+        {% endfor %}
+      </div>
+    </article>
+  {% endfor %}
+</section>
+
+<section class="cv-section" aria-labelledby="cv-projects">
+  <h2 id="cv-projects">{{ labels.projects }}</h2>
+  {% for project in cv.projects %}
+    <article class="cv-entry">
+      <div class="cv-entry-heading">
+        <div>
+          <h3>{{ project.name[lang] }}</h3>
+          <p class="cv-entry-subtitle">{{ project.category[lang] }}</p>
+        </div>
+        <div class="cv-entry-meta">
+          <time datetime="{{ project.date | date: "%Y-%m" }}">{{ project.date | date: "%Y" }}</time>
+        </div>
+      </div>
+      <p>{{ project.description[lang] }}</p>
+      <div class="cv-entry-links">
+        <a href="{{ project.page_url }}">
+          <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          {{ labels.project_page }}
+        </a>
+        <a href="{{ project.repository_url }}" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github" aria-hidden="true"></i>
+          {{ labels.repository }}
+        </a>
+      </div>
+    </article>
+  {% endfor %}
+</section>
+
+<section class="cv-section" aria-labelledby="cv-paper-notes">
+  <h2 id="cv-paper-notes">{{ labels.paper_notes }}</h2>
+  <ul class="cv-paper-list">
+    {% for note in cv.paper_notes %}
+      <li>
+        <div>
+          <cite>{{ note.title }}</cite>
+          <span>{{ note.authors }} · {{ note.year }}</span>
+        </div>
+        <a href="{{ note.url }}">{{ labels.read_note }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="cv-section cv-section-split" aria-label="{{ labels.military }} / {{ labels.certifications }}">
+  <div>
+    <h2 id="cv-military">{{ labels.military }}</h2>
+    <article class="cv-entry cv-entry-compact" aria-labelledby="cv-military">
+      <h3>{{ cv.military.organization[lang] }}</h3>
+      <p class="cv-entry-meta">
+        {% include cv-period.html lang=lang start=cv.military.start end=cv.military.end %}
+      </p>
+      <p>{{ cv.military.description[lang] }}</p>
+    </article>
+  </div>
+
+  <div>
+    <h2 id="cv-certifications">{{ labels.certifications }}</h2>
+    {% for certification in cv.certifications %}
+      <article class="cv-entry cv-entry-compact" aria-labelledby="cv-certifications">
+        <h3>{{ certification.name }}</h3>
+        <p class="cv-entry-meta">
+          {{ labels.issued }}
+          <time datetime="{{ certification.date }}">
+            {% if lang == "ko" %}{{ certification.date | date: "%Y. %m. %d." }}{% else %}{{ certification.date | date: "%b %-d, %Y" }}{% endif %}
+          </time>
+        </p>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="cv-section" aria-labelledby="cv-skills">
+  <h2 id="cv-skills">{{ labels.skills }}</h2>
+  <dl class="cv-skill-list">
+    {% for skill in cv.skills %}
+      <div>
+        <dt>{{ skill.name[lang] }}</dt>
+        <dd>{% for item in skill.items %}{{ item }}{% unless forloop.last %}<span aria-hidden="true"> · </span>{% endunless %}{% endfor %}</dd>
+      </div>
+    {% endfor %}
+  </dl>
+</section>
