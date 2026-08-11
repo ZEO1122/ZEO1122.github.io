@@ -1,0 +1,35 @@
+<style>
+  .page__content {
+    position: relative;
+  }
+
+  @media (min-width: 1240px) {
+    .page__content > .sidebar__right {
+      position: absolute !important;
+      top: 0;
+      bottom: 0;
+      right: -12.2rem;
+      float: none !important;
+      width: 11.5rem !important;
+      height: auto;
+      margin: 0 !important;
+    }
+
+    .page__content > .sidebar__right .toc {
+      position: sticky;
+      top: 5rem;
+    }
+  }
+
+  @media (max-width: 1239px) {
+    .page__content > .sidebar__right {
+      float: none !important;
+      width: auto !important;
+      margin: 0 0 1.5rem !important;
+    }
+
+    .page__content > .sidebar__right .toc {
+      position: static;
+    }
+  }
+</style>

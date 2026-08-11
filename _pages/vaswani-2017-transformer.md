@@ -13,6 +13,7 @@ citation: "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez
 ---
 
 {% include toc %}
+{% include paper-note-toc-layout.html %}
 
 <style>
   .paper-note-figure {
@@ -70,40 +71,6 @@ citation: "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 0.15rem;
-  }
-
-  .page__content {
-    position: relative;
-  }
-
-  @media (min-width: 1380px) {
-    .page__content > .sidebar__right {
-      position: absolute !important;
-      top: 0;
-      bottom: 0;
-      right: -14.5rem;
-      float: none !important;
-      width: 13rem !important;
-      height: auto;
-      margin: 0 !important;
-    }
-
-    .page__content > .sidebar__right .toc {
-      position: sticky;
-      top: 1.5rem;
-    }
-  }
-
-  @media (max-width: 1379px) {
-    .page__content > .sidebar__right {
-      float: none !important;
-      width: auto !important;
-      margin: 0 0 1.5rem !important;
-    }
-
-    .page__content > .sidebar__right .toc {
-      position: static;
-    }
   }
 
   @media (max-width: 700px) {
