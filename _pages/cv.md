@@ -85,7 +85,7 @@ Designed and led a junior-track Transformer study for Aing. Detailed curriculum 
 
 ## Paper Reading Notes
 
-- Paper summaries and implementation notes will be organized in the [Notes](/notes/) section
+- Paper summaries and study questions will be organized in the [Notes](/notes/) section
 - Planned topics include Transformer architecture, affective computing, multimodal learning, and human-centered AI
 
 ---

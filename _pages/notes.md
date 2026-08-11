@@ -4,7 +4,7 @@ title: "Paper Notes"
 author_profile: true
 ---
 
-This page collects structured paper summaries, implementation notes, and study records from PRML Lab reading sessions and personal AI/ML study.
+This page collects structured paper summaries, study questions, and reading records from PRML Lab sessions and personal AI/ML study.
 
 ---
 
@@ -13,6 +13,7 @@ This page collects structured paper summaries, implementation notes, and study r
 | Paper | Area | Status | Note |
 |------|------|--------|------|
 | Bahdanau, Cho, Bengio, "Neural Machine Translation by Jointly Learning to Align and Translate" | NLP, Attention, NMT | Example note | [Read note](/notes/bahdanau-2014-nmt-attention/) |
+| Vaswani et al., "Attention Is All You Need" | NLP, Transformer, Attention | Study note | [Read note](/notes/vaswani-2017-transformer/) |
 
 ---
 
@@ -39,5 +40,5 @@ Use the following structure when adding future notes:
 - Method:
 - Experiment setup:
 - Main results:
-- Implementation notes:
+- Questions I worked through:
 - Questions / follow-up ideas:

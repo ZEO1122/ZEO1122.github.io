@@ -60,11 +60,18 @@ citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Joi
     text-align: left;
   }
 
+  .page__content mjx-container[display="true"] {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.15rem;
+  }
+
   .page__content {
     position: relative;
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1380px) {
     .page__content > .sidebar__right {
       position: absolute !important;
       top: 0;
@@ -82,7 +89,7 @@ citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Joi
     }
   }
 
-  @media (max-width: 1279px) {
+  @media (max-width: 1379px) {
     .page__content > .sidebar__right {
       float: none !important;
       width: auto !important;
@@ -97,6 +104,15 @@ citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Joi
   @media (max-width: 700px) {
     .paper-note-figure-grid {
       grid-template-columns: 1fr;
+    }
+
+    .masthead,
+    .masthead__inner-wrap,
+    .masthead__menu,
+    .greedy-nav,
+    .greedy-nav .visible-links {
+      max-width: 100vw;
+      overflow-x: hidden;
     }
   }
 </style>
