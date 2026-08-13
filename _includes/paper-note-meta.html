@@ -1,0 +1,37 @@
+{% if page.lang == "ko" %}
+  {% assign publication_label = "발표" %}
+  {% assign published_label = "최초 공개" %}
+  {% assign reviewed_label = "노트 정리" %}
+  {% assign paper_label = "논문" %}
+  {% assign html_label = "HTML" %}
+  {% assign proceedings_label = "학회 페이지" %}
+{% else %}
+  {% assign publication_label = "Publication" %}
+  {% assign published_label = "First released" %}
+  {% assign reviewed_label = "Note updated" %}
+  {% assign paper_label = "Paper" %}
+  {% assign html_label = "HTML" %}
+  {% assign proceedings_label = "Proceedings" %}
+{% endif %}
+
+<aside class="paper-note-bibliography" aria-label="Paper information">
+  <p class="paper-note-bibliography__venue">{{ page.paper_venue }}</p>
+  <p class="paper-note-bibliography__authors">{{ page.paper_authors }}</p>
+  <dl class="paper-note-bibliography__dates">
+    {% if page.paper_date %}
+      <div><dt>{{ published_label }}</dt><dd><time datetime="{{ page.paper_date | date_to_xmlschema }}">{% if page.lang == "ko" %}{{ page.paper_date | date: "%Y년 %-m월 %-d일" }}{% else %}{{ page.paper_date | date: "%B %-d, %Y" }}{% endif %}</time></dd></div>
+    {% endif %}
+    <div><dt>{{ reviewed_label }}</dt><dd><time datetime="{{ page.date | date_to_xmlschema }}">{% if page.lang == "ko" %}{{ page.date | date: "%Y년 %-m월 %-d일" }}{% else %}{{ page.date | date: "%B %-d, %Y" }}{% endif %}</time></dd></div>
+  </dl>
+  <div class="paper-note-bibliography__links">
+    {% if page.paperurl %}<a href="{{ page.paperurl }}">{{ paper_label }}</a>{% endif %}
+    {% if page.htmlpaperurl %}<a href="{{ page.htmlpaperurl }}">{{ html_label }}</a>{% endif %}
+    {% if page.proceedingsurl %}<a href="{{ page.proceedingsurl }}">{{ proceedings_label }}</a>{% endif %}
+  </div>
+</aside>
+
+{% if page.tags %}
+  <div class="paper-note-tags paper-note-tags--detail" aria-label="Tags">
+    {% for tag in page.tags %}<span>{{ tag }}</span>{% endfor %}
+  </div>
+{% endif %}

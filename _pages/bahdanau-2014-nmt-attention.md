@@ -2,6 +2,13 @@
 permalink: /notes/bahdanau-2014-nmt-attention/
 title: "Neural Machine Translation by Jointly Learning to Align and Translate"
 date: 2026-07-03
+paper_note: true
+hide_date: true
+note_area: "NLP · Neural Machine Translation"
+note_summary: "How learned soft alignment removes the fixed-length context bottleneck in recurrent encoder-decoder translation."
+paper_authors: "Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio"
+paper_venue: "ICLR 2015 Oral"
+paper_date: 2014-09-01
 author_profile: true
 lang: en
 locale: en-US
@@ -16,109 +23,18 @@ tags:
   - Attention
   - Sequence-to-Sequence
 paperurl: "https://arxiv.org/abs/1409.0473"
+htmlpaperurl: "https://ar5iv.labs.arxiv.org/html/1409.0473"
 citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Jointly Learning to Align and Translate. ICLR 2015 oral."
 ---
 
 {% include toc %}
 {% include paper-note-toc-layout.html %}
+{% include paper-note-head.html %}
+{% include paper-note-meta.html %}
 
-<style>
-  .paper-note-figure {
-    margin: 2rem 0;
-    text-align: center;
-  }
-
-  .paper-note-figure img {
-    max-width: 100%;
-    height: auto;
-    padding: 0.75rem;
-    border: 1px solid var(--global-border-color);
-    background: #fff;
-  }
-
-  .paper-note-figure--narrow img {
-    max-width: 280px;
-  }
-
-  .paper-note-figure--medium img {
-    max-width: 680px;
-  }
-
-  .paper-note-figure-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    align-items: start;
-  }
-
-  .paper-note-figure-grid img {
-    width: 100%;
-  }
-
-  .paper-note-panel-label {
-    margin-top: 0.25rem;
-    font-size: 0.85em;
-    color: var(--global-text-color);
-  }
-
-  .paper-note-figure figcaption {
-    margin-top: 0.75rem;
-    font-size: 0.85em;
-    color: var(--global-text-color);
-    text-align: left;
-  }
-
-  .page__content mjx-container[display="true"] {
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 0.15rem;
-  }
-
-  @media (max-width: 700px) {
-    .paper-note-figure-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .masthead,
-    .masthead__inner-wrap,
-    .masthead__menu,
-    .greedy-nav,
-    .greedy-nav .visible-links {
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-  }
-</style>
-
-<script>
-  window.MathJax = window.MathJax || {};
-  window.MathJax.tex = window.MathJax.tex || {};
-  window.MathJax.tex.inlineMath = [['$', '$'], ['\\(', '\\)']];
-  window.MathJax.tex.displayMath = [['$$', '$$'], ['\\[', '\\]']];
-</script>
-
-## One-Line Takeaway
+## Introduction
 
 This paper introduces a neural machine translation model that learns **where to look in the source sentence while generating each target word**, removing the fixed-length context bottleneck of early encoder-decoder models.
-
-## Metadata
-
-| Item | Detail |
-|------|--------|
-| Paper | Neural Machine Translation by Jointly Learning to Align and Translate |
-| Authors | Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio |
-| Venue | ICLR 2015 oral presentation |
-| First arXiv submission | 2014-09-01 |
-| Task | English-to-French neural machine translation |
-| Core keywords | RNN Encoder-Decoder, soft alignment, attention, BiRNN encoder, RNNsearch |
-| Links | [arXiv](https://arxiv.org/abs/1409.0473) · [HTML paper](https://ar5iv.labs.arxiv.org/html/1409.0473) |
-
-## Why I Read This
-
-This is one of the papers that made **attention** a central idea in deep learning. Before reading Transformer-style self-attention, it is useful to understand why attention was introduced in sequence-to-sequence translation: early NMT models compressed the whole source sentence into one vector, and that single vector became a bottleneck, especially for long sentences.
-
-## Problem
 
 Earlier encoder-decoder NMT models encode the entire source sentence into one fixed-length vector <math><mi>c</mi></math>. The decoder then generates every target word from that same compressed representation.
 
@@ -127,8 +43,6 @@ The paper argues that this design is weak because:
 - Long sentences contain too much information to store reliably in one vector.
 - The decoder needs different source words at different generation steps.
 - Translation often requires soft, non-monotonic alignment rather than a single hard word mapping.
-
-## Key Idea
 
 Instead of forcing the encoder to produce one sentence vector, the encoder produces a sequence of annotations:
 
@@ -224,11 +138,13 @@ This differs from the basic encoder-decoder because every decoding step receives
 <figure class="paper-note-figure paper-note-figure--narrow">
   <img src="/assets/images/paper-notes/bahdanau-2014/figure-1-model.png" alt="Figure 1 from Bahdanau et al. showing the proposed attention-based neural machine translation model">
   <figcaption>
-    <strong>Figure 1.</strong> Original model diagram from Bahdanau et al. showing the proposed attention-based decoder. Source: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S3.F1">ar5iv rendering of arXiv:1409.0473</a>.
+    <strong>Figure 1.</strong> Original model diagram from Bahdanau et al. showing the proposed attention-based decoder.
   </figcaption>
 </figure>
 
 ## Experiments
+
+### Translation Results
 
 The authors evaluate on WMT 2014 English-to-French translation. They compare a basic RNN encoder-decoder with the proposed attention-based model, called **RNNsearch**.
 
@@ -243,16 +159,32 @@ The quantitative table below cites **Table 1** values directly from the paper.
 | RNNsearch-50* | 28.45 | 36.15 |
 | Moses phrase-based SMT | 33.30 | 35.63 |
 
+### Sentence Length and Learned Alignment
+
 The important result is not only the overall BLEU improvement. As shown in **Figure 2**, the attention model is much more robust for longer sentences, while the fixed-vector encoder-decoder degrades as sentence length increases.
 
 <figure class="paper-note-figure paper-note-figure--medium">
   <img src="/assets/images/paper-notes/bahdanau-2014/figure-2-bleu-by-length.png" alt="Figure 2 from Bahdanau et al. showing BLEU scores by source sentence length">
   <figcaption>
-    <strong>Figure 2.</strong> Original BLEU-by-sentence-length plot. This is the main evidence that RNNsearch handles long sentences better than the fixed-vector encoder-decoder. Source: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S4.F2.fig1">ar5iv rendering of arXiv:1409.0473</a>.
+    <strong>Figure 2.</strong> Original BLEU-by-sentence-length plot. This is the main evidence that RNNsearch handles long sentences better than the fixed-vector encoder-decoder.
   </figcaption>
 </figure>
 
-## What I Learned
+The paper also inspects the learned soft alignments directly. In Figure 3, many source-target correspondences form an approximately diagonal pattern, while phrase reordering produces useful non-monotonic alignments.
+
+<figure class="paper-note-figure">
+  <div class="paper-note-figure-grid">
+    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3a-alignment.png" alt="Figure 3a from Bahdanau et al. showing a sample soft alignment matrix"><div class="paper-note-panel-label">(a)</div></div>
+    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3b-alignment.png" alt="Figure 3b from Bahdanau et al. showing a sample soft alignment matrix"><div class="paper-note-panel-label">(b)</div></div>
+    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3c-alignment.png" alt="Figure 3c from Bahdanau et al. showing a sample soft alignment matrix"><div class="paper-note-panel-label">(c)</div></div>
+    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3d-alignment.png" alt="Figure 3d from Bahdanau et al. showing a sample soft alignment matrix"><div class="paper-note-panel-label">(d)</div></div>
+  </div>
+  <figcaption>
+    <strong>Figure 3.</strong> Original RNNsearch-50 soft-alignment examples. The axes correspond to source English words and generated French words; brighter cells indicate larger attention weights.
+  </figcaption>
+</figure>
+
+### Interpretation
 
 The main contribution is the shift from **sentence-level compression** to **step-level retrieval**. The encoder stores a sequence of useful representations, and the decoder retrieves what it needs at each generation step.
 
@@ -264,7 +196,7 @@ For my Transformer study, this paper is a good bridge:
 - Transformer attention removes recurrence and uses attention as the main computation.
 - The motivation remains similar: let the model select relevant context instead of relying on one compressed representation.
 
-## Questions I Worked Through
+## Questions from My Study
 
 This section is not a PyTorch implementation checklist. It collects the questions I had while studying the paper and trying to connect the equations, the official GroundHog code, and a modern PyTorch-style reproduction.
 
@@ -293,30 +225,6 @@ $$
 The **soft-alignment** is the interpretation of $\alpha_{ij}$ as a source-target alignment weight. It tells us how much the annotation at source position $j$ contributed when generating target word $y_i$. The paper describes the context vector as an expected annotation over possible alignments.
 
 The attention heatmap should not be treated as a gold word alignment or a complete explanation of model behavior. It is better to read it as a diagnostic signal: at a given decoding step, which source representations did the model rely on most strongly? For language pairs with very different word order or tokenization units, such as Korean-English, it is safer to interpret the heatmap as token-level soft correspondence rather than exact word-level alignment.
-
-<figure class="paper-note-figure">
-  <div class="paper-note-figure-grid">
-    <div>
-      <img src="/assets/images/paper-notes/bahdanau-2014/figure-3a-alignment.png" alt="Figure 3a from Bahdanau et al. showing a sample soft alignment matrix">
-      <div class="paper-note-panel-label">(a)</div>
-    </div>
-    <div>
-      <img src="/assets/images/paper-notes/bahdanau-2014/figure-3b-alignment.png" alt="Figure 3b from Bahdanau et al. showing a sample soft alignment matrix">
-      <div class="paper-note-panel-label">(b)</div>
-    </div>
-    <div>
-      <img src="/assets/images/paper-notes/bahdanau-2014/figure-3c-alignment.png" alt="Figure 3c from Bahdanau et al. showing a sample soft alignment matrix">
-      <div class="paper-note-panel-label">(c)</div>
-    </div>
-    <div>
-      <img src="/assets/images/paper-notes/bahdanau-2014/figure-3d-alignment.png" alt="Figure 3d from Bahdanau et al. showing a sample soft alignment matrix">
-      <div class="paper-note-panel-label">(d)</div>
-    </div>
-  </div>
-  <figcaption>
-    <strong>Figure 3.</strong> Original RNNsearch-50 soft-alignment examples. The axes correspond to source English words and generated French words; brighter cells indicate larger attention weights. Source: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S4.F3">ar5iv rendering of arXiv:1409.0473</a>.
-  </figcaption>
-</figure>
 
 ### 2. Why do BiRNN encoder states need transpose or reshape?
 
@@ -382,19 +290,21 @@ The summary is:
 - **Comparison requiring caution:** direct `-30` vs `-50` comparison
 - **Main interpretation:** RNNsearch reduces the fixed-length vector bottleneck and is more robust for long sentences, but the 30/50 setup is not a fully length-controlled experiment.
 
-## Limitations and Questions
+### 5. Why does the alignment model use the previous decoder state instead of the current state?
 
-* Because the shortlist vocabulary maps rare words to `UNK`, rare-word translation remains weak.
-* Attention computes source-target pair scores, so computation grows with both input length and output length.
-* Attention heatmaps are useful diagnostics, but they should not be automatically treated as complete explanations of model behavior.
+The paper computes $e_{ij}=a(s_{i-1},h_j)$. The previous state summarizes the target prefix generated so far, so it serves as the query asking which source positions are needed for the next word.
 
-## Follow-Up Reading
+Using $s_i$ directly would create a circular dependency: computing $s_i$ requires context $c_i$, while computing $c_i$ would require attention weights derived from $s_i$. The previous state gives a clear differentiable order: `previous state → alignment → context → current state`.
+
+## Reference
+
+### Follow-Up Reading
 
 - Cho et al., "Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation"
 - Sutskever et al., "Sequence to Sequence Learning with Neural Networks"
 - Vaswani et al., "Attention Is All You Need"
 
-## Reference
+### Sources
 
 - [arXiv:1409.0473](https://arxiv.org/abs/1409.0473)
 - [HTML version via ar5iv](https://ar5iv.labs.arxiv.org/html/1409.0473)

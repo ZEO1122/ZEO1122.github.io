@@ -2,6 +2,13 @@
 permalink: /notes/vaswani-2017-transformer/
 title: "Attention Is All You Need"
 date: 2026-08-11
+paper_note: true
+hide_date: true
+note_area: "NLP · Transformer"
+note_summary: "Why self-attention can replace recurrence, and how multi-head attention and positional encoding build contextual token representations."
+paper_authors: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, Illia Polosukhin"
+paper_venue: "NeurIPS 2017"
+paper_date: 2017-06-12
 author_profile: true
 lang: en
 locale: en-US
@@ -16,114 +23,19 @@ tags:
   - Attention
   - Sequence-to-Sequence
 paperurl: "https://arxiv.org/abs/1706.03762"
+htmlpaperurl: "https://arxiv.org/html/1706.03762v7"
+proceedingsurl: "https://papers.nips.cc/paper/7181-attention-is-all-you-need"
 citation: "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. Attention Is All You Need. NeurIPS 2017."
 ---
 
 {% include toc %}
 {% include paper-note-toc-layout.html %}
+{% include paper-note-head.html %}
+{% include paper-note-meta.html %}
 
-<style>
-  .paper-note-figure {
-    margin: 2rem 0;
-    text-align: center;
-  }
-
-  .paper-note-figure img {
-    max-width: 100%;
-    height: auto;
-    padding: 0.75rem;
-    border: 1px solid var(--global-border-color);
-    background: #fff;
-  }
-
-  .paper-note-figure--narrow img {
-    max-width: 360px;
-  }
-
-  .paper-note-figure--medium img {
-    max-width: 720px;
-  }
-
-  .paper-note-figure-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    align-items: start;
-  }
-
-  .paper-note-figure-grid img {
-    width: 100%;
-  }
-
-  .paper-note-panel-label {
-    margin-top: 0.25rem;
-    font-size: 0.85em;
-    color: var(--global-text-color);
-  }
-
-  .paper-note-figure figcaption {
-    margin-top: 0.75rem;
-    font-size: 0.85em;
-    color: var(--global-text-color);
-    text-align: left;
-  }
-
-  .paper-note-table-wrap {
-    margin: 1.5rem 0;
-    overflow-x: auto;
-  }
-
-  .page__content mjx-container[display="true"] {
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 0.15rem;
-  }
-
-  @media (max-width: 700px) {
-    .paper-note-figure-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .masthead,
-    .masthead__inner-wrap,
-    .masthead__menu,
-    .greedy-nav,
-    .greedy-nav .visible-links {
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-  }
-</style>
-
-<script>
-  window.MathJax = window.MathJax || {};
-  window.MathJax.tex = window.MathJax.tex || {};
-  window.MathJax.tex.inlineMath = [['$', '$'], ['\\(', '\\)']];
-  window.MathJax.tex.displayMath = [['$$', '$$'], ['\\[', '\\]']];
-</script>
-
-## One-Line Takeaway
+## Introduction
 
 The Transformer replaces recurrence and convolution with stacked self-attention, letting every token directly read from other tokens and making sequence modeling much more parallelizable.
-
-## Metadata
-
-| Item | Detail |
-|------|--------|
-| Paper | Attention Is All You Need |
-| Authors | Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, Illia Polosukhin |
-| Venue | NeurIPS 2017 |
-| First arXiv submission | 2017-06-12 |
-| Task | Neural machine translation, with an additional constituency parsing evaluation |
-| Core keywords | Transformer, self-attention, scaled dot-product attention, multi-head attention, positional encoding |
-| Links | [arXiv](https://arxiv.org/abs/1706.03762) · [HTML paper](https://arxiv.org/html/1706.03762v7) · [NeurIPS proceedings](https://papers.nips.cc/paper/7181-attention-is-all-you-need) |
-
-## Why I Read This
-
-Bahdanau attention still uses an RNN decoder state as the query and attends over encoder states at each target step. Transformer keeps the attention idea but removes recurrence entirely. That makes this paper the next step after studying sequence-to-sequence attention: it explains how attention can become the main computation, not only a helper module around an RNN.
-
-## Problem
 
 RNN and convolutional sequence models have two important limitations:
 
@@ -132,8 +44,6 @@ RNN and convolutional sequence models have two important limitations:
 - Encoder-decoder attention helps translation, but earlier systems still depend on recurrent or convolutional encoders and decoders.
 
 The paper asks whether a sequence transduction model can be built using attention alone, while preserving strong translation quality and improving parallel training efficiency.
-
-## Key Idea
 
 The Transformer represents each token as a vector and repeatedly updates those vectors using self-attention and position-wise feed-forward networks. In encoder self-attention, every position can attend to every other source position. In decoder self-attention, masking prevents a position from attending to future target tokens.
 
@@ -177,7 +87,7 @@ The decoder is also a stack of $N=6$ layers, but each decoder layer has three su
 <figure class="paper-note-figure paper-note-figure--narrow">
   <img src="/assets/images/paper-notes/vaswani-2017/figure-1-transformer-architecture.png" alt="Figure 1 from Vaswani et al. showing the Transformer model architecture">
   <figcaption>
-    <strong>Figure 1.</strong> Original Transformer model architecture. The left side is the encoder stack, and the right side is the autoregressive decoder stack. Source: <a href="https://arxiv.org/html/1706.03762v7#S3.F1">arXiv HTML rendering of arXiv:1706.03762</a>.
+    <strong>Figure 1.</strong> Original Transformer model architecture. The left side is the encoder stack, and the right side is the autoregressive decoder stack.
   </figcaption>
 </figure>
 
@@ -219,7 +129,7 @@ $$
     </div>
   </div>
   <figcaption>
-    <strong>Figure 2.</strong> Original diagrams for scaled dot-product attention and multi-head attention. Source: <a href="https://arxiv.org/html/1706.03762v7#S3.F2">arXiv HTML rendering of arXiv:1706.03762</a>.
+    <strong>Figure 2.</strong> Original diagrams for scaled dot-product attention and multi-head attention.
   </figcaption>
 </figure>
 
@@ -257,6 +167,8 @@ The same feed-forward parameters are shared across positions within a layer, but
 
 ## Experiments
 
+### Machine Translation Results
+
 The main evaluation is WMT 2014 English-German and English-French translation. The base Transformer uses $N=6$, $d_{\text{model}}=512$, $d_{\text{ff}}=2048$, $h=8$, and $d_k=d_v=64$. The big model increases model size and trains longer.
 
 The quantitative table below cites **Table 2** values directly from the paper.
@@ -280,13 +192,29 @@ The quantitative table below cites **Table 2** values directly from the paper.
 
 The key result is that Transformer (big) reaches 28.4 BLEU on English-German and 41.8 BLEU on English-French, while using far less reported training compute than strong recurrent, convolutional, and ensemble baselines.
 
-## What I Learned
+### Ablation Study
+
+The paper's **Table 3** varies Transformer components on the English-German development set. These are `newstest2013` development BLEU scores, so they should not be compared directly with the Table 2 test scores.
+
+| Configuration | Dev BLEU |
+|---------------|---------:|
+| Base: 8 heads | 25.8 |
+| 1 head | 24.9 |
+| 4 heads | 25.5 |
+| 16 heads | 25.8 |
+| 32 heads | 25.4 |
+| Learned positional embedding | 25.7 |
+| No label smoothing | 25.3 |
+
+One head is 0.9 BLEU below the base model, but adding more heads does not monotonically improve quality. Learned positional embeddings perform almost identically to sinusoidal encoding, and removing label smoothing lowers BLEU. The ablation supports multi-head attention as a useful design, but it does not prove that every head learns a guaranteed linguistic role.
+
+### Interpretation
 
 The Transformer is not just "attention instead of RNN." It changes how sequence representations are built. In an RNN, information from distant tokens must travel through many recurrent steps. In a Transformer layer, every token can directly compare itself with every other token, and the model learns how much information to retrieve from each position.
 
 The architecture also standardizes the residual stream around one dimension, $d_{\text{model}}$. Embeddings, positional encodings, sublayer outputs, residual connections, and multi-head attention outputs all live in that dimension. This design choice makes the model stackable.
 
-## Questions I Worked Through
+## Questions from My Study
 
 ### 1. Does self-attention model all token relations from the first layer?
 
@@ -328,36 +256,9 @@ If the model stopped there, the result would be a block-wise concatenation of in
 
 That means $W^O$ is not just a shape-fixing layer. It is the learned integration step that turns multiple head-specific representations into one $d_{\text{model}}$ vector for the residual stream and the next layer.
 
-### 4. Why use several attention heads instead of one full-dimensional head?
+## Reference
 
-The paper argues that multi-head attention lets the model jointly attend to information from different representation subspaces and different positions. A single head can still distribute attention over positions, but all information is averaged through one attention pattern.
-
-With several heads, one head might track local syntactic dependencies, another might track long-distance agreement, and another might focus on translation alignment. The exact behavior is learned, not manually assigned, but the architecture gives the model multiple parallel attention views.
-
-### 5. How is this related to Bahdanau attention?
-
-Bahdanau attention computes a decoder-step-specific context vector over encoder annotations:
-
-$$
-c_i=\sum_j \alpha_{ij}h_j
-$$
-
-Transformer attention keeps the weighted-sum idea but generalizes it. Queries, keys, and values can all come from the same sequence in self-attention, or queries can come from the decoder while keys and values come from the encoder in encoder-decoder attention.
-
-The conceptual bridge is:
-
-- Bahdanau attention: an RNN decoder retrieves source context for one target step.
-- Transformer self-attention: every position retrieves context from other positions in parallel.
-- Transformer encoder-decoder attention: decoder positions retrieve source-side context from encoder outputs.
-
-## Limitations and Questions
-
-* Full self-attention has $O(n^2)$ pairwise score computation, so very long sequences are expensive.
-* Absolute sinusoidal position encodings inject order, but later work explores relative and learned positional schemes.
-* Attention maps can help with interpretation, but they should not be treated as complete explanations of model behavior.
-* The original paper is focused on machine translation; later language-model uses change the training objective and deployment setting.
-
-## Follow-Up Reading
+### Follow-Up Reading
 
 - Bahdanau et al., "Neural Machine Translation by Jointly Learning to Align and Translate"
 - Devlin et al., "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"
@@ -365,7 +266,7 @@ The conceptual bridge is:
 - Shaw et al., "Self-Attention with Relative Position Representations"
 - Harvard NLP, "The Annotated Transformer"
 
-## Reference
+### Sources
 
 - [arXiv:1706.03762](https://arxiv.org/abs/1706.03762)
 - [HTML version via arXiv](https://arxiv.org/html/1706.03762v7)

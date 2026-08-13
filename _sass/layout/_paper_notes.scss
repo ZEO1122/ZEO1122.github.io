@@ -1,0 +1,233 @@
+/* ==========================================================================
+   PAPER NOTES
+   ========================================================================== */
+
+.paper-note-index__summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 2rem 0 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--global-text-color);
+  font-family: $sans-serif;
+  font-size: $type-size-6;
+  text-transform: uppercase;
+
+  strong {
+    font-size: $type-size-3;
+  }
+}
+
+.paper-note-list__item {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--global-border-color);
+}
+
+.paper-note-list__eyebrow {
+  margin: 0 0 0.45rem !important;
+  color: var(--global-text-color-light);
+  font-family: $sans-serif;
+  font-size: $type-size-7 !important;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.paper-note-list__title {
+  margin: 0 0 0.7rem;
+  padding: 0 !important;
+  border: 0 !important;
+  font-size: $type-size-3;
+  line-height: 1.25;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.paper-note-list__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  margin-bottom: 0.8rem;
+  color: var(--global-text-color-light);
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+
+}
+
+.paper-note-list__summary {
+  max-width: 48rem;
+  margin-bottom: 0.85rem !important;
+  color: var(--global-text-color);
+}
+
+.paper-note-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--global-text-color-light);
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+
+  > span {
+    padding: 0.28rem 0.55rem;
+    border: 1px solid var(--global-border-color);
+    border-radius: 3px;
+    line-height: 1.2;
+  }
+}
+
+.paper-note-bibliography {
+  margin: 0.75rem 0 1rem;
+  padding: 0.15rem 0 0.15rem 1.1rem;
+  border-left: 4px solid var(--global-link-color);
+}
+
+.paper-note-bibliography__venue,
+.paper-note-bibliography__authors {
+  margin-bottom: 0.35rem !important;
+}
+
+.paper-note-bibliography__venue {
+  font-family: $sans-serif;
+  font-weight: 700;
+}
+
+.paper-note-bibliography__authors {
+  color: var(--global-text-color-light);
+}
+
+.paper-note-bibliography__dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.25rem;
+  margin: 0.7rem 0;
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+
+  > div {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  dt,
+  dd {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  dt {
+    color: var(--global-text-color-light);
+  }
+}
+
+.paper-note-bibliography__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+
+  a {
+    text-decoration: none;
+  }
+
+}
+
+.paper-note-tags--detail {
+  margin: 0 0 2.2rem 1.35rem;
+}
+
+.paper-note-figure {
+  margin: 2rem 0;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    padding: 0.75rem;
+    border: 1px solid var(--global-border-color);
+    background: #fff;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    color: var(--global-text-color);
+    font-size: 0.85em;
+    text-align: left;
+  }
+}
+
+.paper-note-figure--narrow img {
+  max-width: 360px;
+}
+
+.paper-note-figure--medium img {
+  max-width: 720px;
+}
+
+.paper-note-figure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+
+  img {
+    width: 100%;
+  }
+}
+
+.paper-note-panel-label {
+  margin-top: 0.25rem;
+  color: var(--global-text-color);
+  font-size: 0.85em;
+}
+
+.paper-note-table-wrap {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.page__content mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.15rem;
+}
+
+@media (max-width: 700px) {
+  .paper-note-list__item {
+    padding: 1.5rem 0;
+  }
+
+  .paper-note-list__title {
+    font-size: $type-size-4;
+  }
+
+  .paper-note-figure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .paper-note-bibliography__dates {
+    display: block;
+
+    > div + div {
+      margin-top: 0.25rem;
+    }
+  }
+
+  .paper-note-tags--detail {
+    margin-left: 0;
+  }
+
+  .masthead,
+  .masthead__inner-wrap,
+  .masthead__menu,
+  .greedy-nav,
+  .greedy-nav .visible-links {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}

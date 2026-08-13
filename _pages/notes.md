@@ -1,6 +1,7 @@
 ---
 permalink: /notes/
-title: "Paper Notes"
+title: "Paper Reviews"
+description: "Structured reviews and study notes on foundational AI and machine learning papers."
 author_profile: true
 lang: en
 locale: en-US
@@ -11,41 +12,6 @@ translations:
   ko: /ko/notes/
 ---
 
-This page collects structured paper summaries, study questions, and reading records from PRML Lab sessions and personal AI/ML study.
+Structured reviews of foundational AI and machine learning papers. Each note follows the paper's argument from motivation and method to evidence, then records the questions I worked through while studying it.
 
----
-
-## Current Notes
-
-| Paper | Area | Status | Note |
-|------|------|--------|------|
-| Bahdanau, Cho, Bengio, "Neural Machine Translation by Jointly Learning to Align and Translate" | NLP, Attention, NMT | Example note | [Read note](/notes/bahdanau-2014-nmt-attention/) |
-| Vaswani et al., "Attention Is All You Need" | NLP, Transformer, Attention | Study note | [Read note](/notes/vaswani-2017-transformer/) |
-
----
-
-## Note Format
-
-Each note is organized to be useful both as a study record and as a quick research reference:
-
-- **One-line takeaway:** the shortest version of what the paper changed.
-- **Problem:** what limitation or research gap the paper targets.
-- **Key idea:** the core mechanism or hypothesis.
-- **Method:** architecture, objective, and important equations.
-- **Results:** datasets, metrics, baselines, and main findings.
-- **My understanding:** what I learned, what remains unclear, and follow-up ideas.
-
----
-
-## Paper Note Template
-
-Use the following structure when adding future notes:
-
-- Paper:
-- Problem:
-- Key idea:
-- Method:
-- Experiment setup:
-- Main results:
-- Questions I worked through:
-- Questions / follow-up ideas:
+{% include paper-note-index.html %}

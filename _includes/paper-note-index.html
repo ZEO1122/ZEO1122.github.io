@@ -1,0 +1,51 @@
+{% assign note_language = page.lang | default: "en" %}
+{% assign paper_notes = site.pages | where: "paper_note", true | where: "lang", note_language | sort: "date" | reverse %}
+
+{% if note_language == "ko" %}
+  {% assign note_label = "논문 리뷰" %}
+  {% assign reviewed_label = "정리일" %}
+  {% assign empty_label = "아직 등록된 논문 리뷰가 없습니다." %}
+{% else %}
+  {% assign note_label = "Paper review" %}
+  {% assign reviewed_label = "Reviewed" %}
+  {% assign empty_label = "No paper notes have been published yet." %}
+{% endif %}
+
+<div class="paper-note-index">
+  <div class="paper-note-index__summary">
+    <span>{{ note_label }}</span>
+    <strong>{{ paper_notes | size }}</strong>
+  </div>
+
+  {% if paper_notes.size > 0 %}
+    <div class="paper-note-list">
+      {% for note in paper_notes %}
+        <article class="paper-note-list__item">
+          <p class="paper-note-list__eyebrow">{{ note.note_area | default: note_label }}</p>
+          <h2 class="paper-note-list__title">
+            <a href="{{ note.url | relative_url }}">{{ note.title }}</a>
+          </h2>
+
+          <div class="paper-note-list__meta">
+            <span>{{ reviewed_label }} <time datetime="{{ note.date | date_to_xmlschema }}">{% if note_language == "ko" %}{{ note.date | date: "%Y년 %-m월 %-d일" }}{% else %}{{ note.date | date: "%B %-d, %Y" }}{% endif %}</time></span>
+            {% if note.paper_venue %}
+              <span>{{ note.paper_venue }}</span>
+            {% endif %}
+          </div>
+
+          {% if note.note_summary %}
+            <p class="paper-note-list__summary">{{ note.note_summary }}</p>
+          {% endif %}
+
+          {% if note.tags %}
+            <div class="paper-note-tags" aria-label="Tags">
+              {% for tag in note.tags %}<span>{{ tag }}</span>{% endfor %}
+            </div>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>{{ empty_label }}</p>
+  {% endif %}
+</div>

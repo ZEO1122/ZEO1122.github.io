@@ -12,7 +12,7 @@ en:
   - title: "Projects"
     url: /portfolio/
 
-  - title: "Paper Notes"
+  - title: "Paper Reviews"
     url: /notes/
 
   # Restore when you have real publications:
@@ -37,5 +37,5 @@ ko:
   - title: "프로젝트"
     url: /ko/portfolio/
 
-  - title: "논문 노트"
+  - title: "논문 리뷰"
     url: /ko/notes/

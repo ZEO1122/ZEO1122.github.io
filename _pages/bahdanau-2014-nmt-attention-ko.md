@@ -3,6 +3,13 @@ permalink: /ko/notes/bahdanau-2014-nmt-attention/
 title: "Neural Machine Translation by Jointly Learning to Align and Translate"
 description: "Bahdanau attention 논문의 문제 정의, 모델 구조, 실험 결과와 공부하며 정리한 질문을 다룬 한국어 노트입니다."
 date: 2026-07-03
+paper_note: true
+hide_date: true
+note_area: "자연어 처리 · 신경망 기계번역"
+note_summary: "학습 가능한 soft alignment가 recurrent encoder-decoder의 고정 길이 context 병목을 어떻게 해소하는지 정리한 노트입니다."
+paper_authors: "Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio"
+paper_venue: "ICLR 2015 Oral"
+paper_date: 2014-09-01
 author_profile: true
 lang: ko
 locale: ko-KR
@@ -17,34 +24,18 @@ tags:
   - Attention
   - Sequence-to-Sequence
 paperurl: "https://arxiv.org/abs/1409.0473"
+htmlpaperurl: "https://ar5iv.labs.arxiv.org/html/1409.0473"
 citation: "Bahdanau, D., Cho, K., & Bengio, Y. Neural Machine Translation by Jointly Learning to Align and Translate. ICLR 2015 oral."
 ---
 
 {% include toc %}
 {% include paper-note-toc-layout.html %}
 {% include paper-note-head.html %}
+{% include paper-note-meta.html %}
 
-## 한 줄 요약
+## 개요
 
 초기 encoder-decoder의 고정 길이 context 병목을 없애기 위해, 목표 단어를 생성할 때마다 원문에서 **어디를 참고할지 학습하는** 신경망 기계번역 모델을 제안한 논문이다.
-
-## 논문 정보
-
-| 항목 | 내용 |
-|------|------|
-| 논문 | Neural Machine Translation by Jointly Learning to Align and Translate |
-| 저자 | Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio |
-| 학회 | ICLR 2015 oral presentation |
-| arXiv 최초 제출 | 2014-09-01 |
-| 과제 | 영어-프랑스어 신경망 기계번역 |
-| 핵심 키워드 | RNN Encoder-Decoder, soft alignment, attention, BiRNN encoder, RNNsearch |
-| 링크 | [arXiv](https://arxiv.org/abs/1409.0473) · [HTML 논문](https://ar5iv.labs.arxiv.org/html/1409.0473) |
-
-## 읽은 이유
-
-Attention을 딥러닝의 중심 개념으로 끌어올린 대표 논문 중 하나다. Transformer의 self-attention을 공부하기 전에 sequence-to-sequence 번역에서 attention이 왜 필요했는지 이해하고 싶었다. 초기 NMT 모델은 원문 전체를 하나의 벡터로 압축했고, 특히 문장이 길어질수록 이 벡터가 심각한 정보 병목이 되었다.
-
-## 문제 정의
 
 기존 encoder-decoder NMT는 원문 전체를 하나의 고정 길이 벡터 $c$로 인코딩한다. Decoder는 모든 목표 단어를 같은 압축 표현에 의존해 생성한다.
 
@@ -53,8 +44,6 @@ Attention을 딥러닝의 중심 개념으로 끌어올린 대표 논문 중 하
 - 긴 문장의 정보를 하나의 벡터에 안정적으로 담기 어렵다.
 - 생성 시점마다 필요한 원문 단어가 다른데도 같은 context를 사용한다.
 - 번역에는 단일한 hard word mapping보다 유연하고 비단조적인 alignment가 필요하다.
-
-## 핵심 아이디어
 
 Encoder가 문장 하나를 대표하는 벡터를 만드는 대신, 원문의 각 위치에 대응하는 annotation의 시퀀스를 출력한다.
 
@@ -111,11 +100,13 @@ Decoder는 다음 정보를 사용해 다음 목표 단어를 예측한다.
 <figure class="paper-note-figure paper-note-figure--narrow">
   <img src="/assets/images/paper-notes/bahdanau-2014/figure-1-model.png" alt="Bahdanau 등의 attention 기반 신경망 기계번역 모델을 보여 주는 Figure 1">
   <figcaption>
-    <strong>Figure 1.</strong> Bahdanau 등의 논문에 수록된 attention 기반 decoder 구조. 출처: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S3.F1">arXiv:1409.0473의 ar5iv 렌더링</a>.
+    <strong>Figure 1.</strong> Bahdanau 등의 논문에 수록된 attention 기반 decoder 구조.
   </figcaption>
 </figure>
 
 ## 실험
+
+### 번역 성능
 
 WMT 2014 영어-프랑스어 번역에서 기본 RNN encoder-decoder와 제안 모델인 **RNNsearch**를 비교한다. 아래 수치는 논문의 **Table 1**을 직접 옮긴 것이다.
 
@@ -128,16 +119,32 @@ WMT 2014 영어-프랑스어 번역에서 기본 RNN encoder-decoder와 제안 �
 | RNNsearch-50* | 28.45 | 36.15 |
 | Moses phrase-based SMT | 33.30 | 35.63 |
 
+### 문장 길이와 학습된 정렬
+
 중요한 결과는 전체 BLEU 향상만이 아니다. **Figure 2**에서 고정 벡터 encoder-decoder는 문장이 길어질수록 성능이 크게 떨어지지만, attention 모델은 긴 문장에서도 훨씬 안정적이다.
 
 <figure class="paper-note-figure paper-note-figure--medium">
   <img src="/assets/images/paper-notes/bahdanau-2014/figure-2-bleu-by-length.png" alt="원문 문장 길이에 따른 BLEU 점수를 보여 주는 Bahdanau 등의 Figure 2">
   <figcaption>
-    <strong>Figure 2.</strong> 논문의 문장 길이별 BLEU 그래프. RNNsearch가 고정 벡터 encoder-decoder보다 긴 문장을 잘 처리한다는 핵심 근거다. 출처: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S4.F2.fig1">arXiv:1409.0473의 ar5iv 렌더링</a>.
+    <strong>Figure 2.</strong> 논문의 문장 길이별 BLEU 그래프. RNNsearch가 고정 벡터 encoder-decoder보다 긴 문장을 잘 처리한다는 핵심 근거다.
   </figcaption>
 </figure>
 
-## 배운 점
+논문은 번역 성능뿐 아니라 학습된 soft-alignment도 직접 확인한다. Figure 3에서는 영어 원문과 생성된 프랑스어 단어 사이에 대체로 대각선 형태의 대응이 나타나며, 어순이 바뀌는 구문에서는 비단조적인 정렬도 형성된다.
+
+<figure class="paper-note-figure">
+  <div class="paper-note-figure-grid">
+    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3a-alignment.png" alt="RNNsearch-50 soft-alignment 예시 Figure 3a"><div class="paper-note-panel-label">(a)</div></div>
+    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3b-alignment.png" alt="RNNsearch-50 soft-alignment 예시 Figure 3b"><div class="paper-note-panel-label">(b)</div></div>
+    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3c-alignment.png" alt="RNNsearch-50 soft-alignment 예시 Figure 3c"><div class="paper-note-panel-label">(c)</div></div>
+    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3d-alignment.png" alt="RNNsearch-50 soft-alignment 예시 Figure 3d"><div class="paper-note-panel-label">(d)</div></div>
+  </div>
+  <figcaption>
+    <strong>Figure 3.</strong> 논문의 RNNsearch-50 soft-alignment 예시. 축은 영어 원문 단어와 생성된 프랑스어 단어에 대응하며, 밝은 셀일수록 attention weight가 크다.
+  </figcaption>
+</figure>
+
+### 결과 해석
 
 가장 큰 기여는 **문장 단위 압축**을 **시점별 검색**으로 바꾼 것이다. Encoder는 유용한 표현의 시퀀스를 저장하고, decoder는 생성 시점마다 필요한 정보를 꺼내 쓴다.
 
@@ -158,18 +165,6 @@ Transformer를 공부하는 과정에서는 다음 연결이 중요했다.
 **Soft-alignment**는 $\alpha_{ij}$를 원문 위치 $j$와 목표 단어 $y_i$ 사이의 정렬 정도로 해석한 것이다. Context vector는 가능한 alignment에 대한 annotation의 기댓값으로 볼 수 있다.
 
 Attention heatmap을 정답 word alignment나 모델 행동의 완전한 설명으로 간주해서는 안 된다. 특정 decoding 시점에 어떤 원문 표현을 강하게 참고했는지 보여 주는 진단 신호로 보는 편이 타당하다. 한국어-영어처럼 어순과 tokenization 단위가 크게 다른 언어 쌍에서는 정확한 단어 대응보다 token-level soft correspondence로 해석하는 것이 안전하다.
-
-<figure class="paper-note-figure">
-  <div class="paper-note-figure-grid">
-    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3a-alignment.png" alt="RNNsearch-50 soft-alignment 예시 Figure 3a"><div class="paper-note-panel-label">(a)</div></div>
-    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3b-alignment.png" alt="RNNsearch-50 soft-alignment 예시 Figure 3b"><div class="paper-note-panel-label">(b)</div></div>
-    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3c-alignment.png" alt="RNNsearch-50 soft-alignment 예시 Figure 3c"><div class="paper-note-panel-label">(c)</div></div>
-    <div><img src="/assets/images/paper-notes/bahdanau-2014/figure-3d-alignment.png" alt="RNNsearch-50 soft-alignment 예시 Figure 3d"><div class="paper-note-panel-label">(d)</div></div>
-  </div>
-  <figcaption>
-    <strong>Figure 3.</strong> 논문의 RNNsearch-50 soft-alignment 예시. 축은 영어 원문 단어와 생성된 프랑스어 단어에 대응하며, 밝은 셀일수록 attention weight가 크다. 출처: <a href="https://ar5iv.labs.arxiv.org/html/1409.0473#S4.F3">arXiv:1409.0473의 ar5iv 렌더링</a>.
-  </figcaption>
-</figure>
 
 ### 2. BiRNN encoder state에 transpose나 reshape가 필요한 이유는 무엇인가?
 
@@ -210,19 +205,21 @@ Alignment가 hard latent variable이 아니라 미분 가능한 soft alignment�
 - **주의가 필요한 비교:** `-30`과 `-50`의 직접 비교
 - **핵심 해석:** RNNsearch는 고정 길이 벡터 병목을 줄이고 긴 문장에 더 강하지만, 30/50 설정은 문장 길이만 완전히 통제한 실험이 아니다.
 
-## 한계와 남은 질문
+### 5. 왜 alignment score는 현재 state가 아니라 이전 decoder state로 계산하는가?
 
-- Shortlist vocabulary에서 희귀 단어를 `UNK`로 바꾸므로 희귀 단어 번역이 여전히 약하다.
-- 원문과 목표문의 모든 위치 쌍에 score를 계산하므로 입력과 출력 길이가 늘수록 연산량이 커진다.
-- Attention heatmap은 유용한 진단 도구지만 모델 행동의 완전한 설명으로 볼 수는 없다.
+논문의 alignment model은 $e_{ij}=a(s_{i-1},h_j)$처럼 이전 decoder state를 사용한다. $s_{i-1}$은 지금까지 생성한 목표 prefix를 요약하므로, 다음 단어를 만들기 위해 원문의 어느 위치가 필요한지 묻는 query 역할을 한다.
 
-## 후속 읽기
+반대로 $s_i$를 곧바로 사용하면 순환 의존성이 생긴다. 현재 state $s_i$를 계산하려면 context $c_i$가 필요하고, $c_i$를 만들려면 $s_i$로 계산한 attention weight가 필요해진다. 이전 state를 사용하면 `이전 state → alignment → context → 현재 state`라는 계산 순서가 명확해지고 전체 과정이 미분 가능하게 유지된다.
+
+## 참고문헌
+
+### 후속 읽기
 
 - Cho et al., "Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation"
 - Sutskever et al., "Sequence to Sequence Learning with Neural Networks"
 - Vaswani et al., "Attention Is All You Need"
 
-## 참고문헌
+### 출처
 
 - [arXiv:1409.0473](https://arxiv.org/abs/1409.0473)
 - [ar5iv HTML 버전](https://ar5iv.labs.arxiv.org/html/1409.0473)

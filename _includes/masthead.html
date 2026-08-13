@@ -22,12 +22,18 @@
             <a href="{{ base_path }}{{ home_url }}">{{ site.title }}</a>
           </li>
           {% for link in navigation_links %}
+            {% assign navigation_link_selected = false %}
+            {% if page.url == link.url %}
+              {% assign navigation_link_selected = true %}
+            {% elsif link.url != '/' and link.url != '/ko/' and page.url contains link.url %}
+              {% assign navigation_link_selected = true %}
+            {% endif %}
             {% if link.url contains 'http' %}
               {% assign domain = '' %}
             {% else %}
               {% assign domain = base_path %}
             {% endif %}
-            <li class="masthead__menu-item {% if page.url contains link.url and link.url != '/' %}selected{% endif %}">
+            <li class="masthead__menu-item {% if navigation_link_selected %}selected{% endif %}">
               <a href="{{ domain }}{{ link.url }}">{{ link.title }}</a>
             </li>
           {% endfor %}
