@@ -66,15 +66,27 @@
   }
 }
 
-.masthead__menu-item.selected a {
-  color: var(--global-text-color);
-  font-weight: 700;
-  border-bottom: 2px solid var(--global-text-color);
+.masthead__menu-item > a {
+  border-bottom: 2px solid transparent;
+
+  &::before {
+    display: none;
+  }
 }
 
-.masthead__menu-item.selected a:hover {
+.masthead__menu-item#theme-toggle > a {
+  border-bottom: 0;
+}
+
+.masthead__menu-item.selected > a {
   color: var(--global-text-color);
-  border-bottom: 2px solid var(--global-text-color);
+  font-weight: 700;
+  border-bottom-color: var(--global-text-color);
+}
+
+.masthead__menu-item.selected > a:hover {
+  color: var(--global-text-color);
+  border-bottom-color: var(--global-text-color);
 }
 
 .site-language-switch {
