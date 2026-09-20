@@ -153,10 +153,12 @@
       </div>
       <p>{{ project.description[lang] }}</p>
       <div class="cv-entry-links">
+        {% if project.page_url[lang] %}
         <a href="{{ project.page_url[lang] }}">
           <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
           {{ labels.project_page }}
         </a>
+        {% endif %}
         <a href="{{ project.repository_url }}" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-github" aria-hidden="true"></i>
           {{ labels.repository }}

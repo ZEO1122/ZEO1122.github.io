@@ -1,4 +1,4 @@
-updated: "2026-08-11"
+updated: "2026-09-20"
 
 labels:
   en:
@@ -171,6 +171,28 @@ competitions:
         url: "https://github.com/ZEO1122/LG_Aimers_8th"
 
 projects:
+  - name:
+      en: "A.ing Discord Bot"
+      ko: "A.ing Discord 학습 알림 봇"
+    category:
+      en: "Serverless learning automation"
+      ko: "서버리스 기반 학습 알림 자동화"
+    date: "2026-09-13"
+    description:
+      en: "Discord bot for Gachon University's A.ing AI club, built with TypeScript and Cloudflare Workers, Workflows, and D1. Supports Korean summaries of Hugging Face's weekly top papers using OpenAI, a 36-lesson deep-learning curriculum, and delivery-history tracking to prevent duplicate notifications."
+      ko: "가천대학교 AI 학술 동아리 A.ing의 학습을 지원하는 Discord 봇. TypeScript와 Cloudflare Workers·Workflows·D1을 기반으로 Hugging Face 주간 인기 논문의 OpenAI 기반 한국어 요약, 36편의 딥러닝 기초 학습 콘텐츠, 발송 이력 관리와 중복 알림 방지 기능을 구현한 프로젝트"
+    repository_url: "https://github.com/aing-gachon/A.ing-Discord-Bot"
+  - name:
+      en: "LG Aimers 9th: Pitch Control Success Prediction"
+      ko: "LG Aimers 9기 투구 제구 성공 확률 예측"
+    category:
+      en: "Sports analytics & probabilistic modeling"
+      ko: "스포츠 데이터 분석 및 확률 예측"
+    date: "2026-08-05"
+    description:
+      en: "Team project predicting pitch control success from pre-pitch game context and player history. Documents exploratory data analysis, tree-based and deep-learning models, chronological validation, and ensemble experiments using Python, scikit-learn, and PyTorch. The team-provided leaderboard screenshot reports 63rd place with a score of 1,162.43634."
+      ko: "투구 전 경기 상황과 선수 이력으로 제구 성공 확률을 예측한 팀 프로젝트. Python·scikit-learn·PyTorch를 활용한 탐색적 데이터 분석, 트리 기반 모델과 딥러닝 모델 비교, 시간 순서 검증, 앙상블 실험을 정리. 팀 제공 리더보드 캡처 기준 63위, 1,162.43634점 기록"
+    repository_url: "https://github.com/ZEO1122/LG_Aimers_9th"
   - name:
       en: "LG Aimers 8th Model Compression"
       ko: "LG Aimers 8기 모델 경량화"
