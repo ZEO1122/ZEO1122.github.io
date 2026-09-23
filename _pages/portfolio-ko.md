@@ -15,6 +15,14 @@ translations:
 
 <div class="list__item">
   <article class="archive__item">
+    <h2 class="archive__item-title"><a href="/ko/portfolio/lg-aimers-9th/">LG Aimers 9기 투구 제구 성공 확률 예측</a></h2>
+    <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 게시일:</strong> <time datetime="2026-09-02">2026년 9월 2일</time></p>
+    <p class="archive__item-excerpt">팀장으로 참여한 야구 투구 제구 성공 확률 예측 프로젝트. 시간 순서 검증, 트리·딥러닝 모델 비교와 앙상블 실험을 정리했습니다.</p>
+  </article>
+</div>
+
+<div class="list__item">
+  <article class="archive__item">
     <h2 class="archive__item-title"><a href="/ko/portfolio/transformer-study/">Transformer Architecture Study</a></h2>
     <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 게시일:</strong> <time datetime="2026-03-01">2026년 3월 1일</time></p>
     <p class="archive__item-excerpt">Attention Is All You Need 논문부터 직접 구현과 번역 실험까지 연결한 주니어 트랙 Transformer 스터디입니다.</p>

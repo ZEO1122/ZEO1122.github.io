@@ -103,6 +103,13 @@
           {% endfor %}
         </div>
       {% endif %}
+      {% if experience.document_url %}
+        <div class="cv-entry-links">
+          <a href="{{ experience.document_url | relative_url }}" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-file" aria-hidden="true"></i> {{ labels[experience.document_label] }}
+          </a>
+        </div>
+      {% endif %}
     </article>
   {% endfor %}
 </section>
@@ -199,13 +206,21 @@
     <h2 id="cv-certifications">{{ labels.certifications }}</h2>
     {% for certification in cv.certifications %}
       <article class="cv-entry cv-entry-compact" aria-labelledby="cv-certifications">
-        <h3>{{ certification.name }}</h3>
+        <h3>{{ certification.name[lang] }}</h3>
         <p class="cv-entry-meta">
           {{ labels.issued }}
           <time datetime="{{ certification.date }}">
             {% if lang == "ko" %}{{ certification.date | date: "%Y. %m. %d." }}{% else %}{{ certification.date | date: "%b %-d, %Y" }}{% endif %}
           </time>
         </p>
+        <p>{{ certification.description[lang] }}</p>
+        {% if certification.document_url %}
+          <div class="cv-entry-links">
+            <a href="{{ certification.document_url | relative_url }}" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-file" aria-hidden="true"></i> {{ labels.certificate }}
+            </a>
+          </div>
+        {% endif %}
       </article>
     {% endfor %}
   </div>

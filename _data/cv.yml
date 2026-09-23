@@ -1,4 +1,4 @@
-updated: "2026-09-20"
+updated: "2026-09-23"
 
 labels:
   en:
@@ -11,7 +11,9 @@ labels:
     projects: "Selected Projects"
     paper_notes: "Paper Reading Notes"
     military: "Military Service"
-    certifications: "Certifications"
+    certifications: "Certifications & Training"
+    certificate: "Certificate"
+    appointment: "Appointment letter"
     skills: "Skills"
     relevant_coursework: "Relevant coursework"
     present: "Present"
@@ -35,12 +37,14 @@ labels:
     projects: "주요 프로젝트"
     paper_notes: "논문 정리"
     military: "병역"
-    certifications: "자격 및 인증"
+    certifications: "자격 및 교육 수료"
+    certificate: "증명서 보기"
+    appointment: "임명장 보기"
     skills: "기술 역량"
     relevant_coursework: "주요 이수 과목"
     present: "현재"
     expected: "졸업 예정"
-    issued: "취득"
+    issued: "발급일"
     repository: "저장소"
     project_page: "프로젝트 페이지"
     read_note: "노트 보기"
@@ -123,15 +127,19 @@ experience:
       en: "Aing, AI Academic Club at Gachon University"
       ko: "가천대학교 AI 학술 동아리 Aing"
     role:
-      en: "Executive Member"
-      ko: "운영진"
-    start: "2025-12-01"
-    end: "2026-06-01"
+      en: "Academic Team Lead"
+      ko: "학술팀장"
+    start: "2025-09-01"
+    present: true
+    document_url: "/files/certificates/aing-academic-team-lead.jpeg"
+    document_label: appointment
     highlights:
       - en: "Planned and facilitated study sessions and academic activities."
         ko: "스터디와 학술 활동을 기획하고 운영"
       - en: "Supported club operations and member learning."
         ko: "동아리 운영 및 구성원의 학습 활동 지원"
+      - en: "Appointed for the term September 1, 2025 to December 31, 2026."
+        ko: "임명장 기준 임기: 2025년 9월 1일~2026년 12월 31일"
   - organization:
       en: "Aing, AI Academic Club at Gachon University"
       ko: "가천대학교 AI 학술 동아리 Aing"
@@ -150,6 +158,25 @@ experience:
         url: "https://github.com/aing-gachon/26-Spring-Transformer-Study"
 
 competitions:
+  - name:
+      en: "LG Aimers 9th Online Hackathon"
+      ko: "LG Aimers 9기 온라인 해커톤"
+    role:
+      en: "Team Lead"
+      ko: "팀장"
+    start: "2026-08-05"
+    end: "2026-09-02"
+    achievement:
+      en: "63rd place · Score 1,162.43634 (team-provided leaderboard screenshot)"
+      ko: "63위 · 1,162.43634점 (팀 제공 리더보드 캡처 기준)"
+    highlights:
+      - en: "Led the team in predicting pitch control success from pre-pitch game context and player history."
+        ko: "팀장으로 팀을 이끌며 투구 전 경기 상황과 선수 이력 기반의 제구 성공 확률 예측 과제 수행"
+      - en: "The team compared tree-based and deep-learning models, chronological validation, and ensemble strategies."
+        ko: "팀 단위로 트리 기반 모델·딥러닝 모델을 비교하고 시간 순서 검증 및 앙상블 전략 실험"
+    links:
+      - type: repository
+        url: "https://github.com/ZEO1122/LG_Aimers_9th"
   - name:
       en: "LG Aimers 8th Model Compression Online Hackathon"
       ko: "LG Aimers 8기 모델 경량화 온라인 해커톤"
@@ -190,8 +217,11 @@ projects:
       ko: "스포츠 데이터 분석 및 확률 예측"
     date: "2026-08-05"
     description:
-      en: "Team project predicting pitch control success from pre-pitch game context and player history. Documents exploratory data analysis, tree-based and deep-learning models, chronological validation, and ensemble experiments using Python, scikit-learn, and PyTorch. The team-provided leaderboard screenshot reports 63rd place with a score of 1,162.43634."
-      ko: "투구 전 경기 상황과 선수 이력으로 제구 성공 확률을 예측한 팀 프로젝트. Python·scikit-learn·PyTorch를 활용한 탐색적 데이터 분석, 트리 기반 모델과 딥러닝 모델 비교, 시간 순서 검증, 앙상블 실험을 정리. 팀 제공 리더보드 캡처 기준 63위, 1,162.43634점 기록"
+      en: "Led a team predicting pitch control success from pre-pitch game context and player history. Documents exploratory data analysis, tree-based and deep-learning models, chronological validation, and ensemble experiments using Python, scikit-learn, and PyTorch."
+      ko: "팀장으로 참여한 투구 제구 성공 확률 예측 프로젝트. Python·scikit-learn·PyTorch를 활용한 탐색적 데이터 분석, 트리 기반 모델과 딥러닝 모델 비교, 시간 순서 검증, 앙상블 실험을 정리"
+    page_url:
+      en: "/portfolio/lg-aimers-9th/"
+      ko: "/ko/portfolio/lg-aimers-9th/"
     repository_url: "https://github.com/ZEO1122/LG_Aimers_9th"
   - name:
       en: "LG Aimers 8th Model Compression"
@@ -247,8 +277,22 @@ military:
     ko: "병장 만기 전역"
 
 certifications:
-  - name: "NCP-AI"
-    date: "2026-06-17"
+  - name:
+      en: "LG Aimers 9th, Phase 1 & 2"
+      ko: "LG Aimers 9기 Phase 1·2 수료"
+    date: "2026-09-23"
+    description:
+      en: "Completed the 11-week AI program from June 22 to September 2, 2026. Certificate issued by the Youth Work Experience Integrated Support Center."
+      ko: "2026년 6월 22일~9월 2일, 11주간 AI 분야 과정 수료. 청년일경험 통합지원센터 발급"
+    document_url: "/files/certificates/lg-aimers-9th.pdf"
+  - name:
+      en: "NAVER Cloud Platform Certified Professional - AI"
+      ko: "NAVER Cloud Platform Certified Professional - AI"
+    date: "2026-06-18"
+    description:
+      en: "Professional-level AI certification issued by NAVER Cloud."
+      ko: "NAVER Cloud의 AI 분야 Professional 자격 인증"
+    document_url: "/files/certificates/naver-cloud-professional-ai.pdf"
 
 skills:
   - name:
