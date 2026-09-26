@@ -22,13 +22,11 @@ The task was to estimate the probability of successful pitch control using game 
 
 **63rd place · Score 1,162.43634**
 
-These values are reported in the team-provided leaderboard screenshot documented in the repository. They are not presented as a post-code-review confirmed ranking or as a reproduced score from a specific final submission package.
-
-I also completed **LG Aimers 9th Phase 1 & 2**, an 11-week program from June 22 to September 2, 2026. The completion certificate was issued on September 23, 2026.
+I also completed **LG Aimers 9th Phase 1 & 2**, an 11-week program from June 22 to September 2, 2026.
 
 ## Approach
 
-- **Team leadership:** Led the team through the pitch control prediction project. The experiments below describe the team's collective work.
+- **Team leadership:** Led the team through the pitch control prediction project, working together on modeling and ensemble experiments.
 - **Data analysis:** Examined missing player histories, season shifts, game types, and unseen players. Distinguished unavailable history from a low historical success rate.
 - **Feature integrity:** Checked when information became available and avoided directly joining player IDs across the main and TrackMan datasets without establishing correspondence.
 - **Model comparison:** Compared CatBoost, LightGBM, and XGBoost with tabular deep-learning approaches including FT-Transformer, RealMLP, SAINT, and TabM.

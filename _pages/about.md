@@ -29,13 +29,13 @@ I am currently an undergraduate researcher in the **PRML Lab**, where I particip
 
 | Date | Activity |
 |------|----------|
-| 2026.09 | Received the [LG Aimers 9th Phase 1 & 2 completion certificate](/files/certificates/lg-aimers-9th.pdf) for the June 22–September 2 program |
+| 2026.09 | Completed [LG Aimers 9th Phase 1 & 2](/files/certificates/lg-aimers-9th.pdf) (June 22–September 2) |
 | 2026.09 | [A.ing Discord Bot](https://github.com/aing-gachon/A.ing-Discord-Bot) project: AI paper summaries and deep-learning study notifications |
-| 2026.09 | Led the team in [LG Aimers 9th: Pitch Control Success Prediction](/portfolio/lg-aimers-9th/) — **63rd place** (team-provided leaderboard screenshot) |
+| 2026.09 | Led the team in [LG Aimers 9th: Pitch Control Success Prediction](/portfolio/lg-aimers-9th/) — **63rd place** |
 | 2026.06 | Earned [NAVER Cloud Platform Certified Professional - AI](/files/certificates/naver-cloud-professional-ai.pdf) |
 | 2026.03 | Launched [Transformer Architecture Study](https://github.com/aing-gachon/26-Spring-Transformer-Study) at Aing |
 | 2026.02 | Led the team in [LG Aimers 8th](/portfolio/lg-aimers/) — **Top 40 / 600+ teams** |
-| 2025.09 | Appointed [Academic Team Lead of Aing](/files/certificates/aing-academic-team-lead.jpeg) (term: September 2025–December 2026) |
+| 2025.09 | Began serving as [Academic Team Lead of Aing](/files/certificates/aing-academic-team-lead.jpeg) (activity period: September 2025–December 2026; expected end) |
 | 2025.09 | Joined PRML Lab as Undergraduate Researcher |
 | 2024.12 | Completed mandatory military service in the Republic of Korea Army as Sergeant |
 | 2023.06 | Enlisted in the Republic of Korea Army |

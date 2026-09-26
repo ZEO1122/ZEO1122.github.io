@@ -1,4 +1,4 @@
-updated: "2026-09-23"
+updated: "2026-09-26"
 
 labels:
   en:
@@ -138,8 +138,8 @@ experience:
         ko: "스터디와 학술 활동을 기획하고 운영"
       - en: "Supported club operations and member learning."
         ko: "동아리 운영 및 구성원의 학습 활동 지원"
-      - en: "Appointed for the term September 1, 2025 to December 31, 2026."
-        ko: "임명장 기준 임기: 2025년 9월 1일~2026년 12월 31일"
+      - en: "Activity period: September 1, 2025 to December 31, 2026 (expected end)."
+        ko: "활동 기간: 2025년 9월 1일~2026년 12월 31일 (종료 예정)"
   - organization:
       en: "Aing, AI Academic Club at Gachon University"
       ko: "가천대학교 AI 학술 동아리 Aing"
@@ -167,8 +167,8 @@ competitions:
     start: "2026-08-05"
     end: "2026-09-02"
     achievement:
-      en: "63rd place · Score 1,162.43634 (team-provided leaderboard screenshot)"
-      ko: "63위 · 1,162.43634점 (팀 제공 리더보드 캡처 기준)"
+      en: "63rd place · Score 1,162.43634"
+      ko: "63위 · 1,162.43634점"
     highlights:
       - en: "Led the team in predicting pitch control success from pre-pitch game context and player history."
         ko: "팀장으로 팀을 이끌며 투구 전 경기 상황과 선수 이력 기반의 제구 성공 확률 예측 과제 수행"

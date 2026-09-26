@@ -20,7 +20,7 @@ Participated as team leader in [LG Aimers 8th](https://www.lgaimers.ai/), a mode
 
 **Ranked Top 40 out of 600+ teams**
 
-Public portfolio result:
+Competition results:
 
 - Rank: 40th
 - Score: 0.63166
