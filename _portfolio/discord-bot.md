@@ -1,6 +1,6 @@
 ---
 title: "A.ing Discord Learning Support Bot"
-excerpt: "Learning content and a Discord bot for foundational study and research exploration."
+excerpt: "A Discord bot that supports learning Deep Learning fundamentals and exploring research interests through recent papers."
 collection: portfolio
 date: 2026-09-13
 lang: en

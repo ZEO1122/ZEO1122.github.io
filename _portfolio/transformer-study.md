@@ -1,6 +1,6 @@
 ---
 title: "Transformer Study Materials"
-excerpt: "Connecting Transformer concepts with PyTorch implementation and small experiments."
+excerpt: "Study materials that help learners understand the Transformer by connecting concepts from the paper with PyTorch implementations and hands-on exercises."
 collection: portfolio
 date: 2026-02-13
 lang: en

@@ -1,6 +1,6 @@
 ---
 title: "LG Aimers 9th: Pitch Control Success Prediction"
-excerpt: "Team leadership, baseball domain analysis, preprocessing, feature engineering, individual model experiments, and ensembles for pitch control prediction."
+excerpt: "A project that predicts the probability of pitch control success for the next pitch using game context and player history."
 collection: portfolio
 date: 2026-08-05
 lang: en

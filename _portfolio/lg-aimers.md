@@ -1,6 +1,6 @@
 ---
 title: "LG Aimers 8th Model Compression"
-excerpt: "EXAONE-4.0-1.2B compression with conversational preprocessing, QLoRA training, and an optional GPTQ W8A8 pipeline."
+excerpt: "An LLM compression project aimed at improving inference efficiency while preserving the response quality of EXAONE-4.0-1.2B."
 collection: portfolio
 date: 2025-12-01
 lang: en
