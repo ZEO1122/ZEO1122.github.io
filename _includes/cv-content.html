@@ -170,6 +170,12 @@
           <i class="fab fa-github" aria-hidden="true"></i>
           {{ labels.repository }}
         </a>
+        {% if project.notion_url %}
+        <a href="{{ project.notion_url }}" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          {{ project.notion_label[lang] }}
+        </a>
+        {% endif %}
       </div>
     </article>
   {% endfor %}

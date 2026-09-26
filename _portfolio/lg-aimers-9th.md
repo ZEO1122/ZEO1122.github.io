@@ -1,8 +1,8 @@
 ---
 title: "LG Aimers 9th: Pitch Control Success Prediction"
-excerpt: "Team-led baseball probability prediction project with chronological validation, tree-based and deep-learning models, and ensemble experiments."
+excerpt: "Team leadership, temporal validation, and conditional ensembles for pitch control prediction."
 collection: portfolio
-date: 2026-09-02
+date: 2026-08-05
 lang: en
 locale: en-US
 og_locale: en_US
@@ -12,42 +12,64 @@ translations:
   ko: /ko/portfolio/lg-aimers-9th/
 ---
 
-## Overview
+**August 5-September 2, 2026 · Team Lead · 63rd place**
 
-I participated as **team leader** in the LG Aimers 9th online hackathon, leading team **떡잎마을방범대** on a pitch control success prediction task. Phase 2 ran from August 5 to September 2, 2026, hosted by LG AI Research and organized by DACON.
+## Predicting Success Before the Pitch
 
-The task was to estimate the probability of successful pitch control using game context and player history available **before the pitch**. This was not simply strike classification: the competition's target also accounted for pitches missing the intended location. The team explored data interpretation, feature engineering, machine-learning and deep-learning models, and ensemble strategies.
+I led team 떡잎마을방범대 in the LG Aimers 9th online hackathon. The task was to predict pitch control success using game context and player history available before a pitch, rather than classify an outcome from the ball's observed location.
 
-## Achievement
+The team explored tree-based models, deep-learning models, and ensembles. I managed members' schedules, reports and documents in Notion, meetings, and code reviews, offering suggestions while coordinating the project.
 
-**63rd place · Score 1,162.43634**
+## My Role as Team Lead
 
-I also completed **LG Aimers 9th Phase 1 & 2**, an 11-week program from June 22 to September 2, 2026.
+Parallel experiments required shared visibility into progress: one member's predictions could become another member's ensemble inputs. I used meetings and Notion documents to keep track of the work.
 
-## Approach
+| Responsibility | What I did |
+|---|---|
+| Scheduling | Checked members' availability and coordinated progress |
+| Documentation | Managed reports and project documents in Notion |
+| Meetings | Discussed progress, experiment results, and next steps |
+| Code review | Reviewed members' code and suggested improvements |
+| Project coordination | Followed individual experiments and overall progress |
 
-- **Team leadership:** Led the team through the pitch control prediction project, working together on modeling and ensemble experiments.
-- **Data analysis:** Examined missing player histories, season shifts, game types, and unseen players. Distinguished unavailable history from a low historical success rate.
-- **Feature integrity:** Checked when information became available and avoided directly joining player IDs across the main and TrackMan datasets without establishing correspondence.
-- **Model comparison:** Compared CatBoost, LightGBM, and XGBoost with tabular deep-learning approaches including FT-Transformer, RealMLP, SAINT, and TabM.
-- **Ensemble experiments:** Explored residual learning, batter-handedness effects, and conditional blending to assess whether models complemented one another's errors.
-- **Submission preparation:** Checked inference-package execution separately from model quality, keeping executable but weaker configurations as alternatives rather than claiming them as final improvements.
+During reviews, I looked at what had changed in the code and how the results differed from earlier experiments. These checks helped me make concrete suggestions for the next discussion.
 
-## Validation and Lessons
+## When Validation Gains Did Not Transfer to Submissions
 
-The team used chronological validation: training through 2021, 2022, and 2023 and evaluating on 2022, 2023, and 2024, respectively. Evaluation considered Brier error, performance by game type, player-history coverage, and variation across random seeds. Internal validation and leaderboard scores were kept separate.
+A monthly adjustment was motivated by changes in player condition and game patterns over a season. Varying its strength by month improved an internal Validation score but performed worse than the baseline on submission.
 
-A monthly residual adjustment improved an internal score but hurt the actual submission result, so it was not adopted. Conditional blending was also evaluated by player-history coverage rather than applying the same correction to every player. These experiments highlighted the importance of checking whether a local improvement generalizes to later seasons.
+The team did not adopt it. Patterns from one year's monthly data could not be assumed to repeat in the next season. We examined results by game type and used temporal splits: training on 2019-2021 and evaluating 2022, then expanding the training window to evaluate 2023 and 2024.
 
-The main lesson was to distinguish a strong standalone model from a useful ensemble component, and a working submission package from a model supported by sufficient performance evidence. Repeatedly inspected 2024 results were treated as retrospective checks, not independent unseen evaluations.
+This taught me to ask whether a gain reflected a useful pattern or a method that fit only a particular period.
 
-## Links
+## Adjusting Ensemble Weights by Player History
 
-- [Competition repository](https://github.com/ZEO1122/LG_Aimers_9th)
+XGBoost performed worse than LightGBM alone, but could still complement its errors in some conditions. Increasing XGBoost's weight for players with limited history increased errors for new pitchers. The team then shifted toward giving it more weight in Regular games with sufficient player history.
+
+A model's standalone score was not enough to judge its value in an ensemble. We also needed to examine where its errors occurred and whether another model could compensate.
+
+## Checking Consistency in the Submission Environment
+
+Predictions needed to remain consistent when processing one row at a time, splitting batches, or changing input order. The team reused preprocessing settings learned from training data during Inference and added tests for these cases.
+
+These checks were necessary to preserve the chosen model's behavior when moving from experiments to submission code.
+
+## Results and Lessons
+
+The team finished **63rd with a score of 1,162.43634**.
+
+Leading the project taught me that coordinating schedules and experiments requires understanding the work itself. Reading both code and shared results helped me contribute specific suggestions in meetings.
+
+Dropping the monthly adjustment and refining ensemble conditions also showed me the value of removing ineffective approaches. I now consider the data period, evaluation conditions, and model-specific errors alongside the overall score.
+
+## Technologies
+
+Python · pandas · NumPy · scikit-learn · PyTorch · CatBoost · LightGBM · XGBoost · Notion
+
+## Resources
+
+- [Project Notion](https://valiant-crowd-006.notion.site/LG-Aimers-9th-3b2b6928b66c81dd95f7e2b9dcde038c?pvs=74)
+- [Project repository](https://github.com/ZEO1122/LG_Aimers_9th)
 - [Modeling process](https://github.com/ZEO1122/LG_Aimers_9th/blob/main/docs/modeling.md)
 - [Ensemble experiments](https://github.com/ZEO1122/LG_Aimers_9th/blob/main/docs/experiments.md)
-- [Results and retrospective](https://github.com/ZEO1122/LG_Aimers_9th/blob/main/docs/results.md)
-
-## Keywords
-
-Sports Analytics · Probability Prediction · CatBoost · LightGBM · XGBoost · PyTorch · Tabular Deep Learning · Ensemble · Team Leadership
+- [Shared preprocessing and tests](https://github.com/ZEO1122/LG_Aimers_9th/tree/main/Preprocess)

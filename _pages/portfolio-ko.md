@@ -15,17 +15,25 @@ translations:
 
 <div class="list__item">
   <article class="archive__item">
-    <h2 class="archive__item-title"><a href="/ko/portfolio/lg-aimers-9th/">LG Aimers 9기 투구 제구 성공 확률 예측</a></h2>
-    <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 게시일:</strong> <time datetime="2026-09-02">2026년 9월 2일</time></p>
-    <p class="archive__item-excerpt">팀장으로 참여한 야구 투구 제구 성공 확률 예측 프로젝트. 시간 순서 검증, 트리·딥러닝 모델 비교와 앙상블 실험을 정리했습니다.</p>
+    <h2 class="archive__item-title"><a href="/ko/portfolio/discord-bot/">A.ing Discord 학습 지원 봇</a></h2>
+    <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 시작일:</strong> <time datetime="2026-09-13">2026년 9월 13일</time></p>
+    <p class="archive__item-excerpt">부원들의 배경지식에 맞춰 기초 개념과 최신 논문 채널을 나누고, 원문 근거 확인과 발송 이력 관리를 구현했습니다.</p>
   </article>
 </div>
 
 <div class="list__item">
   <article class="archive__item">
-    <h2 class="archive__item-title"><a href="/ko/portfolio/transformer-study/">Transformer Architecture Study</a></h2>
-    <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 게시일:</strong> <time datetime="2026-03-01">2026년 3월 1일</time></p>
-    <p class="archive__item-excerpt">Attention Is All You Need 논문부터 직접 구현과 번역 실험까지 연결한 주니어 트랙 Transformer 스터디입니다.</p>
+    <h2 class="archive__item-title"><a href="/ko/portfolio/lg-aimers-9th/">LG Aimers 9기 투구 제구 성공 확률 예측</a></h2>
+    <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 시작일:</strong> <time datetime="2026-08-05">2026년 8월 5일</time></p>
+    <p class="archive__item-excerpt">팀장으로 일정과 코드 검토를 맡았습니다. 팀원들과 Validation 결과를 검토하고 Ensemble 조건을 조정해 63위를 기록했습니다.</p>
+  </article>
+</div>
+
+<div class="list__item">
+  <article class="archive__item">
+    <h2 class="archive__item-title"><a href="/ko/portfolio/transformer-study/">Transformer 스터디 자료 제작</a></h2>
+    <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 시작일:</strong> <time datetime="2026-02-13">2026년 2월 13일</time></p>
+    <p class="archive__item-excerpt">논문 가이드와 PyTorch 코드, 36개 빈칸 실습을 연결해 Transformer의 개념을 직접 구현하며 이해하도록 자료를 만들었습니다.</p>
   </article>
 </div>
 

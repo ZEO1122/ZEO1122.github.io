@@ -9,7 +9,7 @@ labels:
     experience: "Research & Academic Activities"
     competitions: "Competitions & Hackathons"
     projects: "Selected Projects"
-    paper_notes: "Paper Reading Notes"
+    paper_notes: "Paper Reviews"
     military: "Military Service"
     certifications: "Certifications & Training"
     certificate: "Certificate"
@@ -35,7 +35,7 @@ labels:
     experience: "연구 및 학술 활동"
     competitions: "경진대회 및 해커톤"
     projects: "주요 프로젝트"
-    paper_notes: "논문 정리"
+    paper_notes: "논문 리뷰"
     military: "병역"
     certifications: "자격 및 교육 수료"
     certificate: "증명서 보기"
@@ -47,7 +47,7 @@ labels:
     issued: "발급일"
     repository: "저장소"
     project_page: "프로젝트 페이지"
-    read_note: "노트 보기"
+    read_note: "리뷰 보기"
     print: "인쇄 / PDF 저장"
     updated: "최종 업데이트"
     language_navigation: "CV 언어"
@@ -62,8 +62,8 @@ profile:
     en: "Undergraduate Researcher in Artificial Intelligence"
     ko: "인공지능 분야 학부연구생"
   summary:
-    en: "Third-year undergraduate student in the Department of Computer Engineering at Gachon University, expected to graduate in February 2028. My research interests center on affective computing, multimodal AI, and human-centered AI."
-    ko: "가천대학교 컴퓨터공학과 3학년에 재학 중이며, 2028년 2월 졸업 예정입니다. 감성 컴퓨팅, 멀티모달 AI, 인간 중심 AI를 중심으로 머신러닝 연구 경험을 쌓고 있습니다."
+    en: "Third-year Computer Engineering undergraduate at Gachon University, expected to graduate in February 2028. Interested in Affective Computing, Multimodal AI, and Human-Centered AI; participating in paper seminars and Deep Learning study sessions in the PRML Lab."
+    ko: "가천대학교 컴퓨터공학과 3학년에 재학 중이며, 2028년 2월 졸업 예정입니다. Affective Computing, Multimodal AI, Human-Centered AI에 관심을 두고 PRML 연구실에서 논문 세미나와 Deep Learning 스터디에 참여하고 있습니다."
   location:
     en: "Seongnam, South Korea"
     ko: "경기도 성남시"
@@ -75,13 +75,13 @@ profile:
 
 research_interests:
   - en: "Affective Computing"
-    ko: "감성 컴퓨팅 (Affective Computing)"
+    ko: "Affective Computing"
   - en: "Multimodal AI"
-    ko: "멀티모달 AI (Multimodal AI)"
+    ko: "Multimodal AI"
   - en: "Human-Centered AI"
-    ko: "인간 중심 AI (Human-Centered AI)"
+    ko: "Human-Centered AI"
   - en: "Machine Learning & Deep Learning"
-    ko: "머신러닝 및 딥러닝"
+    ko: "Machine Learning & Deep Learning"
 
 education:
   - institution:
@@ -120,12 +120,12 @@ experience:
     present: true
     highlights:
       - en: "Participate in paper reading seminars and deep-learning study sessions."
-        ko: "논문 세미나 및 딥러닝 스터디 참여"
+        ko: "논문 세미나와 Deep Learning 스터디 참여"
       - en: "Study the foundations of pattern recognition, machine learning, and deep learning."
-        ko: "패턴 인식·머신러닝·딥러닝의 기초 이론 학습"
+        ko: "Pattern Recognition, Machine Learning, Deep Learning의 기초 이론 학습"
   - organization:
-      en: "Aing, AI Academic Club at Gachon University"
-      ko: "가천대학교 AI 학술 동아리 Aing"
+      en: "A.ing, AI Academic Club at Gachon University"
+      ko: "가천대학교 AI 학술 동아리 A.ing"
     role:
       en: "Academic Team Lead"
       ko: "학술팀장"
@@ -141,16 +141,15 @@ experience:
       - en: "Activity period: September 1, 2025 to December 31, 2026."
         ko: "활동 기간: 2025년 9월 1일~2026년 12월 31일"
   - organization:
-      en: "Aing, AI Academic Club at Gachon University"
-      ko: "가천대학교 AI 학술 동아리 Aing"
+      en: "A.ing, AI Academic Club at Gachon University"
+      ko: "가천대학교 AI 학술 동아리 A.ing"
     role:
-      en: "Transformer Study Organizer & Participant"
-      ko: "Transformer 스터디 기획 및 참여"
-    start: "2026-03-01"
-    end: "2026-05-01"
+      en: "Transformer Study Materials Lead"
+      ko: "Transformer 스터디 자료 제작 총괄"
+    start: "2026-02-13"
     highlights:
-      - en: "Designed and led a structured study program on Transformer architecture and the Attention mechanism."
-        ko: "Transformer 구조와 Attention 메커니즘을 다루는 학습 과정을 설계하고 운영"
+      - en: "Led the production of study materials connecting Transformer concepts with PyTorch code."
+        ko: "Transformer의 개념과 PyTorch 코드를 연결하는 스터디 자료 제작 총괄"
       - en: "Connected paper reading with paper-to-code analysis, PyTorch implementation, and translation experiments."
         ko: "논문 읽기, paper-to-code 분석, PyTorch 구현, 번역 실험을 하나의 학습 과정으로 구성"
     links:
@@ -170,10 +169,10 @@ competitions:
       en: "63rd place · Score 1,162.43634"
       ko: "63위 · 1,162.43634점"
     highlights:
-      - en: "Led the team in predicting pitch control success from pre-pitch game context and player history."
-        ko: "팀장으로 팀을 이끌며 투구 전 경기 상황과 선수 이력 기반의 제구 성공 확률 예측 과제 수행"
+      - en: "Managed schedules, Notion documents, meetings, and code reviews for the pitch control prediction team."
+        ko: "투구 제구 성공 확률 예측 팀의 일정 관리, Notion 문서 관리, 회의 주관과 코드 검토 담당"
       - en: "The team compared tree-based and deep-learning models, chronological validation, and ensemble strategies."
-        ko: "팀 단위로 트리 기반 모델·딥러닝 모델을 비교하고 시간 순서 검증 및 앙상블 전략 실험"
+        ko: "팀원들과 Tree-based 모델, Deep Learning 모델, Temporal Validation 및 Ensemble 실험 검토"
     links:
       - type: repository
         url: "https://github.com/ZEO1122/LG_Aimers_9th"
@@ -200,14 +199,17 @@ competitions:
 projects:
   - name:
       en: "A.ing Discord Bot"
-      ko: "A.ing Discord 학습 알림 봇"
+      ko: "A.ing Discord 학습 지원 봇"
     category:
       en: "Serverless learning automation"
-      ko: "서버리스 기반 학습 알림 자동화"
+      ko: "학습 콘텐츠 및 서비스 설계"
     date: "2026-09-13"
     description:
-      en: "Discord bot for Gachon University's A.ing AI club, built with TypeScript and Cloudflare Workers, Workflows, and D1. Supports Korean summaries of Hugging Face's weekly top papers using OpenAI, a 36-lesson deep-learning curriculum, and delivery-history tracking to prevent duplicate notifications."
-      ko: "가천대학교 AI 학술 동아리 A.ing의 학습을 지원하는 Discord 봇. TypeScript와 Cloudflare Workers·Workflows·D1을 기반으로 Hugging Face 주간 인기 논문의 OpenAI 기반 한국어 요약, 36편의 딥러닝 기초 학습 콘텐츠, 발송 이력 관리와 중복 알림 방지 기능을 구현한 프로젝트"
+      en: "Designed separate channels for junior members learning Deep Learning and senior members exploring research interests. Prepared 36 foundational lessons and a paper-summary pipeline that selects quotations from source sentences. Learned to match content depth and verification methods to each audience."
+      ko: "주니어의 Deep Learning 기초 학습과 시니어의 연구 탐색을 돕기 위해 채널을 나누고, 36편의 기초 자료와 논문 요약 기능을 만들었습니다. 요약의 인용이 원문과 맞지 않는 문제는 원문 문장 중에서 근거를 선택하도록 바꿔 대응했습니다. 학습 대상에 따라 설명의 깊이와 검증 방법도 달라져야 한다는 점을 배웠습니다."
+    page_url:
+      en: "/portfolio/discord-bot/"
+      ko: "/ko/portfolio/discord-bot/"
     repository_url: "https://github.com/aing-gachon/A.ing-Discord-Bot"
   - name:
       en: "LG Aimers 9th: Pitch Control Success Prediction"
@@ -217,12 +219,16 @@ projects:
       ko: "스포츠 데이터 분석 및 확률 예측"
     date: "2026-08-05"
     description:
-      en: "Led a team predicting pitch control success from pre-pitch game context and player history. Documents exploratory data analysis, tree-based and deep-learning models, chronological validation, and ensemble experiments using Python, scikit-learn, and PyTorch."
-      ko: "팀장으로 참여한 투구 제구 성공 확률 예측 프로젝트. Python·scikit-learn·PyTorch를 활용한 탐색적 데이터 분석, 트리 기반 모델과 딥러닝 모델 비교, 시간 순서 검증, 앙상블 실험을 정리"
+      en: "Led the team, managing schedules, Notion documents, meetings, and code reviews. When internal Validation gains did not carry over to submissions, the team examined results by season and player history and adjusted Ensemble conditions. Finished 63rd and learned to assess where improvements hold, not just the overall score."
+      ko: "팀장으로 일정과 Notion 문서를 관리하고 회의와 코드 검토를 맡았습니다. 내부 Validation의 개선이 제출 결과로 이어지지 않아 팀원들과 시기·선수 이력별 결과를 검토하고 Ensemble 조건을 조정했습니다. 대회에서 63위를 기록했으며, 점수뿐 아니라 어떤 조건에서 효과가 유지되는지 확인하는 법을 배웠습니다."
     page_url:
       en: "/portfolio/lg-aimers-9th/"
       ko: "/ko/portfolio/lg-aimers-9th/"
     repository_url: "https://github.com/ZEO1122/LG_Aimers_9th"
+    notion_url: "https://valiant-crowd-006.notion.site/LG-Aimers-9th-3b2b6928b66c81dd95f7e2b9dcde038c?pvs=74"
+    notion_label:
+      en: "Project Notion"
+      ko: "프로젝트 Notion"
   - name:
       en: "LG Aimers 8th Model Compression"
       ko: "LG Aimers 8기 모델 경량화"
@@ -231,22 +237,22 @@ projects:
       ko: "LLM 모델 경량화"
     date: "2025-12-01"
     description:
-      en: "Portfolio project documenting the compression strategy and experiments for LG AI Research's EXAONE-4.0-1.2B."
-      ko: "LG AI연구원의 EXAONE-4.0-1.2B를 대상으로 수행한 모델 경량화 전략과 실험 과정을 정리한 프로젝트"
+      en: "Led an EXAONE-4.0-1.2B compression team, comparing QLoRA fine-tuning and an optional GPTQ W8A8 quantization path under fixed submission constraints. Finished 40th out of over 600 teams."
+      ko: "EXAONE-4.0-1.2B 경량화 팀을 이끌며 QLoRA Fine-Tuning과 선택적 GPTQ W8A8 Quantization을 실험했습니다. 정해진 제출 환경에서 성능과 연산 비용을 비교했으며, 600여 팀 중 40위를 기록했습니다."
     page_url:
       en: "/portfolio/lg-aimers/"
       ko: "/ko/portfolio/lg-aimers/"
     repository_url: "https://github.com/ZEO1122/LG_Aimers_8th"
   - name:
       en: "Transformer Architecture Study"
-      ko: "Transformer 구조 스터디"
+      ko: "Transformer 스터디 자료 제작"
     category:
       en: "Study curriculum & implementation"
       ko: "학습 과정 설계 및 구현"
-    date: "2026-03-01"
+    date: "2026-02-13"
     description:
-      en: "Junior-track curriculum connecting Attention Is All You Need with from-scratch implementation and translation experiments."
-      ko: "Attention Is All You Need 논문을 직접 구현하고 번역 실험까지 이어지도록 구성한 주니어 대상 학습 과정"
+      en: "Led the production of materials connecting Transformer concepts with code. Linked the paper guide, PyTorch cookbook, and 36 implementation exercises, with checks to help learners locate mistakes. Explaining Tensor dimensions and Masking also sharpened my own understanding."
+      ko: "Transformer의 개념과 코드를 연결하는 스터디 자료 제작을 총괄했습니다. 논문 가이드와 PyTorch 쿡북, 36개 빈칸 실습을 연결하고 단계별 검사를 넣어 구현 중 막힌 부분을 찾도록 했습니다. Tensor의 차원과 Masking을 설명하며 저도 기본 개념을 더 꼼꼼히 확인했습니다."
     page_url:
       en: "/portfolio/transformer-study/"
       ko: "/ko/portfolio/transformer-study/"

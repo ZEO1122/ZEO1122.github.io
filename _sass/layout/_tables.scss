@@ -20,6 +20,11 @@ thead {
   border-bottom: 1px solid var(--global-border-color);
 }
 
+html[data-theme="dark"] thead {
+  background-color: var(--global-bg-color);
+  color: var(--global-text-color);
+}
+
 th {
   padding: 0.5em;
   font-weight: bold;
