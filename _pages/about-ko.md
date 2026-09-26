@@ -33,7 +33,7 @@ translations:
 | 2026.06 | [NAVER Cloud Platform Certified Professional - AI](/files/certificates/naver-cloud-professional-ai.pdf) 자격 취득 |
 | 2026.03 | Aing에서 [Transformer Architecture Study](https://github.com/aing-gachon/26-Spring-Transformer-Study) 개설 및 운영 |
 | 2026.02 | [LG Aimers 8기](/ko/portfolio/lg-aimers/) 팀장으로 참가, **600여 팀 중 40위** |
-| 2025.09 | [Aing 학술팀장](/files/certificates/aing-academic-team-lead.jpeg) 활동 시작 (활동 기간: 2025.09~2026.12, 종료 예정) |
+| 2025.09 | [Aing 학술팀장](/files/certificates/aing-academic-team-lead.jpeg) 활동 시작 (활동 기간: 2025.09~2026.12) |
 | 2025.09 | PRML 연구실 학부연구생 합류 |
 | 2024.12 | 대한민국 육군 병장 만기 전역 |
 | 2023.06 | 대한민국 육군 입대 |
