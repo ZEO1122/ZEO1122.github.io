@@ -14,51 +14,41 @@ translations:
 
 **December 2025-February 2026 · Team Member · 40th place**
 
-## Balancing Model Performance and Inference Efficiency
+## Compressing a Model While Preserving Performance
 
-I participated in the LG Aimers 8th online hackathon, experimenting with compression of EXAONE-4.0-1.2B. The task required considering both model performance and inference efficiency in a fixed vLLM environment, rather than reducing model size alone.
+I participated in an EXAONE-4.0-1.2B model compression project for LG Aimers 8th. The task required considering response quality and inference efficiency together, rather than reducing model size alone.
 
-The approach used QLoRA to reduce training memory requirements, with an optional path to merge the trained Adapter and apply GPTQ Quantization. The pipeline connected conversational preprocessing to the creation of a Hugging Face-format submission.
+We approached resource-efficient training and post-training Quantization as separate concerns. I experimented with QLoRA Fine-Tuning and considered how to use the available training resources by adjusting which parts of conversations became training targets and how much text each input retained.
 
-## Choosing Which Response to Train On
+## Training on Responses Rather Than Entire Conversations
 
-Each conversation contains user questions, earlier responses, and the response to be learned. The final Assistant response served as the training target, while earlier turns provided the Prompt.
+The first decision was what the model should learn from each conversation. Earlier turns provided the context needed to understand the final response, but Loss was calculated only on the final Assistant response.
 
-A Chat Template formatted the Prompt. Prompt and Padding Labels were set to -100 to exclude them from Loss calculation, leaving only the final Assistant response as the target. EOS marked the end of that response. This made the training objective specific: generate a response given the preceding conversation.
+Prompt and Padding tokens were excluded from Loss calculation. Training on every sentence is different from training a model to respond appropriately to the preceding context, even with the same source data. The focus was therefore on separating inputs and targets to match the learning objective, rather than simply formatting the data.
 
-## Trading Data Coverage Against Training Cost
+## Balancing Training Cost and Data Coverage
 
-Longer sequences preserve more context but require more memory and computation. Length analysis of 3,000 samples helped quantify how much data each limit could retain.
+Conversations varied in length, so the training Sequence Length required a deliberate choice. Longer inputs preserved more text but increased memory use and computation.
 
-| Maximum Sequence Length | Samples fitting without truncation |
-|---|---|
-| 512 Tokens | 13.23% |
-| 1,024 Tokens | 80.47% |
-| 2,048 Tokens | 99.53% |
+Analysis of 3,000 samples showed that approximately 80% of conversations fit within 1,024 Tokens without truncation, compared with approximately 99.5% at 2,048 Tokens. The project used a training length of 1,024 Tokens to balance data coverage and experiment cost.
 
-The training limit was set to 1,024 Tokens to balance coverage and experiment cost. For overlength samples, preprocessing retained the tail of the Prompt and placed the response in the remaining space. Sequence Length therefore determined how much context and response text actually reached training.
+This made it important to consider which context and response tokens remained within the limit, rather than simply choose a larger Sequence Length. Because Loss was calculated only on responses, the amount of response text available for learning mattered alongside the total input length.
 
-## Training with QLoRA Under Memory Constraints
+## Reducing Training Requirements with QLoRA and Extending to Quantization
 
-The Base Model was loaded in 4-bit NF4, with trainable LoRA Adapters rather than updates to all model Parameters. Gradient Checkpointing and Gradient Accumulation helped manage memory requirements.
+For training, I used QLoRA to load the Base Model in 4-bit NF4 and train LoRA Adapters. Instead of updating all model Parameters, this reduced the trainable Parameter set. Gradient Checkpointing and Gradient Accumulation further helped manage memory requirements.
 
-Before preprocessing, 3,000 sampled records were split into 2,850 training and 150 validation examples. Evaluation and logging were configured to track Training Loss and Validation Loss.
+Training and validation data were separated, with logging configured to track Training Loss and Validation Loss. This provided a way to distinguish fitting the training examples from generating responses on unseen data.
 
-QLoRA addressed training resource requirements. Reducing training memory and improving the submitted model's inference efficiency were treated as separate concerns.
-
-## From Adapter Merging to Submission Packaging
-
-An optional post-training stage merged the saved Adapter into the Base Model and applied GPTQ W8A8. Calibration used Prompts with the final Assistant response removed.
-
-Quantization targeted Linear layers while excluding Embedding and the LM Head. The pipeline then saved the model and Tokenizer in Hugging Face format and packaged them into the required ZIP directory structure.
+After training, I implemented a path to merge the Adapter into the Base Model and apply GPTQ W8A8. QLoRA addressed training resource requirements, while GPTQ provided a separate approach to considering inference efficiency after training.
 
 ## Results and Lessons
 
 The team finished **40th with a score of 0.63166**.
 
-The project gave me experience addressing training and inference efficiency at different stages. I connected memory-efficient QLoRA training with a separate post-training Quantization path and submission packaging.
+The project taught me that model compression involves data preparation, training choices, and inference, rather than a single Quantization setting. Reducing training memory does not itself imply faster inference, so it was important to distinguish which stage each method addressed.
 
-Preprocessing also required considering sequence limits together with the Loss mask. Which context is retained and which response tokens become targets determine what the model learns, even when the source conversations are unchanged.
+Conversational preprocessing was also a consequential choice. Deciding which context to show the model and which response tokens to include in Loss calculation gave me experience examining how data is used for learning, not just how the model is configured.
 
 ## Technologies
 
