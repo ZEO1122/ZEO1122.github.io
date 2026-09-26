@@ -62,8 +62,8 @@ profile:
     en: "Undergraduate Researcher in Artificial Intelligence"
     ko: "인공지능 분야 학부연구생"
   summary:
-    en: "Third-year Computer Engineering undergraduate at Gachon University, expected to graduate in February 2028. Interested in Affective Computing, Multimodal AI, and Human-Centered AI; participating in paper seminars and Deep Learning study sessions in the PRML Lab."
-    ko: "가천대학교 컴퓨터공학과 3학년에 재학 중이며, 2028년 2월 졸업 예정입니다. Affective Computing, Multimodal AI, Human-Centered AI에 관심을 두고 PRML 연구실에서 논문 세미나와 Deep Learning 스터디에 참여하고 있습니다."
+    en: "Computer Engineering undergraduate and undergraduate researcher at Gachon University. Through organizing academic activities as a member of A.ing's leadership team and participating in AI competitions, I have gained experience implementing models and running experiments. My interests include Affective Computing, Multimodal AI, and Human-Centered AI, and I am currently conducting research and writing a paper in my areas of interest."
+    ko: "가천대학교 컴퓨터공학과에 재학 중인 학부연구생입니다. AI 학술 동아리 A.ing의 운영진으로 학술 활동을 기획하고, 다양한 AI 경진대회에 참여하며 모델을 구현하고 실험하는 경험을 쌓았습니다. Affective Computing, Multimodal AI, Human-Centered AI에 관심이 있으며, 현재 관심 분야를 바탕으로 연구와 논문 집필을 진행하고 있습니다."
   location:
     en: "Seongnam, South Korea"
     ko: "경기도 성남시"
@@ -180,18 +180,18 @@ competitions:
       en: "LG Aimers 8th Model Compression Online Hackathon"
       ko: "LG Aimers 8기 모델 경량화 온라인 해커톤"
     role:
-      en: "Team Lead"
-      ko: "팀장"
+      en: "Team Member"
+      ko: "팀원"
     start: "2025-12-01"
     end: "2026-02-01"
     achievement:
       en: "40th out of 600+ teams · Score 0.63166 · 69 submissions"
       ko: "600개 이상의 참가 팀 중 40위 · 점수 0.63166 · 69회 제출"
     highlights:
-      - en: "Coordinated the team, consolidated member input, and defined the experiment strategy."
-        ko: "팀원 의견을 조율하고 모델 경량화 실험 전략을 수립"
-      - en: "Explored QLoRA-based supervised fine-tuning, sequence-length trade-offs, and optional GPTQ W8A8 post-training quantization for EXAONE-4.0-1.2B."
-        ko: "EXAONE-4.0-1.2B를 대상으로 QLoRA 기반 지도 미세 조정, 시퀀스 길이별 성능 비교, GPTQ W8A8 사후 양자화를 실험"
+      - en: "Used conversational preprocessing to train on Assistant responses and selected the sequence length based on data coverage and training cost."
+        ko: "Assistant 응답을 학습 대상으로 삼는 대화 전처리를 적용하고, 데이터 보존 범위와 학습 비용을 고려해 Sequence Length 설정"
+      - en: "Explored QLoRA Fine-Tuning for EXAONE-4.0-1.2B and built an optional GPTQ W8A8 pipeline after Adapter merging."
+        ko: "EXAONE-4.0-1.2B의 QLoRA Fine-Tuning을 실험하고, Adapter 병합 후 선택적으로 GPTQ W8A8을 적용하는 과정 구현"
     links:
       - type: repository
         url: "https://github.com/ZEO1122/LG_Aimers_8th"
@@ -237,8 +237,8 @@ projects:
       ko: "LLM 모델 경량화"
     date: "2025-12-01"
     description:
-      en: "Led an EXAONE-4.0-1.2B compression team, comparing QLoRA fine-tuning and an optional GPTQ W8A8 quantization path under fixed submission constraints. Finished 40th out of over 600 teams."
-      ko: "EXAONE-4.0-1.2B 경량화 팀을 이끌며 QLoRA Fine-Tuning과 선택적 GPTQ W8A8 Quantization을 실험했습니다. 정해진 제출 환경에서 성능과 연산 비용을 비교했으며, 600여 팀 중 40위를 기록했습니다."
+      en: "Participated in EXAONE-4.0-1.2B compression, using conversational preprocessing and QLoRA Fine-Tuning to address training resource constraints. Built an optional GPTQ W8A8 path after Adapter merging and connected it to submission packaging. The team finished 40th out of over 600 teams."
+      ko: "EXAONE-4.0-1.2B 경량화 프로젝트에 참여해 대화 데이터 전처리와 QLoRA Fine-Tuning으로 학습 자원 제약에 대응했습니다. Adapter 병합 후 선택적으로 GPTQ W8A8을 적용하고 제출물을 생성하도록 구성했으며, 팀은 600여 팀 중 40위를 기록했습니다."
     page_url:
       en: "/portfolio/lg-aimers/"
       ko: "/ko/portfolio/lg-aimers/"

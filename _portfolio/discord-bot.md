@@ -33,23 +33,25 @@ Recent papers can be difficult to approach without foundational knowledge, while
 
 The curriculum progresses from tensors and matrix operations through neural-network training, CNNs, RNNs, Attention, and Transformers. Each lesson builds on earlier concepts.
 
-Paper explanations are in Korean, with technical terms retained in English so members can recognize them when reading the originals.
+## Different Content Pipelines for Different Purposes
 
-## Fixing Quotations That Did Not Match the Source
+Foundational lessons need consistent explanations that later lessons can build on. Instead of generating a new explanation at delivery time, I organized Markdown manuscripts with objectives, prerequisites, examples, and review questions. A lesson on Tensor Shape, for example, asks members to calculate sums along different Axes in a small array and interpret the results.
 
-Generated quotations sometimes did not match the original paper. Fluent summaries alone were not enough for learning materials.
+Manuscripts are checked and converted into Discord messages before deployment. Checks cover numerical examples and message lengths, and semester registration uses a reviewed content release. Delivery uses the compiled content without generating a new explanation or downloading a manuscript.
 
-I assigned identifiers to collected source sentences and changed the pipeline so the model selects supporting sentences rather than writes quotations. The selected identifiers are checked before the original text is attached. Summary generation and quotation retrieval are separate steps.
+The paper channel serves a different purpose: introducing new research over time. It collects the top three weekly papers from Hugging Face and summarizes the research problem, prior approaches, and key method from the source text. Rather than receiving only titles and links, members can first understand the problem a paper addresses and then follow the original if it interests them.
 
-Foundational lessons use prewritten Markdown rather than newly generated explanations each time. The manuscripts include learning objectives, prerequisites, explanations, review questions, and references. Separate checks verify numerical examples and Discord message length limits.
+## Connecting Explanations to Source Evidence
 
-New papers are collected and summarized; recurring foundational content is maintained as reviewed manuscripts.
+A learning summary needs more than fluent prose: readers should be able to check its supporting text. I assigned identifiers to collected source sentences so the model could select evidence from them.
 
-## Handling Delivery Failures and Semester Changes
+Instead of asking the model to write quotations, the pipeline retrieves the original sentence for each selected identifier. Results and comparisons with prior methods are also linked to evidence, and summaries with invalid evidence selections are rejected during validation.
+
+## Making the Bot Reusable Across Semesters
 
 I used Cloudflare Workers, Workflows, and D1 to avoid maintaining an always-on server.
 
-If a delivery request receives no response, the message may still have been sent. Retrying unconditionally could create duplicates. The pipeline records a delivery reservation before sending and does not automatically resend requests with uncertain outcomes.
+Workflows handle paper collection and summarization, while D1 stores processing results and delivery history. To limit duplicate notifications, the pipeline records a reservation before sending and does not automatically resend requests with uncertain outcomes.
 
 For foundational lessons, a semester uses a fixed content release, and breaks can shift the schedule. Editing a manuscript therefore does not immediately change what an active semester delivers.
 
@@ -57,18 +59,13 @@ For foundational lessons, a semester uses a fixed content release, and breaks ca
 
 The project includes 36 foundational lessons and a paper collection, summarization, and delivery pipeline, along with manuscript checks, previews, semester registration, and delivery-history management.
 
-- Separate channels for foundational concepts and recent papers
-- Paper summaries linked to source sentences
-- Markdown checks and Discord message conversion
-- Delivery-history-based duplicate control
-- Semester schedules and study breaks
-- Documentation for content maintenance and handover
+Foundational lessons follow a reviewed sequence, while recent-paper summaries connect explanations to collected source evidence. Maintenance documentation covers content updates and semester setup so the next maintainer can continue the work.
 
 ## Lessons
 
 Defining what each group needed helped me decide the depth, sequence, writing method, and schedule of the content.
 
-I also learned that a natural explanation does not guarantee an accurate quotation. Learning materials need a way to verify their claims, not just readable prose.
+Not every type of content needed automatic generation. Maintaining reusable foundational explanations as manuscripts and automating the collection and summarization of new papers helped me choose methods that fit each learning goal. Linking paper explanations to source evidence provided a way to check the content as well as read it.
 
 Designing the bot meant considering more than successful delivery: uncertain responses, exam breaks, and handover to the next maintainer also shaped the implementation.
 
